@@ -173,6 +173,17 @@ hr {
 
 /* Fonts and Titles */
 
+.credits {
+    font-size: .8rem;
+    position: relative;
+    opacity: .5;
+    top: -3em;
+}
+
+.credits:hover {
+    opacity: 1;
+}
+
 h2 {
     font-weight: 500;
     text-align: center;
