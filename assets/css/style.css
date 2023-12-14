@@ -38,13 +38,13 @@
     .dark-theme {
         --first-color: #000106;
         --second-color: #fff;
-        --third-color: #ffdb70d2;
+        --third-color: #5275b4;
         --fourth-color: #252525;
-        --fifth-color: #eb6d4a81;
+        --fifth-color: #053168;
         --sixth-color: #202020;
-        --cv-color: #0c2369;
-        --linkedin-color: rgb(13, 67, 99);
-        --github-color: #053168;
+        --cv-color: linear-gradient(145deg, #1040d1, #3d3397);
+        --linkedin-color: linear-gradient(145deg, rgb(0, 108, 197), #3d3397);
+        --github-color: linear-gradient(145deg, #1d80fa, #3d3397);
         --html-bg: linear-gradient(45deg, #F89702, #570000);
         --css-bg: linear-gradient(45deg, #15b1b6, #000261);
         --bootstrap-bg: linear-gradient(45deg, #8594e4, #430f58);
@@ -104,10 +104,13 @@ html {
 
 .typewriter:after {
     content: "|";
-    margin-left: 8px;
     opacity: 1;
     animation: blink 1s infinite;
     color: var(--third-color);
+}
+
+#home .typewriter:after{
+    margin-left: -10px;
 }
 
 @keyframes blink {
@@ -127,7 +130,7 @@ header {
     /* height: 50px; */
 }
 
-header a{
+header a {
     text-decoration: none;
 }
 
@@ -151,7 +154,6 @@ header .button:hover {
 #icon:hover,
 #lang:hover {
     cursor: pointer;
-    -webkit-filter: contrast(65%);
 }
 
 /* Body */
@@ -219,30 +221,30 @@ span {
 }
 
 .downloadCV {
-    background-color: var(--cv-color);
+    background: var(--cv-color);
 }
 
 .downloadCV:hover,
 .downloadCV:focus {
-    box-shadow: 0px 0px 20px var(--cv-color);
+    box-shadow: 0px 0px 20px #1040d1;
 }
 
 .linkedin {
-    background-color: var(--linkedin-color);
+    background: var(--linkedin-color);
 }
 
 .linkedin:hover,
 .linkedin:focus {
-    box-shadow: 0px 0px 20px var(--linkedin-color);
+    box-shadow: 0px 0px 20px rgb(0, 108, 197);
 }
 
 .github {
-    background-color: var(--github-color);
+    background: var(--github-color);
 }
 
 .github:hover,
 .github:focus {
-    box-shadow: 0px 0px 20px var(--github-color);
+    box-shadow: 0px 0px 20px #1d80fa;
 }
 
 /* About me */
@@ -299,11 +301,24 @@ span {
     /* Faz com que este contêiner cresça para ocupar o espaço restante */
 }
 
-.content img {
+.content .img-container {
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    overflow: hidden;
 }
+
+.content img {
+    width: 100%;
+    height: auto;
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: transform .5s ease
+}
+
+.content:hover img{
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+ }
 
 .content h4 {
     color: var(--third-color);
@@ -336,11 +351,9 @@ form button:hover {
 .soon a {
     background-color: var(--second-color);
     color: var(--first-color);
-
 }
 
 .soon a:hover {
-    cursor: default;
     -webkit-filter: contrast(50%);
     box-shadow: none;
 }
