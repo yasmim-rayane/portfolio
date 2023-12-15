@@ -390,6 +390,10 @@ form {
     background-color: var(--fourth-color);
 }
 
+form label {
+    color: var(--second-color);
+}
+
 form textarea {
     resize: vertical;
 }

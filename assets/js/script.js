@@ -7,3 +7,49 @@ icon.onclick = function () {
         icon.src = "assets/images/Dark_Mode.png";
     }
 }
+
+let langs = document.querySelector(".langs"),
+    link = document.querySelector(".langs"),
+    headerHome = document.querySelector(".headerHome")
+
+link.forEach(el=>{
+    el.addEventListener("click",()=>{
+        let attr = el.getAttribute("language")
+        headerHome.textContent = data[attr].title
+    })
+})
+
+let data = {
+    portuguese: {
+        headerHome: "Home",
+        headerAbout: "",
+        headerSkills: "",
+        headerProjects: "",
+        headerContact: "",
+        homeDesc: "",
+        aboutTitle: "",
+        aboutDesc:"",
+        skillsTitle: "",
+        skillsDesc: "",
+        projectsTitle: "",
+        projectsDesc: "",
+        contactTitle: "",
+        contactDesc: ""
+    },
+    english: {
+        headerHome: "Página Inicial",
+        headerAbout: "",
+        headerSkills: "",
+        headerProjects: "",
+        headerContact: "",
+        homeDesc: "",
+        aboutTitle: "",
+        aboutDesc:"",
+        skillsTitle: "",
+        skillsDesc: "",
+        projectsTitle: "",
+        projectsDesc: "",
+        contactTitle: "",
+        contactDesc: ""
+    }
+}
