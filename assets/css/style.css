@@ -30,6 +30,7 @@
     --html-bg: linear-gradient(45deg, #fbb39d, #fba09d);
     --css-bg: linear-gradient(45deg, #bde0fe, #72bbce);
     --bootstrap-bg: linear-gradient(45deg, #c3bef0, #cca8e9);
+    --sass-bg: linear-gradient(45deg, #f3c6f2, #efa6b6);
     --js-bg: linear-gradient(45deg, #fadeab, #f7b484);
     --illustrator-bg: linear-gradient(45deg, #fdf2b0, #cf9963);
     --photoshop-bg: linear-gradient(45deg, #d7e3fc, #abc4ff);
@@ -48,6 +49,7 @@
         --html-bg: linear-gradient(45deg, #F89702, #570000);
         --css-bg: linear-gradient(45deg, #15b1b6, #000261);
         --bootstrap-bg: linear-gradient(45deg, #8594e4, #430f58);
+        --sass-bg: linear-gradient(45deg, #e5bcf5, #c54c82);
         --js-bg: linear-gradient(45deg, #f8e492, #6b4a0b);
         --illustrator-bg: linear-gradient(45deg, #F89702, rgb(112, 20, 4));
         --photoshop-bg: linear-gradient(45deg, #31c5ff, #021233);
@@ -154,6 +156,7 @@ header .button:hover {
 #icon:hover,
 #lang:hover {
     cursor: pointer;
+    -webkit-filter: contrast(65%);
 }
 
 /* Body */
@@ -369,14 +372,7 @@ form button:hover {
     box-shadow: none;
 }
 
-/* Contact me */
-
-#contact h2 {
-    margin-top: 0;
-    margin-bottom: 30px;
-}
-
-#contact {
+.proj-bg {
     padding: 15px;
     border-radius: 15px;
     margin-top: 50px;
@@ -384,24 +380,6 @@ form button:hover {
     background: -moz-radial-gradient(circle, var(--fifth-color) 0%, var(--third-color) 100%);
     background: -webkit-radial-gradient(circle, var(--fifth-color) 0%, var(--third-color) 100%);
     background: radial-gradient(circle, var(--fifth-color) 0%, var(--third-color) 100%);
-}
-
-form {
-    background-color: var(--fourth-color);
-}
-
-form label {
-    color: var(--second-color);
-}
-
-form textarea {
-    resize: vertical;
-}
-
-form button {
-    background-color: var(--third-color);
-    outline: none;
-    color: var(--first-color);
 }
 
 /* Media query */
