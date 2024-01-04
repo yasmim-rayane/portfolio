@@ -111,7 +111,7 @@ html {
     color: var(--third-color);
 }
 
-#home .typewriter:after{
+#home .typewriter:after {
     margin-left: -10px;
 }
 
@@ -141,16 +141,6 @@ header a:hover {
     text-underline-offset: 5px;
     text-decoration-thickness: 2px;
     color: var(--third-color);
-}
-
-header .button {
-    color: var(--first-color);
-    background-color: var(--second-color);
-}
-
-header .button:hover {
-    color: var(--second-color);
-    background: var(--third-color);
 }
 
 #icon:hover,
@@ -271,7 +261,9 @@ span {
 
 /* Skills */
 
-#skills div span {
+#skills div button {
+    outline: none;
+    border: none;
     color: #fff;
     cursor: default;
     letter-spacing: 1px;
@@ -279,6 +271,11 @@ span {
     padding: 0.2em 1em 0.2em 1em;
     border-radius: 2em;
     font-weight: bolder;
+}
+
+#skills div button:hover {
+    -webkit-filter: contrast(60%);
+    cursor: pointer;
 }
 
 #skills img {
@@ -291,6 +288,29 @@ span {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+#info-html,
+#info-css,
+#info-bootstrap,
+#info-sass,
+#info-js,
+#info-illustrator,
+#info-photoshop,
+#info-figma {
+    display: none;
+}
+
+.info-content {
+    background-color: var(--fourth-color);
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.info-content p {
+    margin: 0;
+    padding: 10px;
 }
 
 /* Projects */
@@ -329,10 +349,10 @@ span {
     transition: transform .5s ease
 }
 
-.content:hover img{
+.content:hover img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
- }
+}
 
 .content h4 {
     color: var(--third-color);

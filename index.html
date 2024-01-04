@@ -63,15 +63,81 @@
                 <hr class="mb-4 mt-auto">
                 <div>
                     <h3>Programming</h3>
-                    <span style="background: var(--html-bg);" class="skill mb-1 w-auto"><img src="assets/images/HTML.png" alt="HTML icon" height="22">HTML</span>
-                    <span style="background: var(--css-bg);" class="skill mb-1 w-auto"><img src="assets/images/CSS3.png" alt="CSS icon" height="22">CSS</span>
-                    <span style="background: var(--bootstrap-bg);" class="skill mb-1 w-auto"><img src="assets/images/Bootstrap_logo.svg.png" alt="Bootstrap icon" height="22">Bootstrap</span>
-                    <span style="background: var(--sass-bg);" class="skill mb-1 w-auto"><img src="assets/images/sass_logo.png" alt="Sass icon" height="22">Sass</span>
-                    <span style="background: var(--js-bg);" class="skill mb-1 w-auto"><img src="assets/images/Javascript.png" alt="JavaScript icon" height="22">JavaScript</span>
+                    <button style="background: var(--html-bg);" class="skill mb-1 w-auto" onclick="infoHtml()"><img src="assets/images/HTML.png" alt="HTML icon" height="22">HTML</button>
+                    <button style="background: var(--css-bg);" class="skill mb-1 w-auto" onclick="infoCss()"><img src="assets/images/CSS3.png" alt="CSS icon" height="22">CSS</button>
+                    <button style="background: var(--bootstrap-bg);" class="skill mb-1 w-auto" onclick="infoBoot()"><img src="assets/images/Bootstrap_logo.svg.png" alt="Bootstrap icon" height="22">Bootstrap</button>
+                    <button style="background: var(--sass-bg);" class="skill mb-1 w-auto" onclick="infoSass()"><img src="assets/images/sass_logo.png" alt="Sass icon" height="22">Sass</button>
+                    <button style="background: var(--js-bg);" class="skill mb-1 w-auto" onclick="infoJs()"><img src="assets/images/Javascript.png" alt="JavaScript icon" height="22">JavaScript</button>
+
+                    <div class="info-container">
+
+                        <div id="info-html">
+                            <div class="info-content">
+                                <p>HTML é uma linguagem de marcação utilizada na construção de páginas na Web. Documentos HTML podem ser interpretados por navegadores.</p>
+                            </div>
+                        </div>
+
+                        <div id="info-css">
+                            <div class="info-content">
+                                <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+
+                        <div id="info-bootstrap">
+                            <div class="info-content">
+                                <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+
+                        <div id="info-sass">
+                            <div class="info-content">
+                                <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+
+                        <div id="info-js">
+                            <div class="info-content">
+                                <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <h3 class="mt-3">Softwares</h3>
-                    <span style="background: var(--illustrator-bg);" class="skill mb-1 w-auto"><img src="assets/images/Adobe_Illustrator_CC_icon.svg.png" alt="Adobe Illustrator icon" height="22">Adobe Illustrator</span>
-                    <span style="background: var(--photoshop-bg);" class="skill mb-1 w-auto"><img src="assets/images/Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop icon" height="22">Adobe Photoshop</span>
-                    <span style="background: var(--figma-bg);" class="skill mb-1 w-auto"><img src="assets/images/Figma.png" alt="Figma icon" height="22">Figma</span>
+
+                    <button style="background: var(--illustrator-bg);" class="skill mb-1 w-auto" onclick="infoIllustrator()">
+                        <img src="assets/images/Adobe_Illustrator_CC_icon.svg.png" alt="Adobe Illustrator icon" height="22">Adobe Illustrator
+                    </button>
+
+                    <button style="background: var(--photoshop-bg);" class="skill mb-1 w-auto" onclick="infoPhotoshop()">
+                        <img src="assets/images/Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop icon" height="22">Adobe Photoshop
+                    </button>
+
+                    <button style="background: var(--figma-bg);" class="skill mb-1 w-auto" onclick="infoFigma()">
+                        <img src="assets/images/Figma.png" alt="Figma icon" height="22">Figma
+                    </button>
+
+                    <div class="info-container">
+                
+                        <div id="info-illustrator">
+                            <div class="info-content">
+                                <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+                        
+                        <div id="info-photoshop">
+                            <div class="info-content">
+                                <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+
+                        
+                        <div id="info-figma">
+                            <div class="info-content">
+                                <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -88,7 +154,8 @@
                             <div class="img-container">
                                 <img src="assets/images/amarelo-teste.jpg" class="img-fluid" alt="Test image">
                             </div>
-                            <h4>Project 1</h4><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultricies blandit nunc eget congue.</span><a href="#">View on GitHub</a>
+                            <h4>Calculator</h4><span>A simple calculator made using Python and TkInter (TkInterCustom library).</span>
+                            <a href="https://github.com/yasmim-rayane/calculator">View on GitHub</a>
                         </div>
 
                     </div>
@@ -96,17 +163,21 @@
                     <div class="grid-item col-lg p-0">
                         <div class="content">
                             <div class="img-container">
-                                <img src="assets/images/amarelo-teste.jpg" class="img-fluid" alt="Test image">
+                                <img src="assets/images/project2.png" class="img-fluid" alt="Test image">
                             </div>
-                            <h4>Project 2</h4><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultricies blandit nunc eget congue.</span><a href="#">View on GitHub</a>
+                            <h4>Digital Clock</h4><span>A simple digital clock.</span>
+                            <a href="https://github.com/yasmim-rayane/digital-clock">View on GitHub</a>
                         </div>
                     </div>
 
                     <div class="grid-item col-lg p-0">
-                        <div class="content soon">
-                                <h4>Project 3</h4>
-                                <span class="typewriter">Wait a moment...</span>
-                            <a href="https://github.com/yasmim-rayane">Soon...</a>
+                        <div class="content">
+                            <div class="img-container">
+                                <img src="assets/images/project3.png" class="img-fluid" alt="Test image">
+                            </div>
+                                <h4>To-do List</h4>
+                                <span>A to-do list (HTML, CSS and JS).</span>
+                            <a href="https://github.com/yasmim-rayane/todo-list">View on GitHub</a>
                         </div>
                     </div>
 
