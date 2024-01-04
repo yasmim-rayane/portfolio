@@ -299,7 +299,8 @@ span {
 #info-js,
 #info-illustrator,
 #info-photoshop,
-#info-figma {
+#info-figma,
+#info-py {
     display: none;
 }
 
