@@ -8,52 +8,6 @@ icon.onclick = function () {
     }
 }
 
-// let langs = document.querySelector(".langs"),
-//     link = document.querySelector(".langs"),
-//     headerHome = document.querySelector(".headerHome")
-
-// link.forEach(el=>{
-//     el.addEventListener("click",()=>{
-//         let attr = el.getAttribute("language")
-//         headerHome.textContent = data[attr].title
-//     })
-// })
-
-// let data = {
-//     portuguese: {
-//         headerHome: "Home",
-//         headerAbout: "",
-//         headerSkills: "",
-//         headerProjects: "",
-//         headerContact: "",
-//         homeDesc: "",
-//         aboutTitle: "",
-//         aboutDesc:"",
-//         skillsTitle: "",
-//         skillsDesc: "",
-//         projectsTitle: "",
-//         projectsDesc: "",
-//         contactTitle: "",
-//         contactDesc: ""
-//     },
-//     english: {
-//         headerHome: "Página Inicial",
-//         headerAbout: "",
-//         headerSkills: "",
-//         headerProjects: "",
-//         headerContact: "",
-//         homeDesc: "",
-//         aboutTitle: "",
-//         aboutDesc:"",
-//         skillsTitle: "",
-//         skillsDesc: "",
-//         projectsTitle: "",
-//         projectsDesc: "",
-//         contactTitle: "",
-//         contactDesc: ""
-//     }
-// }
-
 function infoHtml() {
     var htmlInfo = document.getElementById("info-html");
     if (htmlInfo.style.display === "none") {
@@ -123,5 +77,14 @@ function infoFigma() {
         figmaInfo.style.display = "inline";
     } else {
         figmaInfo.style.display = "none";
+    } 
+}
+
+function infoPy() {
+    var pyInfo = document.getElementById("info-py");
+    if (pyInfo.style.display === "none") {
+        pyInfo.style.display = "inline";
+    } else {
+        pyInfo.style.display = "none";
     } 
 }

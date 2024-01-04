@@ -32,6 +32,7 @@
     --bootstrap-bg: linear-gradient(45deg, #c3bef0, #cca8e9);
     --sass-bg: linear-gradient(45deg, #f3c6f2, #efa6b6);
     --js-bg: linear-gradient(45deg, #fadeab, #f7b484);
+    --py-bg: linear-gradient(45deg, #a8caf6, #97d3ce);
     --illustrator-bg: linear-gradient(45deg, #fdf2b0, #cf9963);
     --photoshop-bg: linear-gradient(45deg, #d7e3fc, #abc4ff);
     --figma-bg: linear-gradient(45deg, #e58c8a, #f57c73);
@@ -51,6 +52,7 @@
         --bootstrap-bg: linear-gradient(45deg, #8594e4, #430f58);
         --sass-bg: linear-gradient(45deg, #e5bcf5, #c54c82);
         --js-bg: linear-gradient(45deg, #f8e492, #6b4a0b);
+        --py-bg: linear-gradient(45deg, #47b1db, #0c2f35);
         --illustrator-bg: linear-gradient(45deg, #F89702, rgb(112, 20, 4));
         --photoshop-bg: linear-gradient(45deg, #31c5ff, #021233);
         --figma-bg: linear-gradient(45deg, #b96927, #3d0f01);
