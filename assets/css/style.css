@@ -411,9 +411,6 @@ form button:hover {
     nav {
         display: none;
     }
-    main {
-        
-    }
 }
 
 @media (max-width: 1024px) {
