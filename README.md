@@ -2,6 +2,8 @@
 
 ![For Github](https://github.com/yasmim-rayane/portfolio/assets/130815621/ee05c9d9-a464-4b61-a2ec-4292a43525a2)
 
+<a src="https://yasmim-rayane.github.io/portfolio/">Link do portfólio.</a>
+
 Projeto em andamento.
 
 ## ✨ Seções
