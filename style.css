@@ -1,217 +1,240 @@
-/* --- Definição de variáveis --- */
-
-/* --- Modo escuro --- */
-:root {
-    --main-bg-color: #0D0D0D;
-    --header-bg-color: #1A1A1A;
+[data-theme=dark] {
+  --main-bg-color: #0D0D0D;
+  --header-bg-color: #1A1A1A;
+  --btn-bg-color: linear-gradient(180deg, #8C00F9 0%, #6603B3 50%, #40056D 100%);
+  --btn-text-color: #FFFFFF;
 }
 
-/* --- Modo claro --- */
-[data-theme="light"] {
-    --main-bg-color: #fefefe;
-    --header-bg-color: #e1e1e1;
+[data-theme=light] {
+  --main-bg-color: #fefefe;
+  --header-bg-color: #e1e1e1;
+  --btn-bg-color: #000000;
+  --btn-text-color: #FFFFFF;
 }
 
-/* --- Estilos globais --- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
-/* --- Estilos do corpo --- */
+html {
+  scroll-behavior: smooth;
+}
+
+h2 {
+  color: #960DFF;
+  text-align: center;
+}
+
+.btn {
+  display: inline-flex;
+  padding: 5px 20px;
+  align-items: center;
+  border-radius: 50px;
+  color: var(--btn-text-color);
+  background: var(--btn-bg-color);
+}
+.btn:hover {
+  cursor: pointer;
+  filter: brightness(1.3);
+  transition: 300ms;
+  box-shadow: 0 0 15px 0 rgba(142, 12, 255, 0.5);
+}
+
 body {
-    background-color: var(--main-bg-color);
-    color: white;
-    display: grid;
-    place-items: center;
-    font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--main-bg-color);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-/* --- Estilos do cabeçalho e do menu de navegação --- */
 
 header {
-    position: fixed;
-    top: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--header-bg-color);
-    width: 100%;
-    padding: 10px;
-    padding-right: 10%;
-    padding-left: 10%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 10% 10px 10%;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
-
 header ul {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 20px;
 }
-
 header ul li a {
-    color: white;
+  color: white;
 }
-
 header ul li a:hover {
-    color: #FFD21D;
-    text-decoration: wavy underline 0.01em;
-    transition: 0.3s;
+  color: #FFD21D;
+  text-decoration: wavy underline 0.01em;
+  transition: 0.3s;
 }
-
-/* --- Estilos do corpo principal --- */
+header .header-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .header-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 5px;
+}
+header .header-button:hover {
+  cursor: pointer;
+  filter: brightness(0.8);
+  transition: 300ms;
+}
 
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 80%;
+  gap: 50px;
 }
 
-.about-me,
-.projects,
-.contact,
-.follow-me {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 20px;
+#about-me,
+#projects,
+#contact,
+#follow-me {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 20px;
 }
 
-/* --- Estilos da seção "Sobre mim" --- */
-.about-me .container {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    flex-wrap: wrap;
+#about-me .container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#about-me .left,
+#about-me .right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+}
+#about-me .left h2 {
+  color: white;
+  text-align: left;
+}
+#about-me .left #semester {
+  font-size: 0.9rem;
+  color: #BBBBBB;
+}
+#about-me .left .skills {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#about-me .left .skills .skill {
+  display: flex;
+  padding: 3px 12px;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-radius: 100px;
+  background: linear-gradient(120deg, #051050 -2.91%, #3d0b76 50.06%, #1f0641 103.03%);
+}
+#about-me .left .skills .skill:hover {
+  cursor: default;
+  color: #FFD21D;
+  transition: 300ms;
 }
 
-.about-me .left,
-.about-me .right {
-    display: flexbox;
-    flex-direction: column;
-
-    gap: 20px;
-    padding: 20px;
-    flex: 1;
+#projects .project-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+#projects .project-list .project-item {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  background-color: var(--header-bg-color);
+  border-radius: 10px;
+  padding: 10px;
+  gap: 10px;
+}
+#projects .project-list .project-item .technology-list {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+#projects .project-list .project-item .technology-list .technology-item {
+  font-size: 0.9rem;
+  display: inline-flex;
+  width: fit-content;
+  padding: 2px 5px;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: #090909;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+#projects .project-list .project-item .technology-list .technology-item:hover {
+  cursor: default;
+  color: #FFD21D;
+  transition: 300ms;
 }
 
-.about-me .left .skills {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
+#contact .contact-form {
+  display: flex;
+  flex-direction: column;
+  background: #1A1A1A;
+  padding: 2%;
 }
-
-.about-me .left .skills .skill {
-    display: flex;
-    padding: 3px 12px;
-    width: fit-content;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    border-radius: 100px;
-    background: linear-gradient(120deg, #166EC0 -2.91%, #0B3276 50.06%, #18124E 103.03%);
-}
-
-.about-me .left .skills .skill:hover {
-    cursor: default;
-    color: #FFD21D;
-    transition: 300ms;
-}
-
-/* --- Estilos da seção "Projetos" --- */
-
-.projects .project-list {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-
-}
-
-.projects .project-list .project-item {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    background-color: var(--header-bg-color);
-    border-radius: 10px;
-    padding: 10px;
-    gap: 10px;
-}
-
-.projects .project-list .project-item .technology-list {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.projects .project-list .project-item .technology-list .technology-item {
-    font-size: 0.9rem;
-    display: inline-flex;
-    width: fit-content;
-    padding: 2px 5px 2px 5px;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: #090909;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-}
-
-.projects .project-list .project-item .technology-list .technology-item:hover {
-    cursor: default;
-    color: #FFD21D;
-    transition: 300ms;
-}
-
-.follow-me {
-    text-align: center;
-    padding: 20px;
-    stroke: white;
-    stroke-width: 2px;
-}
-
-.contact .contact-form {
-    display: flex;
-    flex-direction: column;
-    background: #1A1A1A;
-    padding: 2%;
-}
-
-.contact .contact-form form {
-    display: flex;
-    flex-direction: column;
+#contact .contact-form form {
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    color: white;
-    position: relative;
-    bottom: 0;
-    margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  color: white;
+  position: relative;
+  bottom: 0;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
-    .about-me .container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .projects .project-list {
-        flex-direction: column;
-        align-items: center;
-    }
-
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  #about-me .container {
+    flex-direction: column;
+  }
+  #projects .project-list {
+    flex-direction: column;
+    align-items: center;
+  }
 }
+
+/*# sourceMappingURL=style.css.map */

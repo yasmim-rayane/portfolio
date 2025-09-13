@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yasmim Rayane</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c22b5b5ca0.js" crossorigin="anonymous"></script>
 </head>
 
 <body data-theme="dark">
@@ -15,23 +16,14 @@
             <h1>Yasmim</h1>
         </div>
 
-        <div>
-            <ul>
-                <li><a href="#">About Me</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-
-        <div>
-            <button>Change language</button>
-            <button>Change theme</button>
-            <button>Get in touch</button>
+        <div class="header-icons">
+            <button class="header-button"><img src="imagens/icones/england-flag.svg" alt="Change language button"></button>
+            <button class="header-button"><img src="imagens/icones/dark-mode-icon.svg" alt="Change theme button"></button>
         </div>
     </header>
 
     <main>
-        <div class="about-me">
+        <div id="about-me">
             <div class="container">
                 <div class="left">
                     <h2>
@@ -40,9 +32,11 @@
                         UI/UX Designer & Front-end Developer
                     </h2>
                     <p>
-                        I'm a passionate designer and front-end developer with experience of creating beautiful,
-                        responsive,
-                        and user-friendly web applications.
+                        Web Developer focused on performance, security, and design.<br>
+                        Bacharelor Degree in Computer Engineering at Universidade Santa Cecília.<br>
+                        <span id="semester">
+                            2th of 10 semesters
+                        </span> 
                     </p>
                     <div class="skills">
                         <span class="skill">
@@ -76,15 +70,22 @@
                             Adobe Photoshop
                         </span>
                     </div>
-                    <button>Download resume</button>
+                    <div class="container">
+                        <a href="#" class="btn">Download resume</a>
+                        <div class="social-links">
+                            <a href="mailto:silva.yasmimray@gmail.com"><i class="fa-brands fa-google"></i></a>
+                            <a href="https://www.linkedin.com/in/yasmimrayane" class="social-link" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://github.com/yasmim-rayane" class="social-link" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="right">
-                    <span>testasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+                    <span>testasaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa</span>
                 </div>
             </div>
         </div>
 
-        <div class="projects">
+        <div id="projects">
             <h2>Featured Projects</h2>
             <div class="project-list">
                 <div class="project-item">
@@ -130,17 +131,7 @@
             </div>
         </div>
 
-        <div class="follow-me">
-            <h2>Follow Me</h2>
-            <p>Connect with me on social media and professional networks.</p>
-            <div class="social-links">
-                <a href="mailto:silva.yasmimray@gmail.com">E-mail</a>
-                <a href="https://www.linkedin.com/in/yasmimrayane" class="social-link" target="_blank">LinkedIn</a>
-                <a href="https://github.com/yasmim-rayane" class="social-link" target="_blank">GitHub</a>
-            </div>
-        </div>
-
-        <div class="contact">
+        <div id="contact">
             <h2>Get in Touch</h2>
             <p>I'm always open to discussing new opportunities, interesting projects, or just having a chat about web
                 development and design. Feel free to reach out!</p>

@@ -1,0 +1,294 @@
+// ----- Definição de variáveis -----
+$purple-gradient: linear-gradient(180deg, #8C00F9 0%, #6603B3 50%, #40056D 100%);
+$skill-gradient: linear-gradient(120deg, #051050 -2.91%, #3d0b76 50.06%, #1f0641 103.03%);
+$main-bg-dark: #0D0D0D;
+$header-bg-dark: #1A1A1A;
+$btn-text-dark: #FFFFFF;
+$main-bg-light: #fefefe;
+$header-bg-light: #e1e1e1;
+$btn-bg-light: #000000;
+$btn-text-light: #FFFFFF;
+
+// ----- Temas -----
+[data-theme="dark"] {
+    --main-bg-color: #{$main-bg-dark};
+    --header-bg-color: #{$header-bg-dark};
+    --btn-bg-color: #{$purple-gradient};
+    --btn-text-color: #{$btn-text-dark};
+}
+
+[data-theme="light"] {
+    --main-bg-color: #{$main-bg-light};
+    --header-bg-color: #{$header-bg-light};
+    --btn-bg-color: #{$btn-bg-light};
+    --btn-text-color: #{$btn-text-light};
+}
+
+// ----- Estilos globais -----
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+// ----- Componentes de texto -----
+h2 {
+    color: #960DFF;
+    text-align: center;
+}
+
+.btn {
+    display: inline-flex;
+    padding: 5px 20px;
+    align-items: center;
+    border-radius: 50px;
+    color: var(--btn-text-color);
+    background: var(--btn-bg-color);
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.3);
+        transition: 300ms;
+        box-shadow: 0 0 15px 0 rgba(142, 12, 255, 0.50);
+    }
+}
+
+// ----- Corpo -----
+body {
+    background-color: var(--main-bg-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+// ----- Cabeçalho e navegação -----
+header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 10% 10px 10%;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.10);
+    backdrop-filter: blur(10px);
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        gap: 20px;
+
+        li {
+            a {
+                color: white;
+
+                &:hover {
+                    color: #FFD21D;
+                    text-decoration: wavy underline 0.01em;
+                    transition: 0.3s;
+                }
+            }
+        }
+    }
+
+    .header-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header-button {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0 5px;
+
+        &:hover {
+            cursor: pointer;
+            filter: brightness(0.8);
+            transition: 300ms;
+        }
+    }
+}
+
+// ----- Corpo principal -----
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 80%;
+    gap: 50px;
+}
+
+#about-me,
+#projects,
+#contact,
+#follow-me {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 20px;
+}
+
+// ----- Seção "Sobre mim" -----
+#about-me {
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .left,
+    .right {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        flex: 1;
+    }
+
+    .left {
+        h2 {
+            color: white;
+            text-align: left;
+        }
+
+        #semester {
+            font-size: 0.9rem;
+            color: #BBBBBB;
+        }
+
+        .skills {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 5px;
+
+            .skill {
+                display: flex;
+                padding: 3px 12px;
+                width: fit-content;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                border-radius: 100px;
+                background: $skill-gradient;
+
+                &:hover {
+                    cursor: default;
+                    color: #FFD21D;
+                    transition: 300ms;
+                }
+            }
+        }
+    }
+}
+
+// ----- Seção "Projetos" -----
+#projects {
+    .project-list {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            background-color: var(--header-bg-color);
+            border-radius: 10px;
+            padding: 10px;
+            gap: 10px;
+
+            .technology-list {
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                flex-wrap: wrap;
+
+                .technology-item {
+                    font-size: 0.9rem;
+                    display: inline-flex;
+                    width: fit-content;
+                    padding: 2px 5px;
+                    align-items: center;
+                    flex-shrink: 0;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.25);
+                    background: #090909;
+                    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+                    &:hover {
+                        cursor: default;
+                        color: #FFD21D;
+                        transition: 300ms;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ----- Seção "Contato" -----
+#contact {
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        background: #1A1A1A;
+        padding: 2%;
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+// ----- Rodapé -----
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    position: relative;
+    bottom: 0;
+    margin-top: 20px;
+}
+
+// ----- Responsivo -----
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #about-me {
+        .container {
+            flex-direction: column;
+        }
+    }
+
+    #projects {
+        .project-list {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
