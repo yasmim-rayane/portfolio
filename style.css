@@ -1,6 +1,6 @@
 [data-theme=dark] {
   --main-bg-color: #0d0d0d;
-  --header-bg-color: #1a1a1a;
+  --header-bg-color: rgba(26, 26, 26, 0.8705882353);
   --accent: #960dff;
   --text: #fff;
   --text-muted: #bbb;
@@ -68,6 +68,7 @@ textarea {
 
 /* Yellow effect for text */
 .effect-yellow {
+  user-select: none;
   display: inline-block;
   color: var(--accent);
   background-image: linear-gradient(90deg, #ffd21d 0%, #ffd21d 50%, var(--accent) 50%);
@@ -107,9 +108,10 @@ body[data-theme] {
 }
 
 header {
-  background: var(--header-bg-color, #0d0d0d);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--header-bg-color, #0d0d0d) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
 }
 header .header-button {
   background: none;
@@ -126,11 +128,23 @@ header .header-button:hover {
   filter: brightness(1.3);
 }
 
+.mini-prompt-container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  font-family: "Fira Mono", "Consolas", "Menlo", monospace;
+  user-select: none;
+}
+
 .mini-prompt-title {
   background: #262626;
 }
 .mini-prompt-title .circle {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   aspect-ratio: 1/1;
 }
 .mini-prompt-title .red {
@@ -145,7 +159,6 @@ header .header-button:hover {
 .mini-prompt-title .portfolio-title {
   color: #95A1A1 !important;
   font-size: 0.9rem;
-  font-weight: 600;
 }
 
 .mini-prompt-footer {
@@ -156,7 +169,6 @@ header .header-button:hover {
   background: #181828;
   box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
   padding: 18px 20px 14px 20px;
-  font-family: "Fira Mono", "Consolas", "Menlo", monospace;
   font-size: 0.8rem;
   color: #f8f8f2;
   min-width: 240px;
@@ -193,6 +205,7 @@ header .header-button:hover {
 
 .skills {
   margin-bottom: 1rem;
+  user-select: none;
 }
 .skills .skill {
   background: #181828;

@@ -1,6 +1,6 @@
 // ----- Variables -----
 $main-bg-dark: #0d0d0d;
-$header-bg-dark: #1a1a1a;
+$header-bg-dark: #1a1a1ade;
 $main-bg-light: #fefefe;
 $header-bg-light: #e1e1e1;
 $accent: #960dff;
@@ -86,6 +86,7 @@ textarea {
 // ----- Effects -----
 /* Yellow effect for text */
 .effect-yellow {
+    user-select: none;
     display: inline-block;
     color: var(--accent);
     background-image: linear-gradient(90deg, #ffd21d 0%, #ffd21d 50%, var(--accent) 50%);
@@ -130,9 +131,10 @@ body[data-theme] {
 
 // ----- Header -----
 header {
-    background: var(--header-bg-color, #0d0d0d);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--header-bg-color, #0d0d0d) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.10);
 
     .header-button {
         background: none;
@@ -153,18 +155,34 @@ header {
 }
 
 // ----- Mini Prompt -----
+.mini-prompt-container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+    font-family: "Fira Mono", "Consolas", "Menlo", monospace;
+    user-select: none;
+}
+
 .mini-prompt-title {
     background: #262626;
+
     .circle {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         aspect-ratio: 1/1;
     }
+
     .red {
         color: #FB2C36 !important;
     }
+
     .yellow {
         color: #F0B100 !important;
     }
+
     .green {
         color: #00C950 !important;
     }
@@ -172,7 +190,6 @@ header {
     .portfolio-title {
         color: #95A1A1 !important;
         font-size: 0.9rem;
-        font-weight: 600;
     }
 }
 
@@ -184,7 +201,6 @@ header {
     background: #181828;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 18px 20px 14px 20px;
-    font-family: "Fira Mono", "Consolas", "Menlo", monospace;
     font-size: 0.8rem;
     color: #f8f8f2;
     min-width: 240px;
@@ -230,6 +246,7 @@ header {
 // ----- Skills -----
 .skills {
     margin-bottom: 1rem;
+    user-select: none;
 
     .skill {
         background: #181828;
