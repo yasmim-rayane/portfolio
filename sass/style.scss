@@ -1,6 +1,6 @@
 // ----- Variables -----
 $main-bg-dark: #0d0d0d;
-$header-bg-dark: #1a1a1ade;
+$header-bg-dark: #1a1a1aaf;
 $main-bg-light: #fefefe;
 $header-bg-light: #e1e1e1;
 $accent: #960dff;
@@ -275,11 +275,11 @@ header {
     border: none;
     background: var(--accent) !important;
     color: #fff !important;
+    transition: filter 0.5s;
     text-decoration: none;
 
     &:hover {
         cursor: unset !important;
-        transition: filter 0.5s;
         filter: brightness(1.2);
         box-shadow: #960dff 0px 0px 8px 0px;
     }
@@ -340,10 +340,21 @@ header {
         margin-top: 2px;
     }
 
-    .project-tech {
+    .under-project {
         color: var(--text-secondary);
         font-size: 0.97rem;
         margin-top: 2px;
+        font-family: "Fira Mono", "Consolas", "Menlo", monospace;
+        user-select: none;
+
+        &::before{
+            content: "› ";
+            color: var(--accent);
+        }
+        &::after{
+            content: " ‹";
+            color: var(--accent);
+        }
     }
 }
 

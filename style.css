@@ -1,6 +1,7 @@
+@charset "UTF-8";
 [data-theme=dark] {
   --main-bg-color: #0d0d0d;
-  --header-bg-color: rgba(26, 26, 26, 0.8705882353);
+  --header-bg-color: rgba(26, 26, 26, 0.6862745098);
   --accent: #960dff;
   --text: #fff;
   --text-muted: #bbb;
@@ -230,11 +231,11 @@ header .language-button {
   border: none;
   background: var(--accent) !important;
   color: #fff !important;
+  transition: filter 0.5s;
   text-decoration: none;
 }
 .purple-btn:hover {
   cursor: unset !important;
-  transition: filter 0.5s;
   filter: brightness(1.2);
   box-shadow: #960dff 0px 0px 8px 0px;
 }
@@ -283,10 +284,20 @@ header .language-button {
   font-size: 1rem;
   margin-top: 2px;
 }
-.project-list .project-tech {
+.project-list .under-project {
   color: var(--text-secondary);
   font-size: 0.97rem;
   margin-top: 2px;
+  font-family: "Fira Mono", "Consolas", "Menlo", monospace;
+  user-select: none;
+}
+.project-list .under-project::before {
+  content: "› ";
+  color: var(--accent);
+}
+.project-list .under-project::after {
+  content: " ‹";
+  color: var(--accent);
 }
 
 .see-projects {
