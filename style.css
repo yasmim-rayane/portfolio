@@ -477,12 +477,8 @@ footer {
 }
 @media (max-width: 500px) {
   header {
-    flex-direction: column;
     gap: 8px;
-    padding: 12px 2vw;
-  }
-  header h1 {
-    font-size: 1.2rem;
+    padding: 12px 8vw;
   }
   main {
     margin-top: 80px;
