@@ -29,6 +29,8 @@ O projeto foi dividido em duas fases:
 
 - HTML5
 - CSS3 + Flexbox
+- SaSS (for styling)
+- Bootstrap (for responsivity)
 - JavaScript (básico)
 - Google Fonts
 - Font Awesome
