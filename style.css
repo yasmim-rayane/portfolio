@@ -33,7 +33,8 @@ body {
   cursor: url("imagens/cursor/Cursor.cur"), auto;
 }
 
-button, a {
+button,
+a {
   cursor: url("imagens/cursor/Pointer.cur"), pointer;
 }
 
