@@ -1,3 +1,10 @@
+<!--
+
+    Falta colocar o efeito de digitação no código
+    Fazer o dark mode/light funcionar
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,25 +80,42 @@
                 </div>
             </div>
 
-
-
             
             <div class="col-md-6 d-flex justify-content-center">
-                <div class="mini-prompt">
-                    <span class="var">const</span> <span class="name">developer</span> <span class="eq">=</span>
-                    {<br><br>
-                    <div class="indent">
-                        <span class="key">name:</span> <span class="string">'Yasmim Rayane'</span>,<br>
-                        <span class="key">role:</span> <span class="string">'UI/UX Designer &amp; Developer'</span>,<br>
-                        <span class="key">skills:</span> [
-                        <span class="array">'Bootstrap'</span>, <span class="array">'Sass'</span>,
-                        <span class="array">'Figma'</span>, <span class="array">'Design Systems'</span>
-                        ],<br>
-                        <span class="key">passion:</span> <span class="string">'Creating beautiful UX'</span>,<br>
-                        <span class="key">status:</span> <span class="string">'Available for hire'</span>
+                <div class="mini-prompt-container">
+                    <div class="mini-prompt-title d-flex justify-content-between align-items-center px-3 py-1 rounded-top">
+                        <div>
+                            <div class="d-inline-block me-2">
+                                <span><i class="fa-solid fa-circle circle red"></i></span>
+                                <span><i class="fa-solid fa-circle circle yellow"></i></span>
+                                <span><i class="fa-solid fa-circle circle green"></i></span>
+                            </div>
+                            <span class="portfolio-title">portfolio.tsx</span>
+                        </div>
+                        <span class="portfolio-title">VS Code</span>
                     </div>
-                    }<br><br>
-                    <span class="export">export default</span> <span class="name">developer</span>;
+
+
+                    <div class="mini-prompt">
+                        <span class="var">const</span> <span class="name">developer</span> <span class="eq">=</span>
+                        {<br><br>
+                        <div class="indent">
+                            <span class="key">name:</span> <span class="string">'Yasmim Rayane'</span>,<br>
+                            <span class="key">role:</span> <span class="string">'UI/UX Designer &amp; Developer'</span>,<br>
+                            <span class="key">skills:</span> [
+                            <span class="array">'Bootstrap'</span>, <span class="array">'Sass'</span>,
+                            <span class="array">'Figma'</span>, <span class="array">'Design Systems'</span>
+                            ],<br>
+                            <span class="key">passion:</span> <span class="string">'Creating beautiful UX'</span>,<br>
+                            <span class="key">status:</span> <span class="string">'Available for hire'</span>
+                            <span class="typewriter"></span>
+                        </div>
+                        }<br><br>
+                        <span class="export">export default</span> <span class="name">developer</span>;
+                    </div>
+                    <div class="mini-prompt-footer  d-flex justify-content-between align-items-center px-3 py-1 rounded-bottom">
+                        
+                    </div>
                 </div>
             </div>
 

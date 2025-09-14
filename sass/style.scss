@@ -84,6 +84,7 @@ textarea {
 }
 
 // ----- Effects -----
+/* Yellow effect for text */
 .effect-yellow {
     display: inline-block;
     color: var(--accent);
@@ -97,6 +98,25 @@ textarea {
 
     &:hover {
         background-position: 0 0;
+    }
+}
+
+/* Blink effect */
+.typewriter:after {
+    content: "|";
+    opacity: 1;
+    animation: blink 1s infinite;
+    color: var(--third-color);
+    margin-left: -10px;
+}
+
+@keyframes blink {
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
     }
 }
 
@@ -133,13 +153,39 @@ header {
 }
 
 // ----- Mini Prompt -----
+.mini-prompt-title {
+    background: #262626;
+    .circle {
+        font-size: 0.8rem;
+        aspect-ratio: 1/1;
+    }
+    .red {
+        color: #FB2C36 !important;
+    }
+    .yellow {
+        color: #F0B100 !important;
+    }
+    .green {
+        color: #00C950 !important;
+    }
+
+    .portfolio-title {
+        color: #95A1A1 !important;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+}
+
+.mini-prompt-footer {
+    background: #FAFAFA;
+}
+
 .mini-prompt {
     background: #181828;
-    border-radius: 10px;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 18px 20px 14px 20px;
     font-family: "Fira Mono", "Consolas", "Menlo", monospace;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #f8f8f2;
     min-width: 240px;
     max-width: 320px;
