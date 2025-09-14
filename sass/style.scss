@@ -48,17 +48,17 @@ html {
 
 // ----- Cursor -----
 body {
-    cursor: url("imagens/cursor/Cursor.cur"), auto;
+    cursor: url("assets/images/cursor/Cursor.cur"), auto;
 }
 
 button,
 a {
-    cursor: url("imagens/cursor/Pointer.cur"), pointer !important;
+    cursor: url("assets/images/cursor/Pointer.cur"), pointer !important;
 }
 
 input,
 textarea {
-    cursor: url("imagens/cursor/Text.cur"), text;
+    cursor: url("assets/images/cursor/Text.cur"), text;
 }
 
 // ----- Scrollbar -----
@@ -198,7 +198,7 @@ header {
 }
 
 .mini-prompt {
-    background: #181828;
+    background: #0A0A0A;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 18px 20px 14px 20px;
     font-size: 0.8rem;
@@ -214,32 +214,32 @@ header {
         display: block;
     }
 
-    .var {
-        color: #4ec9b0;
+    .var { // uso
+        color: #1A5FE2;
     }
 
-    .name {
-        color: #dcdcaa;
+    .name { // uso
+        color: #c09a02;
     }
 
-    .eq {
+    .eq {   
         color: #fff;
     }
 
     .key {
-        color: #9cdcfe;
+        color: #037C23  ;
     }
 
     .string {
-        color: #ce9178;
+        color: #FF6900;
     }
 
     .array {
-        color: #b5cea8;
+        color: #8048e9;
     }
 
     .export {
-        color: #c586c0;
+        color: #8737C5;
     }
 }
 
@@ -415,6 +415,7 @@ header {
     }
 
     textarea {
+        resize: vertical;
         min-height: 80px !important;
         max-height: 300px !important;
     }

@@ -19,12 +19,12 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/c22b5b5ca0.js" crossorigin="anonymous"></script>
     <!-- Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="imagens/Sun-3d.ico">
+    <link rel="icon" type="image/png" href="assets/images/Sun-3d.ico">
 </head>
 
 <!-- Dark/light theme set in body -->
@@ -32,15 +32,16 @@
 <body data-theme="dark">
 
     <header class="fixed-top shadow-sm py-2 px-4 d-flex justify-content-between align-items-center">
-        <!-- FOR GOD';S SAKE change this font RIGHT HERE. -->
-        <h1 class="mb-0" style="font-family: 'Inconsolata', sans-serif; color: var(--accent); font-size: 1.7rem; font-weight: 900;">Yasmim
+        <h1 class="mb-0"
+            style="font-family: 'Inconsolata', sans-serif; color: var(--accent); font-size: 1.7rem; font-weight: 900;">
+            Yasmim
         </h1>
         <div class="d-flex gap-2 align-items-center">
             <button class="header-button btn p-0 bg-transparent border-0">
-                <img src="imagens/icones/usa-flag.svg" alt="Change language button" width="37" height="37">
+                <img src="assets/images/icons/usa-flag.svg" alt="Change language button" width="37" height="37">
             </button>
             <button class="header-button btn p-0 bg-transparent border-0">
-                <img src="imagens/icones/dark-mode-icon.svg" alt="Change theme button" width="37" height="37">
+                <img src="assets/images/icons/dark-mode-icon.svg" alt="Change theme button" width="37" height="37">
             </button>
         </div>
     </header>
@@ -77,7 +78,7 @@
                     <span class="skill">Adobe Photoshop</span>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <a href="#" class="purple-btn btn rounded-pill px-4"><strong>Download resume</strong></a>
+                    <a href="assets/docs/Curriculo_Yasmim_Rayane.pdf" download class="purple-btn btn rounded-pill px-4"><strong>Download resume</strong></a>
                     <div class="social-links d-flex gap-3">
                         <a href="mailto:silva.yasmimray@gmail.com"><i class="fa-brands fa-google"></i></a>
                         <a href="https://www.linkedin.com/in/yasmim-rayane-189970325/" target="_blank"><i
@@ -106,26 +107,25 @@
                         <span class="var">const</span> <span class="name">developer</span> <span class="eq">=</span>
                         {<br>
                         <div class="indent">
-                            <span class="key">name:</span> <span class="string">'Yasmim Rayane'</span>,<br>
-                            <span class="key">role:</span> <span class="string">'UI/UX Designer &amp;
+                            <span class="key">name</span><span class="eq">:</span> <span class="string">'Yasmim Rayane'</span>,<br>
+                            <span class="key">role</span><span class="eq">:</span> <span class="string">'UI/UX Designer &amp;
                                 Developer'</span>,<br>
-                            <span class="key">skills:</span> [
+                            <span class="key">skills</span><span class="eq">:</span> [
                             <span class="array">'Bootstrap'</span>, <span class="array">'Sass'</span>,
                             <span class="array">'Figma'</span>, <span class="array">'Design Systems'</span>
                             ],<br>
-                            <span class="key">passion:</span> <span class="string">'Creating beautiful UX'</span>,<br>
-                            <span class="key">status:</span> <span class="string">'Available for hire'</span>
+                            <span class="key">passion</span><span class="eq">:</span> <span class="string">'Creating beautiful UX'</span>,<br>
+                            <span class="key">status</span><span class="eq">:</span> <span class="string">'Available for hire'</span>
                             <span class="typewriter"></span>
                         </div>
                         }<br><br>
-                        <span class="export">export default</span> <span class="name">developer</span>;
+                        <span class="export">export</span> <span class="var">default</span> <span class="name">developer</span>;
                     </div>
                     <div
                         class="mini-prompt-footer  d-flex justify-content-between align-items-center px-3 py-1 rounded-bottom">
                     </div>
                 </div>
             </div>
-
         </section>
 
         <section id="projects" class="mb-5">
@@ -205,6 +205,8 @@
             </div>
         </section>
     </main>
+
+    <hr>
 
     <footer class="text-center py-4">
         <p class="mb-0">&copy; 2025 Yasmim Rayane. All rights reserved.</p>

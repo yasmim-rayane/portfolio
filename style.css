@@ -32,17 +32,17 @@ html {
 }
 
 body {
-  cursor: url("imagens/cursor/Cursor.cur"), auto;
+  cursor: url("assets/images/cursor/Cursor.cur"), auto;
 }
 
 button,
 a {
-  cursor: url("imagens/cursor/Pointer.cur"), pointer !important;
+  cursor: url("assets/images/cursor/Pointer.cur"), pointer !important;
 }
 
 input,
 textarea {
-  cursor: url("imagens/cursor/Text.cur"), text;
+  cursor: url("assets/images/cursor/Text.cur"), text;
 }
 
 /* Para navegadores baseados em Webkit (Chrome, Edge, Safari) */
@@ -166,7 +166,7 @@ header .header-button:hover {
 }
 
 .mini-prompt {
-  background: #181828;
+  background: #0A0A0A;
   box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
   padding: 18px 20px 14px 20px;
   font-size: 0.8rem;
@@ -182,25 +182,25 @@ header .header-button:hover {
   display: block;
 }
 .mini-prompt .var {
-  color: #4ec9b0;
+  color: #1A5FE2;
 }
 .mini-prompt .name {
-  color: #dcdcaa;
+  color: #c09a02;
 }
 .mini-prompt .eq {
   color: #fff;
 }
 .mini-prompt .key {
-  color: #9cdcfe;
+  color: #037C23;
 }
 .mini-prompt .string {
-  color: #ce9178;
+  color: #FF6900;
 }
 .mini-prompt .array {
-  color: #b5cea8;
+  color: #8048e9;
 }
 .mini-prompt .export {
-  color: #c586c0;
+  color: #8737C5;
 }
 
 .skills {
@@ -353,6 +353,7 @@ header .header-button:hover {
   box-shadow: 0 0 0 2px rgba(150, 13, 255, 0.15);
 }
 .contact-form textarea {
+  resize: vertical;
   min-height: 80px !important;
   max-height: 300px !important;
 }
