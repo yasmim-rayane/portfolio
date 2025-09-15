@@ -133,6 +133,15 @@ header .language-button {
   filter: grayscale(30%);
 }
 
+/*#my-photo {
+    position: absolute;
+    float: left;
+    z-index: -1000;
+    opacity: 0.5;
+    img {
+        width: 100px;
+    }
+}*/
 .mini-prompt-container {
   display: flex;
   flex-direction: column;
