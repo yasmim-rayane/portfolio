@@ -11,6 +11,7 @@
 }
 
 [data-theme=light] {
+  /* Não concluído! */
   --main-bg-color: #fefefe;
   --header-bg-color: #e1e1e1;
   --accent: #960dff;
@@ -133,15 +134,21 @@ header .language-button {
   filter: grayscale(30%);
 }
 
-/*#my-photo {
-    position: absolute;
-    float: left;
-    z-index: -1000;
-    opacity: 0.5;
-    img {
-        width: 100px;
-    }
-}*/
+#my-photo img {
+  opacity: 0.7;
+  filter: grayscale(0.1);
+  width: 100px;
+  transition: 500ms;
+  border: solid 2px #222;
+  border-radius: 50%;
+}
+#my-photo img:hover {
+  opacity: 1;
+  filter: saturate(1.2);
+  width: 150px;
+  border-radius: 15px;
+}
+
 .mini-prompt-container {
   display: flex;
   flex-direction: column;
@@ -286,7 +293,9 @@ header .language-button {
   transition: color 0.2s;
 }
 .project-list .project-title:hover {
+  transition: 300ms;
   color: #ffd21d;
+  font-size: 1.2rem;
 }
 .project-list .project-description {
   color: var(--text-muted);

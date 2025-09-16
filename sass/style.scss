@@ -24,6 +24,7 @@ $radius: 10px;
 }
 
 [data-theme="light"] {
+    /* Não concluído! */
     --main-bg-color: #{$main-bg-light};
     --header-bg-color: #{$header-bg-light};
     --accent: #{$accent};
@@ -159,16 +160,24 @@ header {
     }
 }
 
-// ----- My photo ------
-/*#my-photo {
-    position: absolute;
-    float: left;
-    z-index: -1000;
-    opacity: 0.5;
+// ----- My photo..!!!!!....!.. ------
+#my-photo {
     img {
+        opacity: 0.7;
+        filter: grayscale(0.1);
         width: 100px;
+        transition: 500ms;
+        border: solid 2px #222;
+        border-radius: 50%;
+
+        &:hover {
+            opacity: 1;
+            filter: saturate(1.2);
+            width: 150px;
+            border-radius: 15px;
+        }
     }
-}*/
+}
 
 // ----- Mini Prompt -----
 .mini-prompt-container {
@@ -229,20 +238,22 @@ header {
         display: block;
     }
 
-    .var { // uso
+    .var {
+        // uso
         color: #1A5FE2;
     }
 
-    .name { // uso
+    .name {
+        // uso
         color: #c09a02;
     }
 
-    .eq {   
+    .eq {
         color: #fff;
     }
 
     .key {
-        color: #037C23  ;
+        color: #037C23;
     }
 
     .string {
@@ -341,7 +352,9 @@ header {
         transition: color 0.2s;
 
         &:hover {
+            transition: 300ms;
             color: $text-tertiary;
+            font-size: 1.2rem;
         }
     }
 
@@ -358,11 +371,12 @@ header {
         font-family: "Fira Mono", "Consolas", "Menlo", monospace;
         user-select: none;
 
-        &::before{
+        &::before {
             content: "› ";
             color: var(--accent);
         }
-        &::after{
+
+        &::after {
             content: " ‹";
             color: var(--accent);
         }
@@ -431,7 +445,6 @@ header {
             color: var(--text);
             opacity: .4;
         }
-
 
         &:focus {
             border: 1.5px solid var(--accent);

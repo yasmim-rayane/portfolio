@@ -59,7 +59,10 @@ Link para o protótipo criado no Figma:
 
 <h2>Capturas de Tela</h2>
 
-> (Adicione aqui imagens do seu projeto rodando – Print da versão desktop e mobile)
+<div align="center">
+    <img alt="Captura de tela do portfólio mobile" src="assets/images/screenshots/mobile-1.png" height="298"/>
+    <img alt="Captura de tela do portfólio desktop" src="assets/images/screenshots/web-1.png" height="298"/>
+</div>
 
 <h2>Licença</h2>
 
