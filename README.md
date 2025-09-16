@@ -30,7 +30,6 @@ O projeto foi dividido em duas fases:
 
 ![HTML5](https://img.shields.io/badge/HTML5-000?logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-000?logo=css&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-000?logo=JavaScript&logoColor=white)
 
 <h3>Estilização e responsividade</h3>
 
