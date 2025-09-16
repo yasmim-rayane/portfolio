@@ -1,15 +1,17 @@
+<!DOCTYPE html>
+
 <!--
     Checklist:
         - [ ] Fazer o dark mode/light funcionar
         - [ ] Fazer o botão de idioma funcionar
 -->
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yasmim Rayane">
     <title>Yasmim Rayane</title>
     <link rel="stylesheet" href="style.css">
 
@@ -29,7 +31,7 @@
     <link rel="icon" type="image/png" href="assets/images/Sun-3d.ico">
 </head>
 
-<!-- Dark/light theme set in body -->
+<!-- data-theme controls dark/light mode. Toggle handled by script.js (not used yet) -->
 
 <body data-theme="dark">
 
@@ -38,6 +40,7 @@
             style="font-family: 'Inconsolata', sans-serif; color: var(--accent); font-size: 1.7rem; font-weight: 900;">
             Yasmim
         </h1>
+        <!-- Language and theme toggle buttons. Implement logic in script.js -->
         <nav class="d-flex gap-2 align-items-center">
             <button class="header-button btn p-0 bg-transparent border-0" title="Change language">
                 <img src="assets/images/icons/usa-flag.svg" alt="Change language button" class="language-button">
@@ -50,6 +53,7 @@
 
     <main class="container" style="margin-top: 110px;">
         <div class="mb-3 mb-xxl-4" id="my-photo">
+            <!-- Profile photo. Use descriptive alt text for accessibility. -->
             <img src="assets/images/foto.jpeg" alt="Yasmim Rayane's photo.">
         </div>
 
@@ -88,16 +92,17 @@
                         class="purple-btn btn rounded-pill px-4"><strong>Download resume</strong></a>
                     <div class="social-links d-flex gap-3">
                         <a href="mailto:silva.yasmimray@gmail.com"><i class="fa-brands fa-google"></i></a>
-                        <a href="https://www.linkedin.com/in/yasmim-rayane-189970325/" target="_blank"><i
+                        <a href="https://www.linkedin.com/in/yasmim-rayane-189970325/" rel="noopener noreferrer" target="_blank"><i
                                 class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://github.com/yasmim-rayane" target="_blank"><i
+                        <a href="https://github.com/yasmim-rayane" rel="noopener noreferrer" target="_blank"><i
                                 class="fa-brands fa-github"></i></a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 d-flex justify-content-center">
-                <div class="mini-prompt-container rounded-4 shadow-sm">
+                <!-- Decorative code snippet -->
+                <div class="mini-prompt-container rounded-4 shadow-sm" aria-hidden="true">
                     <div class="mini-prompt-title d-flex justify-content-between align-items-center px-3 py-1">
                         <div>
                             <div class="d-inline-block me-1">
@@ -142,9 +147,10 @@
 
         <section id="projects" class="mb-5">
             <h2 class="effect-yellow section-title">Recent projects</h2>
+            <!-- Projects: external links open in new tab -->
             <ol class="project-list list-unstyled">
                 <li class="mb-4">
-                    <a class="project-title" href="https://github.com/yasmim-rayane/agenda-telefonica" target="_blank">
+                    <a class="project-title" rel="noopener noreferrer" href="https://github.com/yasmim-rayane/agenda-telefonica" target="_blank">
                         Phonebook
                     </a>
                     <div class="project-description">
@@ -160,7 +166,7 @@
                     </div>
                 </li>
                 <li class="mb-4">
-                    <a class="project-title" href="https://github.com/yasmim-rayane/todo-list" target="_blank">To-do
+                    <a class="project-title" rel="noopener noreferrer" href="https://github.com/yasmim-rayane/todo-list" target="_blank">To-do
                         list</a>
                     <div class="project-description">
                         A webpage of a to-do list.
@@ -173,7 +179,7 @@
                     </span>
                 </li>
                 <li class="mb-4">
-                    <a class="project-title" href="https://github.com/yasmim-rayane/calculator"
+                    <a class="project-title" rel="noopener noreferrer" href="https://github.com/yasmim-rayane/calculator"
                         target="_blank">Calculator</a>
                     <div class="project-description">
                         A calculator using TkInterCustom library.
@@ -186,7 +192,7 @@
                     </span>
                 </li>
                 <li class="mb-4">
-                    <a class="project-title" href="https://github.com/yasmim-rayane/digital-clock"
+                    <a class="project-title" rel="noopener noreferrer" href="https://github.com/yasmim-rayane/digital-clock"
                         target="_blank">Digital clock</a>
                     <div class="project-description">
                         A webpage of a digital clock.
@@ -210,6 +216,7 @@
                 web
                 development and design. Feel free to reach out!</p>
             <div class="contact-form container-fluid">
+                <!-- Contact form uses Formspree. Validate inputs and check privacy policy. -->
                 <form action="https://formspree.io/f/xblaerpd" method="POST">
                     <div class="mb-3">
                         <input type="text" name="name" class="form-control" placeholder="Name" required>
@@ -229,13 +236,12 @@
 
     <hr>
 
+    <!-- Footer: update year as needed. -->
     <footer class="text-center py-4">
         <p class="mb-0">&copy; 2025 Yasmim Rayane.</p>
     </footer>
 
-    <!-- Custom JS (para futuros componentes interativos) -->
-    <script src="script.js"></script>
-    <!-- Bootstrap JS (opcional, para componentes interativos) -->
+    <!-- Bootstrap JS for future components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
