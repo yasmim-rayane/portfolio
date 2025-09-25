@@ -4,7 +4,7 @@
 
 <h2>Sobre o Projeto</h2>
 
-Este site foi criado com foco em aplicar os conhecimentos de **HTML**, **CSS**, **JavaScript** (a ser aplicado), **Flexbox**, **responsividade** e **publicação com GitHub Pages**.
+Este site foi criado com foco em aplicar os conhecimentos de **HTML**, **CSS**, **JavaScript**, **Flexbox**, **responsividade** e **publicação com GitHub Pages**.
 
 O projeto foi dividido em duas fases:
 - **Parte 1 (Semana 5):** Estruturação HTML e protótipo no Figma  
@@ -17,8 +17,8 @@ O projeto foi dividido em duas fases:
     - [x] Formulário de Contato com validação básica
     - [x] Layout responsivo (mobile e desktop)
     - [x] Animações e efeitos visuais com CSS
-    - [ ] Tema claro/escuro com JavaScript e CSS
-    - [ ] Idiomas inglês/português com JavaScript e HTML
+    - [x] Tema claro/escuro com JavaScript e CSS
+    - [x] Idiomas inglês/português com JavaScript e HTML
 
 ## Tecnologias Utilizadas
 
@@ -30,6 +30,7 @@ O projeto foi dividido em duas fases:
 
 ![HTML5](https://img.shields.io/badge/HTML5-000?logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-000?logo=css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-000?logo=javascript&logoColor=white)
 
 <h3>Estilização e responsividade</h3>
 
@@ -53,8 +54,8 @@ Link para o protótipo criado no Figma:
 
 <h2>Acesso ao Projeto</h2>
 
-- **GitHub Pages:** [Clique aqui para acessar o site](https://yasmim-rayane.github.io/portfolio-front-end-parte1/)
-- **Repositório GitHub:** [Acesse o código-fonte aqui](https://github.com/yasmim-rayane/portfolio-front-end-parte1)
+- **GitHub Pages:** [Clique aqui para acessar o site](https://yasmim-rayane.github.io/portfolio/)
+- **Repositório GitHub:** [Acesse o código-fonte aqui](https://github.com/yasmim-rayane/portfolio)
 
 <h2>Capturas de Tela</h2>
 
