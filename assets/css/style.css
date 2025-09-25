@@ -65,7 +65,7 @@
 
 [data-theme=light] {
   --main-bg-color: #fefefe;
-  --header-bg-color: #e1e1e1;
+  --header-bg-color: rgba(225,225,225,0.85);
   --accent: #960dff;
   --text: #222;
   --text-muted: #666;

@@ -33,7 +33,8 @@
 
 [data-theme="light"] {
     --main-bg-color: #{$main-bg-light};
-    --header-bg-color: #{$header-bg-light};
+    // was: #{$header-bg-light}; agora com transparência para simular vidro
+    --header-bg-color: rgba(225,225,225,0.85);
     --accent: #{$accent};
     --text: #222;
     --text-muted: #666;
