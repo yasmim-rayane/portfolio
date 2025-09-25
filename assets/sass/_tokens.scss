@@ -13,7 +13,9 @@ $radius: 10px;
 
 // Cores do header translúcido
 $header-bg-dark-glass: #1a1a1aaf;
-$header-bg-light-glass: rgba(225,225,225,0.85);
+$header-bg-light-glass: rgba(255,255,255,0.55); // reduz opacidade para evidenciar transparência
+$header-border-light: rgba(0,0,0,0.10);
+$header-border-dark: rgba(255,255,255,0.08);
 
 // Mixins
 @mixin focus-ring($color: #960dff, $size: 2px) {
@@ -71,4 +73,5 @@ $header-bg-light-glass: rgba(225,225,225,0.85);
   backdrop-filter: blur($blur) !important;
   -webkit-backdrop-filter: blur($blur) !important;
   box-shadow: $shadow;
+  border: 1px solid var(--header-border-color, transparent);
 }

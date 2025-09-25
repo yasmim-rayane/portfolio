@@ -1,6 +1,7 @@
 const THEME_KEY = 'siteTheme';
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 let currentTheme = localStorage.getItem(THEME_KEY) || (prefersDark ? 'dark' : 'light');
+let initialized = false;
 
 function applyTheme(theme) {
     const body = document.body;
@@ -29,33 +30,32 @@ function toggleTheme() {
     applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
 }
 
-// Consolidated init (removes duplicated early/DOMContentLoaded logic & retry spam)
-function ensureThemeInit() {
-    if (!document.body) return setTimeout(ensureThemeInit, 30);
+function initTheme() {
+    if (initialized) return;
+    if (!document.body) return document.addEventListener('DOMContentLoaded', initTheme, { once: true });
     applyTheme(currentTheme);
-    const btn = document.getElementById('themeToggle');
-    if (btn && !btn.__boundTheme) {
-        btn.addEventListener('click', toggleTheme);
-        btn.__boundTheme = true;
-    }
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#themeToggle')) toggleTheme();
+    });
+    initialized = true;
 }
-ensureThemeInit();
-document.addEventListener('DOMContentLoaded', ensureThemeInit);
 
-// Expose if needed elsewhere
+initTheme();
+
 window.toggleTheme = toggleTheme;
 export { applyTheme, toggleTheme };
-    if (document.body && !earlyApply.__done) {
-        applyTheme(currentTheme);
-        earlyApply.__done = true;
-    }
-}
+initTheme();
 
-// Execução imediata (caso body já exista)
-earlyApply();
-bindThemeToggle();
-
-document.addEventListener('DOMContentLoaded', () => {
+// Expose
+window.toggleTheme = toggleTheme;
+export { applyTheme, toggleTheme };
+// Expose / export
+window.toggleTheme = toggleTheme;
+export { applyTheme, toggleTheme };
+window.toggleTheme = toggleTheme;
+export { applyTheme, toggleTheme };
+window.toggleTheme = toggleTheme;
+export { applyTheme, toggleTheme };
     earlyApply();
     bindThemeToggle();
 });

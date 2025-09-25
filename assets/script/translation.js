@@ -99,77 +99,61 @@ const STORAGE_KEY = "siteLang";
 let currentLang = localStorage.getItem(STORAGE_KEY) || "en";
 
 function applyTranslations(lang) {
-  const dict = translations[lang] || translations.en;
+  try {
+    const dict = translations[lang] || translations.en;
+    const htmlEl = document.getElementById("html-lang");
+    if (htmlEl) htmlEl.setAttribute("lang", lang);
 
-  // Update the HTML lang attribute
-  const htmlElement = document.getElementById("html-lang");
-  if (htmlElement) {
-    htmlElement.setAttribute("lang", lang);
-  }
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const k = el.getAttribute("data-i18n");
+      if (k && dict[k]) el.textContent = dict[k];
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(el => {
+      const k = el.getAttribute("data-i18n-html");
+      if (k && dict[k]) el.innerHTML = dict[k];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const k = el.getAttribute("data-i18n-placeholder");
+      if (k && dict[k]) el.placeholder = dict[k];
+    });
 
-  // Elements with plain text
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (key && dict[key]) el.textContent = dict[key];
-  });
-
-  // Elements whose value contains HTML
-  document.querySelectorAll("[data-i18n-html]").forEach(el => {
-    const key = el.getAttribute("data-i18n-html");
-    if (key && dict[key]) el.innerHTML = dict[key];
-  });
-
-  // Placeholders
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    if (key && dict[key]) el.placeholder = dict[key];
-  });
-
-  // Update flag + alt
-  const flagImg = document.getElementById("langFlag");
-  if (flagImg) {
-    if (lang === "en") {
-      flagImg.src = "assets/images/icons/usa-flag.svg";
-      flagImg.alt = "Switch to Portuguese";
-    } else {
-      flagImg.src = "assets/images/icons/brazil-flag.png";
-      flagImg.alt = "Mudar para Inglês";
+    const flagImg = document.getElementById("langFlag");
+    if (flagImg) {
+      if (lang === "en") {
+        flagImg.src = "assets/images/icons/usa-flag.svg";
+        flagImg.alt = "Switch to Portuguese";
+      } else {
+        flagImg.src = "assets/images/icons/brazil-flag.png";
+        flagImg.alt = "Mudar para Inglês";
+      }
     }
-  }
 
-  localStorage.setItem(STORAGE_KEY, lang);
-  currentLang = lang;
-  // Notify listeners (e.g., year updater)
-  document.dispatchEvent(new CustomEvent('i18n:applied', { detail: { lang } }));
+    localStorage.setItem(STORAGE_KEY, lang);
+    currentLang = lang;
+    document.dispatchEvent(new CustomEvent('i18n:applied', { detail: { lang } }));
+  } catch (e) { console.error('[i18n] apply error', e); }
 }
 
 function toggleLanguage() {
   applyTranslations(currentLang === "en" ? "pt" : "en");
 }
 
-// Consolidated init (removes separate earlyLangInit + bindLangToggle + retry loops)
-function ensureLangInit() {
-  if (!document.documentElement) return setTimeout(ensureLangInit, 30);
-  if (!ensureLangInit.__done) {
-    applyTranslations(currentLang);
-    ensureLangInit.__done = true;
-  }
-  const btn = document.getElementById("langToggle");
-  if (btn && !btn.__boundLang) {
-    btn.addEventListener("click", toggleLanguage);
-    btn.__boundLang = true;
-  } else if (!btn) {
-    // retry only until button exists (lightweight)
-    if (!ensureLangInit.__tries) ensureLangInit.__tries = 0;
-    if (ensureLangInit.__tries < 20) {
-      ensureLangInit.__tries++;
-      setTimeout(ensureLangInit, 50);
-    }
-  }
-}
-ensureLangInit();
-document.addEventListener("DOMContentLoaded", ensureLangInit);
+let i18nInitialized = false;
+function initI18n() {
+  if (i18nInitialized) return;
+  if (document.readyState === 'loading')
+    return document.addEventListener('DOMContentLoaded', initI18n, { once: true });
 
-// keep global + export
+  applyTranslations(currentLang);
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#langToggle')) toggleLanguage();
+  });
+
+  i18nInitialized = true;
+}
+
+initI18n();
+
 window.toggleLanguage = toggleLanguage;
 export { applyTranslations, toggleLanguage };

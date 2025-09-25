@@ -28,11 +28,12 @@
     --skill-bg-hover: #181828;
     --input-bg: #181828;
     --input-bg-focus: #181828;
+    --header-border-color: #{$header-border-dark};
 }
 
 [data-theme="light"] {
     --main-bg-color: #{$main-bg-light};
-    --header-bg-color: #{$header-bg-light-glass};
+    --header-bg-color: #{$header-bg-light-glass}; // agora aponta para opacidade 0.70
     --accent: #{$accent};
     --text: #222;
     --text-muted: #666;
@@ -58,4 +59,5 @@
     --skill-bg-hover: #e2e2e2;
     --input-bg: #ffffff;
     --input-bg-focus: #ffffff;
+    --header-border-color: #{$header-border-light};
 }

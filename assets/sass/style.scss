@@ -67,7 +67,7 @@ body[data-theme] {
 // ----- Header -----
 header {
     user-select: none;
-    @include glass-panel(var(--header-bg-color)); // substitui background + blur + shadow
+    @include glass-panel(var(--header-bg-color)); // usa --header-border-color se definido
 
     .header-button {
         background: none;
