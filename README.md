@@ -62,6 +62,7 @@ Link para o protótipo criado no Figma:
 <div align="center">
     <img alt="Captura de tela do portfólio mobile com o tema escuro" src="assets/images/screenshots/darktheme-mobile.png" height="298"/>
     <img alt="Captura de tela do portfólio desktop com o tema escuro" src="assets/images/screenshots/darktheme-web.png" height="298"/>
+    <br>
     <img alt="Captura de tela do portfólio mobile com o tema claro" src="assets/images/screenshots/lighttheme-mobile.png" height="298"/>
     <img alt="Captura de tela do portfólio desktop com o tema claro" src="assets/images/screenshots/lighttheme-web.png" height="298"/>
 </div>
