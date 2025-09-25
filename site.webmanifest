@@ -1,0 +1,31 @@
+{
+    "name": "Yasmim Rayane Portfolio",
+    "short_name": "Portfolio",
+    "description": "Portfolio de Yasmim Rayane (UI/UX & Front-end).",
+    "start_url": "index.html",
+    "display": "standalone",
+    "scope": ".",
+    "background_color": "#0d0d0d",
+    "theme_color": "#0d0d0d",
+    "lang": "en",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "assets/images/Rainbow Marble.ico",
+            "sizes": "16x16 32x32 48x48 64x64",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "assets/images/icons/dark-mode-icon.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/images/icons/dark-mode-icon.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ]
+}

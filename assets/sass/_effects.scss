@@ -1,0 +1,33 @@
+// ----- Effects -----
+// Yellow gradient hover text effect
+.effect-yellow {
+    @include gradient-text(#ffd21d, var(--accent));
+    user-select: none;
+    display: inline-block;
+    background-position: 100% 0;
+    will-change: background-position;
+    @include transition(background-position, .6s, cubic-bezier(0.4,0,0.2,1));
+
+    &:hover {
+        background-position: 0 0;
+    }
+}
+
+/* Blinking caret effect */
+.typewriter:after {
+    content: "|";
+    opacity: 1;
+    animation: blink 1s infinite;
+    color: var(--text-teriary); // fixed: was --third-color (undefined)
+    margin-left: -10px;
+}
+
+@keyframes blink {
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}

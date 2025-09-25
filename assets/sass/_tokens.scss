@@ -1,0 +1,62 @@
+// Design tokens (colors, spacing, radii, etc.)
+$main-bg-dark: #0d0d0d;
+$header-bg-dark: #1a1a1aaf;
+$main-bg-light: #fefefe;
+$header-bg-light: #e1e1e1;
+$accent: #960dff;
+$text-light: #fff;
+$text-muted: #bbb;
+$text-secondary: #888;
+$text-tertiary: #ffd21d;
+$border: #222;
+$radius: 10px;
+
+// Mixins
+@mixin focus-ring($color: #960dff, $size: 2px) {
+    outline: $size solid $color;
+    outline-offset: 2px;
+}
+
+@mixin flex-center($dir: row) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin gradient-text($from, $to) {
+  color: $to;
+  background-image: linear-gradient(90deg, $from 0%, $from 50%, $to 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin smooth-transition($props: all, $time: .4s, $ease: ease) {
+    transition: $props $time $ease;
+}
+
+@mixin transition($prop, $time: .6s, $ease: cubic-bezier(0.4,0,0.2,1)) {
+  transition: #{$prop} #{$time} #{$ease};
+}
+
+@mixin scrollbars($thumb: $accent, $track: #181828) {
+    &::-webkit-scrollbar {
+        width: 8px;
+        background: $track;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb;
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $text-tertiary;
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: $thumb $track;
+}

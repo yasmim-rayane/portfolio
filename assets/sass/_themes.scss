@@ -1,0 +1,63 @@
+// Theme definitions (depends on _tokens.scss)
+
+[data-theme="dark"] {
+    --main-bg-color: #{$main-bg-dark};
+    --header-bg-color: #{$header-bg-dark};
+    --accent: #{$accent};
+    --text: #{$text-light};
+    --text-muted: #{$text-muted};
+    --text-secondary: #{$text-secondary};
+    --text-teriary: #{$text-tertiary};
+    --text-tertiary: var(--text-teriary); // alias
+    --border: #{$border};
+    --placeholder-color: rgba(255, 255, 255, 0.45);
+
+    --code-bg: #0A0A0A;
+    --code-title-bg: #262626;
+    --code-footer-bg: #FAFAFA;
+    --code-border: #262626;
+    --code-var: #1A5FE2;
+    --code-name: #c09a02;
+    --code-key: #037C23;
+    --code-string: #FF6900;
+    --code-array: #8048e9;
+    --code-export: #8737C5;
+    --code-eq: #ffffff;
+
+    --skill-bg: #181828;
+    --skill-color: var(--text-muted);
+    --skill-bg-hover: #181828;
+    --input-bg: #181828;
+    --input-bg-focus: #181828;
+}
+
+[data-theme="light"] {
+    --main-bg-color: #{$main-bg-light};
+    --header-bg-color: #{$header-bg-light};
+    --accent: #{$accent};
+    --text: #222;
+    --text-muted: #666;
+    --text-secondary: #888;
+    --text-teriary: #{$text-tertiary};
+    --text-tertiary: var(--text-teriary); // alias
+    --border: #e1e1e1;
+    --placeholder-color: #7a7a7a;
+
+    --code-bg: #ffffff;
+    --code-title-bg: #f5f5f5;
+    --code-footer-bg: #f9f9f9;
+    --code-border: #e2e2e2;
+    --code-var: #1f51b5;
+    --code-name: #b37a00;
+    --code-key: #0c7d2f;
+    --code-string: #d44e00;
+    --code-array: #6a35c7;
+    --code-export: #6d1fae;
+    --code-eq: #222222;
+
+    --skill-bg: #efefef;
+    --skill-color: #555;
+    --skill-bg-hover: #e2e2e2;
+    --input-bg: #ffffff;
+    --input-bg-focus: #ffffff;
+}

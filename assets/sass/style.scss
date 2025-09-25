@@ -1,42 +1,10 @@
 // Main SCSS file for portfolio styles
 // Author: Yasmim Rayane
 
-// ----- Variables -----
-$main-bg-dark: #0d0d0d;
-$header-bg-dark: #1a1a1aaf;
-$main-bg-light: #fefefe;
-$header-bg-light: #e1e1e1;
-$accent: #960dff;
-$text-light: #fff;
-$text-muted: #bbb;
-$text-secondary: #888;
-$text-tertiary: #ffd21d;
-$border: #222;
-$radius: 10px;
-
-// ----- Themes -----
-[data-theme="dark"] {
-    --main-bg-color: #{$main-bg-dark};
-    --header-bg-color: #{$header-bg-dark};
-    --accent: #{$accent};
-    --text: #{$text-light};
-    --text-muted: #{$text-muted};
-    --text-secondary: #{$text-secondary};
-    --text-teriary: #{$text-tertiary};
-    --border: #{$border};
-}
-
-[data-theme="light"] {
-    /* Não concluído! */
-    --main-bg-color: #{$main-bg-light};
-    --header-bg-color: #{$header-bg-light};
-    --accent: #{$accent};
-    --text: #222;
-    --text-muted: #666;
-    --text-secondary: #888;
-    --text-teriary: #{$text-tertiary};
-    --border: #e1e1e1;
-}
+@import 'tokens';
+@import 'effects';
+@import 'themes';
+@import 'translation';
 
 // ----- Reset -----
 * {
@@ -52,21 +20,21 @@ html {
 
 // ----- Cursor -----
 body {
-    cursor: url("assets/images/cursor/Cursor.cur"), auto;
+    cursor: url("../images/cursor/Cursor.cur"), auto;
 }
 
 button,
 a {
-    cursor: url("assets/images/cursor/Pointer.cur"), pointer !important;
+    cursor: url("../images/cursor/Pointer.cur"), pointer !important;
 }
 
 input,
 textarea {
-    cursor: url("assets/images/cursor/Text.cur"), text;
+    cursor: url("../images/cursor/Text.cur"), text;
 }
 
 // ----- Scrollbar -----
-/* Para navegadores baseados em Webkit (Chrome, Edge, Safari) */
+// For WebKit browsers
 ::-webkit-scrollbar {
     width: 8px;
     background: #181828;
@@ -87,50 +55,13 @@ textarea {
     scrollbar-color: var(--accent) #181828;
 }
 
-// ----- Effects -----
-/* Yellow effect for text */
-.effect-yellow {
-    user-select: none;
-    display: inline-block;
-    color: var(--accent);
-    background-image: linear-gradient(90deg, #ffd21d 0%, #ffd21d 50%, var(--accent) 50%);
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transition: background-position 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-
-    &:hover {
-        background-position: 0 0;
-    }
-}
-
-/* Blink effect */
-.typewriter:after {
-    content: "|";
-    opacity: 1;
-    animation: blink 1s infinite;
-    color: var(--third-color);
-    margin-left: -10px;
-}
-
-@keyframes blink {
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-}
-
 // ----- Body -----
 body[data-theme] {
     background: var(--main-bg-color, #0d0d0d);
     color: var(--text, #fff);
     font-family: "Inter", Arial, Helvetica, sans-serif !important;
     min-height: 100vh;
+    transition: background .4s ease, color .4s ease;
 }
 
 // ----- Header -----
@@ -146,31 +77,84 @@ header {
         border: none;
         padding: 0;
         cursor: pointer;
-        transition: filter 0.5s;
-
-        img {
-            width: 35px;
-            height: 35px;
-        }
+        position: relative;
+        border-radius: 50%;
+        transition: filter 0.5s, transform .25s ease, box-shadow .35s ease, background-color .35s ease;
 
         &:hover {
-            filter: brightness(1.3);
+            filter: brightness(1.2);
+            transform: scale(1.08);
+            box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.20);
+            background: rgba(255, 255, 255, 0.05);
         }
-    }
 
-    .language-button {
-        filter: grayscale(30%);
+        &:active {
+            transform: scale(.94);
+            box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.32);
+        }
+
+        &:focus-visible {
+            @include focus-ring(var(--accent));
+        }
     }
 }
 
-// ----- My photo..!!!!!....!.. ------
+// Apply styles directly to toggle buttons (previous nesting prevented them from working)
+#langToggle,
+#themeToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: transparent;
+    transition: filter 0.5s, transform .25s ease, box-shadow .35s ease, background-color .35s ease;
+
+    &:hover {
+        filter: brightness(1.2);
+        transform: scale(1.08);
+        box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.20);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    &:active {
+        transform: scale(.94);
+        box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.32);
+    }
+
+    img {
+        border-radius: 50%;
+        transition: transform .25s ease, box-shadow .35s ease, filter .35s ease;
+    }
+
+    &:hover img {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+    }
+}
+
+// Fix: enforce uniform size for header icons (prevents oversized flag)
+#langFlag,
+#themeIcon {
+    width: 35px;
+    height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    display: block;
+}
+
+// ----- Profile photo -----
 #my-photo {
     img {
         opacity: 0.7;
         filter: grayscale(0.1);
         width: 100px;
         transition: 500ms;
-        border: solid 2px #222;
+        border: solid 2px #2222228e;
         border-radius: 50%;
 
         &:hover {
@@ -182,7 +166,7 @@ header {
     }
 }
 
-// ----- Mini Prompt -----
+// ----- Mini Prompt (decorative code window) -----
 .mini-prompt-container {
     display: flex;
     flex-direction: column;
@@ -191,11 +175,11 @@ header {
     margin-top: 1rem;
     font-family: "Fira Mono", "Consolas", "Menlo", monospace;
     user-select: none;
-    border: 2px solid #262626;
+    border: 2px solid var(--code-border);
 }
 
 .mini-prompt-title {
-    background: #262626;
+    background: var(--code-title-bg);
 
     .circle {
         font-size: 0.7rem;
@@ -221,15 +205,16 @@ header {
 }
 
 .mini-prompt-footer {
-    background: #FAFAFA;
+    background: var(--code-footer-bg);
 }
 
 .mini-prompt {
-    background: #0A0A0A;
+    background: var(--code-bg);
+    color: var(--text); // mantido adaptável ao tema
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 18px 20px 14px 20px;
     font-size: 0.8rem;
-    color: #f8f8f2;
+    /* removido color: #f8f8f2 que sobrescrevia o tema */
     min-width: 240px;
     max-width: 320px;
     margin: 0 auto;
@@ -242,33 +227,31 @@ header {
     }
 
     .var {
-        // uso
-        color: #1A5FE2;
+        color: var(--code-var);
     }
 
     .name {
-        // uso
-        color: #c09a02;
+        color: var(--code-name);
     }
 
     .eq {
-        color: #fff;
+        color: var(--code-eq);
     }
 
     .key {
-        color: #037C23;
+        color: var(--code-key);
     }
 
     .string {
-        color: #FF6900;
+        color: var(--code-string);
     }
 
     .array {
-        color: #8048e9;
+        color: var(--code-array);
     }
 
     .export {
-        color: #8737C5;
+        color: var(--code-export);
     }
 }
 
@@ -278,8 +261,8 @@ header {
     user-select: none;
 
     .skill {
-        background: #181828;
-        color: var(--text-muted);
+        background: var(--skill-bg);
+        color: var(--skill-color);
         font-size: 0.9rem;
         border-radius: 100px;
         padding: 3px 14px;
@@ -290,12 +273,13 @@ header {
         transition: color 0.2s, background 0.2s;
 
         &:hover {
-            color: $text-tertiary;
+            background: var(--skill-bg-hover);
+            color: var(--accent); // changed from var(--text-teriary)
         }
     }
 }
 
-// ----- Purple button -----
+// ----- Accent (purple) button -----
 .purple-btn {
     border: none;
     background: var(--accent) !important;
@@ -310,7 +294,7 @@ header {
     }
 }
 
-// ----- Title sections -----
+// ----- Section titles -----
 .section-title {
     font-size: 1.2rem;
     font-weight: 600;
@@ -332,7 +316,7 @@ header {
     }
 }
 
-// ----- Social -----
+// ----- Social links -----
 .social-links {
     a {
         color: var(--text-secondary);
@@ -345,7 +329,7 @@ header {
     }
 }
 
-// ----- Projects -----
+// ----- Projects list -----
 .project-list {
     .project-title {
         font-size: 1.08rem;
@@ -399,13 +383,13 @@ header {
 
         &:hover {
             filter: brightness(1);
-            color: $text-tertiary;
+            color: var(--text-teriary); // use CSS var alias for consistency
             text-decoration: underline 0.02rem;
         }
     }
 }
 
-// ----- Contact -----
+// ----- Contact form -----
 .contact-form {
     background: var(--header-bg-color);
     border-radius: $radius;
@@ -414,7 +398,7 @@ header {
 
     input,
     textarea {
-        background: #181828;
+        background: var(--input-bg);
         color: var(--text) !important;
         border: 1px solid var(--border);
         border-radius: 6px;
@@ -425,33 +409,13 @@ header {
         transition: border 0.2s;
 
         &::placeholder {
-            color: var(--text);
-            opacity: .4;
-        }
-
-        &::-webkit-input-placeholder {
-            color: var(--text);
-            opacity: .4;
-        }
-
-        &::-moz-placeholder {
-            color: var(--text);
-            opacity: .4;
-        }
-
-        &:-ms-input-placeholder {
-            color: var(--text);
-            opacity: .4;
-        }
-
-        &::-ms-input-placeholder {
-            color: var(--text);
-            opacity: .4;
+            color: var(--placeholder-color);
+            opacity: 1;
         }
 
         &:focus {
             border: 1.5px solid var(--accent);
-            background: #181828;
+            background: var(--input-bg-focus);
             box-shadow: 0 0 0 2px rgba(150, 13, 255, 0.15);
         }
     }
@@ -471,3 +435,58 @@ footer {
     background: none;
     border: none;
 }
+
+// ----- Page Initial Loader -----
+.page-loader {
+    position: fixed;
+    inset: 0;
+    background: var(--main-bg-color, #0d0d0d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11000;
+    transition: opacity .6s ease, visibility .6s ease;
+    font-family: "Fira Mono", "Consolas", monospace;
+
+    &.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        display: none; // added
+    }
+
+    .loader-inner {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+    }
+
+    .loader-spinner {
+        width: 56px;
+        height: 56px;
+        border: 4px solid rgba(255, 255, 255, 0.12);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin .9s linear infinite;
+        box-shadow: 0 0 12px -2px var(--accent);
+    }
+
+    .loader-text {
+        color: var(--text-muted);
+        font-size: .75rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        user-select: none;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// Utility: body lock during initial loader
+.no-scroll { overflow: hidden; }
