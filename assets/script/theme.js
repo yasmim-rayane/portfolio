@@ -29,22 +29,22 @@ function toggleTheme() {
     applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
 }
 
-function bindThemeToggle() {
+// Consolidated init (removes duplicated early/DOMContentLoaded logic & retry spam)
+function ensureThemeInit() {
+    if (!document.body) return setTimeout(ensureThemeInit, 30);
+    applyTheme(currentTheme);
     const btn = document.getElementById('themeToggle');
     if (btn && !btn.__boundTheme) {
         btn.addEventListener('click', toggleTheme);
         btn.__boundTheme = true;
-    } else if (!btn) {
-        // tenta novamente até 1s
-        if (!bindThemeToggle.__tries) bindThemeToggle.__tries = 0;
-        if (bindThemeToggle.__tries < 20) {
-            bindThemeToggle.__tries++;
-            setTimeout(bindThemeToggle, 50);
-        }
     }
 }
+ensureThemeInit();
+document.addEventListener('DOMContentLoaded', ensureThemeInit);
 
-function earlyApply() {
+// Expose if needed elsewhere
+window.toggleTheme = toggleTheme;
+export { applyTheme, toggleTheme };
     if (document.body && !earlyApply.__done) {
         applyTheme(currentTheme);
         earlyApply.__done = true;

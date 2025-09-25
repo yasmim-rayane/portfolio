@@ -96,40 +96,6 @@ header {
     }
 }
 
-// Apply styles directly to toggle buttons (previous nesting prevented them from working)
-#langToggle,
-#themeToggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: transparent;
-    transition: filter 0.5s, transform .25s ease, box-shadow .35s ease, background-color .35s ease;
-
-    &:hover {
-        filter: brightness(1.2);
-        transform: scale(1.08);
-        box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.20);
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    &:active {
-        transform: scale(.94);
-        box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.32);
-    }
-
-    img {
-        border-radius: 50%;
-        transition: transform .25s ease, box-shadow .35s ease, filter .35s ease;
-    }
-
-    &:hover img {
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
-    }
-}
-
 // Fix: enforce uniform size for header icons (prevents oversized flag)
 #langFlag,
 #themeIcon {

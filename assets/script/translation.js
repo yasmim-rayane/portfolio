@@ -147,32 +147,29 @@ function toggleLanguage() {
   applyTranslations(currentLang === "en" ? "pt" : "en");
 }
 
-function bindLangToggle() {
+// Consolidated init (removes separate earlyLangInit + bindLangToggle + retry loops)
+function ensureLangInit() {
+  if (!document.documentElement) return setTimeout(ensureLangInit, 30);
+  if (!ensureLangInit.__done) {
+    applyTranslations(currentLang);
+    ensureLangInit.__done = true;
+  }
   const btn = document.getElementById("langToggle");
   if (btn && !btn.__boundLang) {
     btn.addEventListener("click", toggleLanguage);
     btn.__boundLang = true;
   } else if (!btn) {
-    if (!bindLangToggle.__tries) bindLangToggle.__tries = 0;
-    if (bindLangToggle.__tries < 20) {
-      bindLangToggle.__tries++;
-      setTimeout(bindLangToggle, 50);
+    // retry only until button exists (lightweight)
+    if (!ensureLangInit.__tries) ensureLangInit.__tries = 0;
+    if (ensureLangInit.__tries < 20) {
+      ensureLangInit.__tries++;
+      setTimeout(ensureLangInit, 50);
     }
   }
 }
+ensureLangInit();
+document.addEventListener("DOMContentLoaded", ensureLangInit);
 
-function earlyLangInit() {
-  if (!earlyLangInit.__done) {
-    applyTranslations(currentLang);
-    earlyLangInit.__done = true;
-  }
-}
-
-// Execução imediata se possível
-earlyLangInit();
-bindLangToggle();
-
-document.addEventListener("DOMContentLoaded", () => {
-  earlyLangInit();
-  bindLangToggle();
-});
+// keep global + export
+window.toggleLanguage = toggleLanguage;
+export { applyTranslations, toggleLanguage };

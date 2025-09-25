@@ -1,4 +1,4 @@
-// Module entrypoint
+// Module entrypoint (theme + translation auto-initialize internamente)
 import './translation.js';
 import './theme.js';
 

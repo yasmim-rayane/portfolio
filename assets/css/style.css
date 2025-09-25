@@ -252,39 +252,6 @@ header .header-button:focus-visible {
   outline-offset: 2px;
 }
 
-#langToggle,
-#themeToggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: transparent;
-  transition: filter 0.5s, transform 0.25s ease, box-shadow 0.35s ease, background-color 0.35s ease;
-}
-#langToggle:hover,
-#themeToggle:hover {
-  filter: brightness(1.2);
-  transform: scale(1.08);
-  box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-}
-#langToggle:active,
-#themeToggle:active {
-  transform: scale(0.94);
-  box-shadow: 0 0 0 4px rgba(150, 13, 255, 0.32);
-}
-#langToggle img,
-#themeToggle img {
-  border-radius: 50%;
-  transition: transform 0.25s ease, box-shadow 0.35s ease, filter 0.35s ease;
-}
-#langToggle:hover img,
-#themeToggle:hover img {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
-}
-
 #langFlag,
 #themeIcon {
   width: 35px;
