@@ -60,8 +60,10 @@ Link para o protótipo criado no Figma:
 <h2>Capturas de Tela</h2>
 
 <div align="center">
-    <img alt="Captura de tela do portfólio mobile" src="assets/images/screenshots/mobile-1.png" height="298"/>
-    <img alt="Captura de tela do portfólio desktop" src="assets/images/screenshots/web-1.png" height="298"/>
+    <img alt="Captura de tela do portfólio mobile com o tema escuro" src="assets/images/screenshots/darktheme-mobile.png" height="298"/>
+    <img alt="Captura de tela do portfólio desktop com o tema escuro" src="assets/images/screenshots/darktheme-web.png" height="298"/>
+    <img alt="Captura de tela do portfólio mobile com o tema claro" src="assets/images/screenshots/lighttheme-mobile.png" height="298"/>
+    <img alt="Captura de tela do portfólio desktop com o tema claro" src="assets/images/screenshots/lighttheme-web.png" height="298"/>
 </div>
 
 <h2>Licença</h2>
