@@ -99,61 +99,56 @@ const STORAGE_KEY = "siteLang";
 let currentLang = localStorage.getItem(STORAGE_KEY) || "en";
 
 function applyTranslations(lang) {
-  try {
-    const dict = translations[lang] || translations.en;
-    const htmlEl = document.getElementById("html-lang");
-    if (htmlEl) htmlEl.setAttribute("lang", lang);
+  const dict = translations[lang] || translations.en;
+  const htmlEl = document.getElementById('html-lang');
+  if (htmlEl) htmlEl.setAttribute('lang', lang);
 
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const k = el.getAttribute("data-i18n");
-      if (k && dict[k]) el.textContent = dict[k];
-    });
-    document.querySelectorAll("[data-i18n-html]").forEach(el => {
-      const k = el.getAttribute("data-i18n-html");
-      if (k && dict[k]) el.innerHTML = dict[k];
-    });
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const k = el.getAttribute("data-i18n-placeholder");
-      if (k && dict[k]) el.placeholder = dict[k];
-    });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (k && dict[k]) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const k = el.getAttribute('data-i18n-html');
+    if (k && dict[k]) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const k = el.getAttribute('data-i18n-placeholder');
+    if (k && dict[k]) el.placeholder = dict[k];
+  });
 
-    const flagImg = document.getElementById("langFlag");
-    if (flagImg) {
-      if (lang === "en") {
-        flagImg.src = "assets/images/icons/usa-flag.svg";
-        flagImg.alt = "Switch to Portuguese";
-      } else {
-        flagImg.src = "assets/images/icons/brazil-flag.png";
-        flagImg.alt = "Mudar para Inglês";
-      }
+  const flag = document.getElementById('langFlag');
+  if (flag) {
+    if (lang === 'en') {
+      flag.src = 'assets/images/icons/usa-flag.svg';
+      flag.alt = 'Switch to Portuguese';
+    } else {
+      flag.src = 'assets/images/icons/brazil-flag.png';
+      flag.alt = 'Mudar para Inglês';
     }
+  }
 
-    localStorage.setItem(STORAGE_KEY, lang);
-    currentLang = lang;
-    document.dispatchEvent(new CustomEvent('i18n:applied', { detail: { lang } }));
-  } catch (e) { console.error('[i18n] apply error', e); }
+  localStorage.setItem(STORAGE_KEY, lang);
+  currentLang = lang;
+  document.dispatchEvent(new CustomEvent('i18n:applied', { detail: { lang } }));
 }
 
 function toggleLanguage() {
-  applyTranslations(currentLang === "en" ? "pt" : "en");
+  applyTranslations(currentLang === 'en' ? 'pt' : 'en');
 }
 
-let i18nInitialized = false;
+let i18nReady = false;
 function initI18n() {
-  if (i18nInitialized) return;
-  if (document.readyState === 'loading')
-    return document.addEventListener('DOMContentLoaded', initI18n, { once: true });
-
+  if (i18nReady) return;
+  if (document.readyState === 'loading') return document.addEventListener('DOMContentLoaded', initI18n, { once: true });
   applyTranslations(currentLang);
-
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', e => {
     if (e.target.closest('#langToggle')) toggleLanguage();
   });
-
-  i18nInitialized = true;
+  // Fallback reapply (caso conteúdo carregue depois)
+  setTimeout(() => applyTranslations(currentLang), 200);
+  i18nReady = true;
 }
 
 initI18n();
-
 window.toggleLanguage = toggleLanguage;
 export { applyTranslations, toggleLanguage };

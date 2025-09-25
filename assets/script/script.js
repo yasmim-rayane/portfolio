@@ -2,6 +2,8 @@
 import './translation.js';
 import './theme.js';
 
+console.info('[app] scripts loaded v3');
+
 // First-visit loader
 let __loaderInit = false;
 function initLoader() {
