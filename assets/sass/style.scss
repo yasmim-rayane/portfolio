@@ -67,10 +67,7 @@ body[data-theme] {
 // ----- Header -----
 header {
     user-select: none;
-    background: var(--header-bg-color, #0d0d0d) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.10);
+    @include glass-panel(var(--header-bg-color)); // substitui background + blur + shadow
 
     .header-button {
         background: none;
@@ -340,7 +337,7 @@ header {
 
         &:hover {
             transition: 300ms;
-            color: $text-tertiary;
+            color: var(--text-teriary); // was $text-tertiary (converte para var para consistência)
             font-size: 1.2rem;
         }
     }
@@ -383,7 +380,7 @@ header {
 
         &:hover {
             filter: brightness(1);
-            color: var(--text-teriary); // use CSS var alias for consistency
+            color: var(--text-teriary); // already using – keep
             text-decoration: underline 0.02rem;
         }
     }

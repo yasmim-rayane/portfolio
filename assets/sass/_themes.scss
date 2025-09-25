@@ -2,13 +2,12 @@
 
 [data-theme="dark"] {
     --main-bg-color: #{$main-bg-dark};
-    --header-bg-color: #{$header-bg-dark};
+    --header-bg-color: #{$header-bg-dark-glass};
     --accent: #{$accent};
     --text: #{$text-light};
     --text-muted: #{$text-muted};
     --text-secondary: #{$text-secondary};
     --text-teriary: #{$text-tertiary};
-    --text-tertiary: var(--text-teriary); // alias
     --border: #{$border};
     --placeholder-color: rgba(255, 255, 255, 0.45);
 
@@ -33,14 +32,12 @@
 
 [data-theme="light"] {
     --main-bg-color: #{$main-bg-light};
-    // was: #{$header-bg-light}; agora com transparência para simular vidro
-    --header-bg-color: rgba(225,225,225,0.85);
+    --header-bg-color: #{$header-bg-light-glass};
     --accent: #{$accent};
     --text: #222;
     --text-muted: #666;
     --text-secondary: #888;
     --text-teriary: #{$text-tertiary};
-    --text-tertiary: var(--text-teriary); // alias
     --border: #e1e1e1;
     --placeholder-color: #7a7a7a;
 

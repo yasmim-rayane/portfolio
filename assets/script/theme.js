@@ -21,7 +21,7 @@ function swapThemeIcon(theme) {
         icon.alt = 'Switch to light theme';
     } else {
         icon.src = 'assets/images/icons/light-mode-icon.svg';
-        icon.alt = 'Switch to dark theme'; // unified language
+        icon.alt = 'Switch to dark theme';
     }
 }
 
@@ -29,10 +29,35 @@ function toggleTheme() {
     applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    applyTheme(currentTheme);
+function bindThemeToggle() {
     const btn = document.getElementById('themeToggle');
-    if (btn) btn.addEventListener('click', toggleTheme);
+    if (btn && !btn.__boundTheme) {
+        btn.addEventListener('click', toggleTheme);
+        btn.__boundTheme = true;
+    } else if (!btn) {
+        // tenta novamente até 1s
+        if (!bindThemeToggle.__tries) bindThemeToggle.__tries = 0;
+        if (bindThemeToggle.__tries < 20) {
+            bindThemeToggle.__tries++;
+            setTimeout(bindThemeToggle, 50);
+        }
+    }
+}
+
+function earlyApply() {
+    if (document.body && !earlyApply.__done) {
+        applyTheme(currentTheme);
+        earlyApply.__done = true;
+    }
+}
+
+// Execução imediata (caso body já exista)
+earlyApply();
+bindThemeToggle();
+
+document.addEventListener('DOMContentLoaded', () => {
+    earlyApply();
+    bindThemeToggle();
 });
 
 // Expose if needed elsewhere

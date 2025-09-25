@@ -11,6 +11,10 @@ $text-tertiary: #ffd21d;
 $border: #222;
 $radius: 10px;
 
+// Cores do header translúcido
+$header-bg-dark-glass: #1a1a1aaf;
+$header-bg-light-glass: rgba(225,225,225,0.85);
+
 // Mixins
 @mixin focus-ring($color: #960dff, $size: 2px) {
     outline: $size solid $color;
@@ -59,4 +63,12 @@ $radius: 10px;
 
     scrollbar-width: thin;
     scrollbar-color: $thumb $track;
+}
+
+// Mixin para painéis translúcidos (header, futuros cards, etc.)
+@mixin glass-panel($bg, $blur:12px, $shadow:0 0 25px 0 rgba(0,0,0,0.10)) {
+  background: $bg !important;
+  backdrop-filter: blur($blur) !important;
+  -webkit-backdrop-filter: blur($blur) !important;
+  box-shadow: $shadow;
 }

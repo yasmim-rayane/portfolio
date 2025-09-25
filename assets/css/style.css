@@ -42,7 +42,6 @@
   --text-muted: #bbb;
   --text-secondary: #888;
   --text-teriary: #ffd21d;
-  --text-tertiary: var(--text-teriary);
   --border: #222;
   --placeholder-color: rgba(255, 255, 255, 0.45);
   --code-bg: #0A0A0A;
@@ -65,13 +64,12 @@
 
 [data-theme=light] {
   --main-bg-color: #fefefe;
-  --header-bg-color: rgba(225,225,225,0.85);
+  --header-bg-color: rgba(225, 225, 225, 0.85);
   --accent: #960dff;
   --text: #222;
   --text-muted: #666;
   --text-secondary: #888;
   --text-teriary: #ffd21d;
-  --text-tertiary: var(--text-teriary);
   --border: #e1e1e1;
   --placeholder-color: #7a7a7a;
   --code-bg: #ffffff;
@@ -225,7 +223,7 @@ body[data-theme] {
 
 header {
   user-select: none;
-  background: var(--header-bg-color, #0d0d0d) !important;
+  background: var(--header-bg-color) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
@@ -462,7 +460,7 @@ header .header-button:focus-visible {
 }
 .project-list .project-title:hover {
   transition: 300ms;
-  color: #ffd21d;
+  color: var(--text-teriary);
   font-size: 1.2rem;
 }
 .project-list .project-description {

@@ -147,15 +147,32 @@ function toggleLanguage() {
   applyTranslations(currentLang === "en" ? "pt" : "en");
 }
 
-// ensure global access if another script references it
-window.toggleLanguage = toggleLanguage;
+function bindLangToggle() {
+  const btn = document.getElementById("langToggle");
+  if (btn && !btn.__boundLang) {
+    btn.addEventListener("click", toggleLanguage);
+    btn.__boundLang = true;
+  } else if (!btn) {
+    if (!bindLangToggle.__tries) bindLangToggle.__tries = 0;
+    if (bindLangToggle.__tries < 20) {
+      bindLangToggle.__tries++;
+      setTimeout(bindLangToggle, 50);
+    }
+  }
+}
 
-// Export for module usage
-export { applyTranslations, toggleLanguage };
+function earlyLangInit() {
+  if (!earlyLangInit.__done) {
+    applyTranslations(currentLang);
+    earlyLangInit.__done = true;
+  }
+}
+
+// Execução imediata se possível
+earlyLangInit();
+bindLangToggle();
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyTranslations(currentLang);
-  const toggleBtn = document.getElementById("langToggle");
-  if (toggleBtn) toggleBtn.addEventListener("click", toggleLanguage);
-
+  earlyLangInit();
+  bindLangToggle();
 });
