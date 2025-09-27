@@ -100,22 +100,26 @@ let currentLang = localStorage.getItem(STORAGE_KEY) || "en";
 
 function applyTranslations(lang) {
   const dict = translations[lang] || translations.en;
-  const htmlEl = document.getElementById('html-lang');
-  if (htmlEl) htmlEl.setAttribute('lang', lang);
 
+  // Aplica traduções para elementos com texto simples
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.getAttribute('data-i18n');
-    if (k && dict[k]) el.textContent = dict[k];
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const k = el.getAttribute('data-i18n-html');
-    if (k && dict[k]) el.innerHTML = dict[k];
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const k = el.getAttribute('data-i18n-placeholder');
-    if (k && dict[k]) el.placeholder = dict[k];
+    const key = el.getAttribute('data-i18n');
+    if (key && dict[key]) el.textContent = dict[key];
   });
 
+  // Aplica traduções para elementos com HTML
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (key && dict[key]) el.innerHTML = dict[key];
+  });
+
+  // Aplica traduções para placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (key && dict[key]) el.placeholder = dict[key];
+  });
+
+  // Atualiza a bandeira do idioma
   const flag = document.getElementById('langFlag');
   if (flag) {
     if (lang === 'en') {
@@ -127,8 +131,11 @@ function applyTranslations(lang) {
     }
   }
 
+  // Atualiza o idioma no localStorage
   localStorage.setItem(STORAGE_KEY, lang);
   currentLang = lang;
+
+  // Dispara evento de tradução aplicada
   document.dispatchEvent(new CustomEvent('i18n:applied', { detail: { lang } }));
 }
 
