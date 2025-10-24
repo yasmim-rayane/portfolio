@@ -80,7 +80,7 @@ const translations = {
     mpKeyPassion: "paixao",
     mpPassionVal: "'Criar UX bonito'",
     mpKeyStatus: "status",
-    mpStatusVal: "'Disponível'",
+    mpStatusVal: "'Estagiária na APS'",
     contact: "Fale comigo",
     contactText:
       "Estou sempre aberta para conversar sobre novas oportunidades, projetos interessantes ou apenas bater um papo sobre desenvolvimento e design. Sinta-se à vontade para entrar em contato!",
