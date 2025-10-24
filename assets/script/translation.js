@@ -33,7 +33,7 @@ const translations = {
     mpKeyPassion: "passion",
     mpPassionVal: "'Creating beautiful UX'",
     mpKeyStatus: "status",
-    mpStatusVal: "'Available for hire'",
+    mpStatusVal: "'Intern @ APS'",
     contact: "Get in Touch",
     contactText:
       "I'm always open to discussing new opportunities, interesting projects, or just having a chat about web development and design. Feel free to reach out!",
