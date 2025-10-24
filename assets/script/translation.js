@@ -78,7 +78,7 @@ const translations = {
     mpSkillFigma: "'Figma'",
     mpSkillDesignSystems: "'Design'",
     mpKeyPassion: "paixao",
-    mpPassionVal: "'Aprender sempre'",
+    mpPassionVal: "'Aprender coisas novas'",
     mpKeyStatus: "status",
     mpStatusVal: "'Estagiária na APS'",
     contact: "Fale comigo",
