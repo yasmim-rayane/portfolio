@@ -72,10 +72,7 @@ Link para o protótipo criado no Figma:
     Este projeto é de uso educacional, criado como parte da disciplina Tecnologia Web.
 
 <h2>Desenvolvido por</h2>
-
-**Nome completo:** Yasmim Rayane da Silva Nonato.<br>
-**RA:** 252825.<br>
-**Turma:** A (matutino do segundo semestre).
+Yasmim Rayane.
 
 <p align="center">
     <a href="mailto:silva.yasmimray@gmail.com" target="_blank">E-mail</a> &nbsp;|&nbsp;
