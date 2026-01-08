@@ -28,6 +28,7 @@
     <link rel="manifest" href="assets/config/site.webmanifest">
     <meta name="theme-color" content="#0d0d0d" id="meta-theme-color">
     <script type="module" src="assets/script/script.js?v=3" defer></script>
+    <script type="module" src="assets/script/api-github.js" defer></script>
 </head>
 
 <!-- data-theme controls dark/light mode. Toggle handled by script.js (not used yet) -->
@@ -239,6 +240,13 @@
             <span class="see-projects">
                 <a href="https://github.com/yasmim-rayane" target="_blank" data-i18n="viewAll">View all my works...</a>
             </span>
+        </section>
+
+        <section id="github-repos" class="mb-5">
+            <h2 class="effect-yellow section-title" data-i18n="githubRepos">GitHub Repositories</h2>
+            <div id="repos-container" class="row row-cols-1 row-cols-md-2 g-4">
+                <!-- GitHub repositories will be dynamically loaded here by api-github.js -->
+            </div>
         </section>
 
         <section id="contact" class="mb-5">
