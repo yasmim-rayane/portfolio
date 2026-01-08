@@ -174,79 +174,13 @@
 
         <section id="projects" class="mb-5">
             <h2 class="effect-yellow section-title" data-i18n="projects">Recent projects</h2>
-            <!-- Projects: external links open in new tab -->
+            <!-- Projects: dynamically loaded from GitHub API via api-github.js -->
             <ol class="project-list list-unstyled">
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer"
-                        href="https://github.com/yasmim-rayane/agenda-telefonica" target="_blank"
-                        data-i18n="projPhonebookTitle">
-                        Phonebook
-                    </a>
-                    <div class="project-description" data-i18n="projPhonebookDesc">
-                        Focuses on managing contacts, creating accounts, and ensuring data security.
-                    </div>
-                    <div>
-                        <span class="under-project">
-                            C++
-                        </span>
-                        <span class="under-project">
-                            2025
-                        </span>
-                    </div>
-                </li>
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer" href="https://github.com/yasmim-rayane/todo-list"
-                        target="_blank" data-i18n="projTodoTitle">To-do
-                        list</a>
-                    <div class="project-description" data-i18n="projTodoDesc">
-                        A webpage of a to-do list.
-                    </div>
-                    <span class="under-project">
-                        HTML5, CSS3, JavaScript
-                    </span>
-                    <span class="under-project">
-                        2023
-                    </span>
-                </li>
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer"
-                        href="https://github.com/yasmim-rayane/calculator" target="_blank"
-                        data-i18n="projCalculatorTitle">Calculator</a>
-                    <div class="project-description" data-i18n="projCalculatorDesc">
-                        A calculator using TkInterCustom library.
-                    </div>
-                    <span class="under-project">
-                        Python, Tkinter
-                    </span>
-                    <span class="under-project">
-                        2023
-                    </span>
-                </li>
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer"
-                        href="https://github.com/yasmim-rayane/digital-clock" target="_blank"
-                        data-i18n="projClockTitle">Digital clock</a>
-                    <div class="project-description" data-i18n="projClockDesc">
-                        A webpage of a digital clock.
-                    </div>
-                    <span class="under-project">
-                        HTML5, CSS3, JavaScript
-                    </span>
-                    <span class="under-project">
-                        2023
-                    </span>
-                </li>
+                <!-- GitHub projects will be inserted here -->
             </ol>
             <span class="see-projects">
                 <a href="https://github.com/yasmim-rayane" target="_blank" data-i18n="viewAll">View all my works...</a>
             </span>
-        </section>
-
-        <section id="github-repos" class="mb-5">
-            <h2 class="effect-yellow section-title" data-i18n="githubRepos">GitHub Repositories</h2>
-            <div id="repos-container" class="row row-cols-1 row-cols-md-2 g-4">
-                <!-- GitHub repositories will be dynamically loaded here by api-github.js -->
-            </div>
         </section>
 
         <section id="contact" class="mb-5">
