@@ -26,9 +26,6 @@ import './translation.js';
 // Importa o sistema de tema (auto-inicializa internamente)
 import './theme.js';
 
-// Log de versão para debugging
-console.info('[app] scripts loaded v3');
-
 // ============================================================================
 // LOADER DE PRIMEIRA VISITA
 // ============================================================================

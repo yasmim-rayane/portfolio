@@ -1,0 +1,633 @@
+/**
+ * =============================================================================
+ * Header Effects - Stars & Clouds Animation
+ * =============================================================================
+ * 
+ * Este arquivo contém animações decorativas para o header:
+ * - Estrelas piscantes no modo escuro (simula noite)
+ * - Nuvens flutuantes no modo claro (simula dia)
+ * 
+ * As animações são sutis e posicionadas no centro do header para não
+ * interferir com os elementos interativos nas laterais (nome e botões).
+ * =============================================================================
+ */
+
+/* ============================================================================
+   CONTAINER DE EFEITOS DO HEADER
+   ============================================================================ */
+
+/**
+ * Container para os efeitos decorativos do header
+ * Posicionado absolutamente, não interfere com cliques
+ */
+header {
+    position: relative;
+    overflow: hidden; /* Garante que elementos não vazem do header */
+}
+
+/* Desativa pseudo-elementos por padrão para evitar conflitos */
+header::before,
+header::after {
+    content: none;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Garante que o conteúdo do header fique acima dos efeitos */
+header > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================================
+   ESTRELAS - MODO ESCURO
+   ============================================================================ */
+
+/**
+ * Estrelas animadas para o modo escuro
+ * Usa múltiplas box-shadows para criar várias estrelas com uma única pseudo-elemento
+ * Cores naturais de estrelas: branco, azulado e levemente amarelado
+ * Campo expandido para 100% do header - alcance máximo
+ */
+body[data-theme="dark"] header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    pointer-events: none;
+    z-index: 0;
+    
+    /* Cria múltiplas estrelas usando box-shadow */
+    /* Campo máximo: horizontal de -400px a +400px (cobertura total) */
+    box-shadow:
+        /* Grupo 1 - Extrema esquerda (-400px a -300px) */
+        -400px 10px 0 0 rgba(255, 255, 255, 0.36),
+        -380px -14px 0 0 rgba(255, 255, 255, 0.38),
+        -360px 16px 0 0 rgba(255, 255, 255, 0.34),
+        -340px -8px 0 0 rgba(255, 255, 255, 0.4),
+        -320px 12px 0 0 rgba(255, 255, 255, 0.35),
+        -300px -16px 0 0 rgba(255, 255, 255, 0.37),
+        -390px 18px 1px 0 rgba(200, 220, 255, 0.32),
+        -370px -10px 1px 0 rgba(255, 250, 220, 0.34),
+        -350px 8px 0 0 rgba(255, 255, 255, 0.3),
+        -330px -20px 1px 0 rgba(210, 225, 255, 0.33),
+        -310px 14px 1px 0 rgba(255, 248, 210, 0.35),
+        
+        /* Grupo 2 - Esquerda (-300px a -150px) */
+        -280px 8px 0 0 rgba(255, 255, 255, 0.38),
+        -260px -12px 0 0 rgba(255, 255, 255, 0.35),
+        -240px 18px 0 0 rgba(255, 255, 255, 0.4),
+        -220px -6px 0 0 rgba(255, 255, 255, 0.36),
+        -180px 10px 0 0 rgba(255, 255, 255, 0.4),
+        -150px -8px 0 0 rgba(255, 255, 255, 0.38),
+        -270px 14px 1px 0 rgba(200, 220, 255, 0.33),
+        -250px -18px 1px 0 rgba(255, 250, 220, 0.35),
+        -230px 5px 0 0 rgba(255, 255, 255, 0.32),
+        -210px -15px 0 0 rgba(255, 255, 255, 0.34),
+        -165px -15px 1px 0 rgba(200, 220, 255, 0.35),
+        -195px 5px 0 0 rgba(255, 255, 255, 0.25),
+        -175px -20px 0 0 rgba(255, 255, 255, 0.22),
+        
+        /* Grupo 3 - Centro-esquerda (-150px a 0) */
+        -120px 15px 0 0 rgba(255, 255, 255, 0.35),
+        -90px -10px 0 0 rgba(255, 255, 255, 0.42),
+        -60px 12px 0 0 rgba(255, 255, 255, 0.37),
+        -30px -5px 0 0 rgba(255, 255, 255, 0.4),
+        -135px 18px 1px 0 rgba(210, 225, 255, 0.38),
+        -105px -8px 1px 0 rgba(195, 215, 255, 0.32),
+        -75px 20px 1px 0 rgba(205, 220, 255, 0.36),
+        -45px 20px 1px 0 rgba(255, 250, 220, 0.38),
+        -140px -18px 1px 0 rgba(255, 248, 210, 0.35),
+        -110px 8px 1px 0 rgba(255, 252, 225, 0.36),
+        -55px -18px 1px 0 rgba(255, 252, 225, 0.33),
+        -145px 25px 0 0 rgba(255, 255, 255, 0.24),
+        -115px -15px 0 0 rgba(255, 255, 255, 0.26),
+        -85px 20px 0 0 rgba(255, 255, 255, 0.23),
+        -188px -22px 0 0 rgba(255, 255, 255, 0.36),
+        -158px 16px 0 0 rgba(255, 255, 255, 0.34),
+        -128px -12px 0 0 rgba(255, 255, 255, 0.38),
+        -98px 18px 0 0 rgba(255, 255, 255, 0.35),
+        -68px -8px 0 0 rgba(255, 255, 255, 0.37),
+        -160px -5px 1px 0 rgba(180, 150, 255, 0.25),
+        -100px 12px 1px 0 rgba(175, 145, 255, 0.22),
+        -120px -15px 1px 0 rgba(175, 145, 255, 0.22),
+        
+        /* Grupo 4 - Centro (0 a +150px) */
+        20px 10px 0 0 rgba(255, 255, 255, 0.4),
+        50px -5px 0 0 rgba(255, 255, 255, 0.45),
+        80px 8px 0 0 rgba(255, 255, 255, 0.42),
+        110px -12px 0 0 rgba(255, 255, 255, 0.38),
+        140px 18px 0 0 rgba(255, 255, 255, 0.4),
+        40px -15px 1px 0 rgba(200, 220, 255, 0.35),
+        70px 18px 1px 0 rgba(210, 225, 255, 0.4),
+        125px -10px 1px 0 rgba(195, 215, 255, 0.34),
+        25px 22px 1px 0 rgba(255, 248, 210, 0.35),
+        130px 24px 1px 0 rgba(255, 250, 220, 0.37),
+        65px 25px 0 0 rgba(255, 255, 255, 0.36),
+        100px 5px 0 0 rgba(255, 255, 255, 0.25),
+        115px -8px 0 0 rgba(255, 255, 255, 0.3),
+        95px -20px 1px 0 rgba(180, 150, 255, 0.25),
+        
+        /* Grupo 5 - Centro-direita (+150px a +300px) */
+        170px -6px 0 0 rgba(255, 255, 255, 0.35),
+        200px 14px 0 0 rgba(255, 255, 255, 0.42),
+        220px -8px 0 0 rgba(255, 255, 255, 0.36),
+        240px 16px 0 0 rgba(255, 255, 255, 0.4),
+        260px -14px 0 0 rgba(255, 255, 255, 0.38),
+        280px 10px 0 0 rgba(255, 255, 255, 0.35),
+        155px 16px 1px 0 rgba(205, 220, 255, 0.37),
+        185px -14px 1px 0 rgba(200, 220, 255, 0.33),
+        210px 20px 1px 0 rgba(200, 220, 255, 0.35),
+        230px -16px 1px 0 rgba(210, 225, 255, 0.33),
+        250px 12px 1px 0 rgba(195, 215, 255, 0.36),
+        270px -10px 1px 0 rgba(205, 220, 255, 0.34),
+        160px -16px 1px 0 rgba(255, 248, 210, 0.34),
+        215px -20px 1px 0 rgba(255, 250, 220, 0.37),
+        235px 18px 1px 0 rgba(255, 248, 210, 0.35),
+        255px -12px 1px 0 rgba(255, 252, 225, 0.33),
+        160px 8px 0 0 rgba(255, 255, 255, 0.24),
+        190px -18px 0 0 rgba(255, 255, 255, 0.26),
+        205px 6px 0 0 rgba(255, 255, 255, 0.26),
+        225px -22px 0 0 rgba(255, 255, 255, 0.24),
+        245px 22px 0 0 rgba(255, 255, 255, 0.28),
+        265px -6px 0 0 rgba(255, 255, 255, 0.25),
+        145px 22px 0 0 rgba(255, 255, 255, 0.32),
+        175px -24px 0 0 rgba(255, 255, 255, 0.35),
+        150px 10px 1px 0 rgba(175, 145, 255, 0.23),
+        275px 16px 0 0 rgba(255, 255, 255, 0.3),
+        
+        /* Grupo 6 - Extrema direita (+300px a +400px) */
+        300px -12px 0 0 rgba(255, 255, 255, 0.37),
+        320px 14px 0 0 rgba(255, 255, 255, 0.35),
+        340px -16px 0 0 rgba(255, 255, 255, 0.4),
+        360px 10px 0 0 rgba(255, 255, 255, 0.34),
+        380px -8px 0 0 rgba(255, 255, 255, 0.38),
+        400px 12px 0 0 rgba(255, 255, 255, 0.36),
+        310px 18px 1px 0 rgba(200, 220, 255, 0.33),
+        330px -20px 1px 0 rgba(210, 225, 255, 0.32),
+        350px 16px 1px 0 rgba(195, 215, 255, 0.34),
+        370px -14px 1px 0 rgba(205, 220, 255, 0.35),
+        390px 8px 1px 0 rgba(200, 220, 255, 0.31),
+        305px -22px 1px 0 rgba(255, 250, 220, 0.34),
+        325px 20px 1px 0 rgba(255, 248, 210, 0.36),
+        345px -10px 1px 0 rgba(255, 252, 225, 0.33),
+        365px 14px 0 0 rgba(255, 255, 255, 0.32),
+        385px -18px 0 0 rgba(255, 255, 255, 0.3),
+        395px 6px 1px 0 rgba(180, 150, 255, 0.24);
+    
+    /* Animação de piscar suave e natural */
+    animation: starsTwinkle 5s ease-in-out infinite;
+}
+
+/**
+ * Animação de brilho das estrelas
+ * Cria um efeito de brilho alternado mais sutil
+ */
+@keyframes starsTwinkle {
+    0%, 100% {
+        opacity: 1;
+        filter: brightness(1);
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        opacity: 0.8;
+        filter: brightness(0.7);
+        transform: translate(-50%, -50%);
+    }
+}
+
+/**
+ * Animação de brilho intenso para estrelas especiais
+ * Algumas estrelas brilham mais que outras
+ */
+@keyframes starsBrightTwinkle {
+    0%, 100% {
+        opacity: 1;
+        filter: brightness(1.8) drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+    }
+    50% {
+        opacity: 0.95;
+        filter: brightness(2.8) drop-shadow(0 0 5px rgba(255, 255, 255, 1));
+    }
+}
+
+/**
+ * Animação de estrela cadente
+ * Estrela que cria uma linha enquanto se move mais devagar
+ */
+@keyframes shootingStar {
+    0% {
+        transform: translateX(0) translateY(0) rotate(-45deg) scaleX(1);
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(300px) translateY(300px) rotate(-45deg) scaleX(3);
+        opacity: 0;
+    }
+}
+
+/* ============================================================================
+   NUVENS - MODO CLARO (Estilo Cartoon/Desenho)
+   ============================================================================ */
+
+/**
+ * Estrela cadente 1 - aparece ocasionalmente no modo escuro
+ * Controlada por JavaScript para alternância adequada
+ */
+body[data-theme="dark"] header::before {
+    content: "";
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    /* Sem animação por padrão - será adicionada via JavaScript */
+}
+
+/**
+ * Segunda estrela cadente - aparece em momento diferente
+ * Controlada por JavaScript para alternância adequada
+ */
+body[data-theme="dark"] header .shooting-star-2 {
+    display: block;
+    position: absolute;
+    top: 25%;
+    left: 70%;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    /* Sem animação por padrão - será adicionada via JavaScript */
+}
+
+/**
+ * Terceira estrela cadente
+ */
+body[data-theme="dark"] header .shooting-star-3 {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+}
+
+/**
+ * Quarta estrela cadente
+ */
+body[data-theme="dark"] header .shooting-star-4 {
+    display: block;
+    position: absolute;
+    top: 30%;
+    left: 55%;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+}
+
+/**
+ * Quinta estrela cadente
+ */
+body[data-theme="dark"] header .shooting-star-5 {
+    display: block;
+    position: absolute;
+    top: 20%;
+    left: 80%;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+}
+
+/* Esconde estrelas cadentes no modo claro */
+body[data-theme="light"] header .shooting-star-2,
+body[data-theme="light"] header .shooting-star-3,
+body[data-theme="light"] header .shooting-star-4,
+body[data-theme="light"] header .shooting-star-5 {
+    display: none;
+}
+
+/* Classes para ativar animação via JavaScript */
+body[data-theme="dark"] header.shooting-star-1-active::before {
+    animation: shootingStar 3.5s ease-out forwards;
+}
+
+body[data-theme="dark"] header .shooting-star-2.shooting-star-2-active {
+    animation: shootingStar 3.5s ease-out forwards;
+}
+
+body[data-theme="dark"] header .shooting-star-3.shooting-star-3-active {
+    animation: shootingStar 3.5s ease-out forwards;
+}
+
+body[data-theme="dark"] header .shooting-star-4.shooting-star-4-active {
+    animation: shootingStar 3.5s ease-out forwards;
+}
+
+body[data-theme="dark"] header .shooting-star-5.shooting-star-5-active {
+    animation: shootingStar 3.5s ease-out forwards;
+}
+
+/**
+ * Estrelas com brilho especial - algumas estrelas brilham mais que outras
+ */
+[data-theme="dark"] header .star-bright-1,
+[data-theme="dark"] header .star-bright-2,
+[data-theme="dark"] header .star-bright-3 {
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+[data-theme="dark"] header .star-bright-1 {
+    top: 25%;
+    left: 30%;
+    animation: starsBrightTwinkle 4s ease-in-out infinite;
+}
+
+[data-theme="dark"] header .star-bright-2 {
+    top: 65%;
+    left: 75%;
+    animation: starsBrightTwinkle 4s ease-in-out infinite 1.3s;
+}
+
+[data-theme="dark"] header .star-bright-3 {
+    top: 45%;
+    left: 55%;
+    animation: starsBrightTwinkle 4s ease-in-out infinite 2.6s;
+}
+
+/* Esconde estrelas especiais no modo claro */
+body[data-theme="light"] header .star-bright-1,
+body[data-theme="light"] header .star-bright-2,
+body[data-theme="light"] header .star-bright-3 {
+    display: none;
+}
+
+/**
+ * Container para as nuvens no modo claro
+ * Usa pseudo-elementos para criar nuvens estilo desenho animado
+ */
+body[data-theme="light"] header::after,
+body[data-theme="light"] header::before {
+    pointer-events: none;
+    z-index: 0;
+}
+
+/**
+ * Primeira nuvem - estilo cartoon grande com cores do portfólio
+ * Branca com toques sutis de roxo e amarelo (cores do tema)
+ */
+body[data-theme="light"] header::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+    filter: drop-shadow(0 2px 8px rgba(150, 13, 255, 0.15)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.08));
+    
+    /* Cria formato de nuvem cartoon com círculos sobrepostos */
+    box-shadow:
+        /* Círculo central maior - branco puro */
+        35px 0 0 0 rgba(255, 255, 255, 0.92),
+        /* Círculos nas laterais - toque roxo */
+        -28px 7px 0 -7px rgba(250, 245, 255, 0.88),
+        70px 7px 0 -7px rgba(250, 245, 255, 0.88),
+        /* Círculo superior (topo da nuvem) - toque amarelo */
+        17px -21px 0 -3px rgba(255, 252, 240, 0.90),
+        49px -17px 0 -7px rgba(255, 252, 240, 0.88),
+        /* Base da nuvem (mais larga) - roxo clarinho */
+        17px 28px 0 7px rgba(248, 245, 255, 0.85),
+        42px 28px 0 4px rgba(248, 245, 255, 0.82);
+    
+    /* Animação de flutuação */
+    animation: cloudFloat1 30s linear infinite;
+}
+
+/**
+ * Segunda nuvem - estilo cartoon menor com cores do tema
+ * Branca com toques de amarelo e roxo nas extremidades
+ */
+body[data-theme="light"] header::before {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: 65%;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 50%;
+    filter: drop-shadow(0 2px 7px rgba(255, 210, 29, 0.14)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.07));
+    
+    /* Formato de nuvem menor */
+    box-shadow:
+        /* Círculo central - branco */
+        26px 0 0 -3px rgba(255, 255, 255, 0.88),
+        /* Laterais - toque roxo */
+        -17px 4px 0 -7px rgba(252, 248, 255, 0.84),
+        50px 4px 0 -10px rgba(252, 248, 255, 0.84),
+        /* Topo - amarelo claro */
+        12px -14px 0 -4px rgba(255, 253, 240, 0.87),
+        31px -11px 0 -8px rgba(255, 253, 242, 0.84),
+        /* Base - roxo muito claro */
+        13px 20px 0 3px rgba(250, 248, 255, 0.80),
+        28px 20px 0 1px rgba(250, 248, 255, 0.78);
+    
+    /* Animação mais lenta */
+    animation: cloudFloat2 40s linear infinite;
+}
+
+/**
+ * Animação de flutuação da primeira nuvem
+ * Movimento suave da esquerda para direita com oscilação vertical
+ * Scale para criar profundidade e sensação de flutuação
+ */
+@keyframes cloudFloat1 {
+    0% {
+        left: -20%;
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    20% {
+        transform: translateY(-6px) scale(1.05);
+    }
+    40% {
+        transform: translateY(0) scale(1);
+    }
+    60% {
+        transform: translateY(-5px) scale(1.03);
+    }
+    80% {
+        transform: translateY(0) scale(1);
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        left: 120%;
+        transform: translateY(-3px) scale(0.95);
+        opacity: 0;
+    }
+}
+
+/**
+ * Animação de flutuação da segunda nuvem
+ * Velocidade diferente e padrão de movimento variado
+ */
+@keyframes cloudFloat2 {
+    0% {
+        left: -18%;
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(-7px) scale(1.06);
+    }
+    45% {
+        transform: translateY(0) scale(1);
+    }
+    65% {
+        transform: translateY(-6px) scale(1.04);
+    }
+    85% {
+        transform: translateY(0) scale(1);
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        left: 118%;
+        transform: translateY(-4px) scale(0.96);
+        opacity: 0;
+    }
+}
+
+/* ============================================================================
+   AJUSTES RESPONSIVOS
+   ============================================================================ */
+
+/**
+ * Em telas pequenas, reduz o tamanho dos efeitos
+ */
+@media (max-width: 768px) {
+    /* Reduz área dos efeitos em mobile */
+    header::before {
+        width: 40%;
+    }
+    
+    /* Estrelas menores em mobile */
+    body[data-theme="dark"] header::after {
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+    
+    /* Estrelas cadentes proporcionalmente mais rápidas em mobile */
+    body[data-theme="dark"] header::before,
+    body[data-theme="dark"] header .shooting-star-2,
+    body[data-theme="dark"] header .shooting-star-3,
+    body[data-theme="dark"] header .shooting-star-4,
+    body[data-theme="dark"] header .shooting-star-5 {
+        animation-duration: 2.8s;
+    }
+    
+    /* Estrelas especiais menores */
+    body[data-theme="dark"] header .star-bright-1,
+    body[data-theme="dark"] header .star-bright-2,
+    body[data-theme="dark"] header .star-bright-3 {
+        width: 2px;
+        height: 2px;
+    }
+    
+    /* Nuvens ajustadas para mobile - ainda visíveis mas não dominantes */
+    body[data-theme="light"] header::after {
+        width: 55px;
+        height: 55px;
+        top: 25%;
+    }
+    
+    body[data-theme="light"] header::before {
+        width: 40px;
+        height: 40px;
+        top: 45%;
+    }
+}
+
+/**
+ * Para usuários que preferem movimento reduzido
+ * Remove animações para acessibilidade
+ */
+@media (prefers-reduced-motion: reduce) {
+    body[data-theme="dark"] header::after {
+        animation: none;
+        opacity: 0.8;
+    }
+    
+    body[data-theme="dark"] header::before,
+    body[data-theme="dark"] header .shooting-star-2,
+    body[data-theme="dark"] header .shooting-star-3,
+    body[data-theme="dark"] header .shooting-star-4,
+    body[data-theme="dark"] header .shooting-star-5 {
+        animation: none;
+        opacity: 0;
+    }
+    
+    body[data-theme="dark"] header .star-bright-1,
+    body[data-theme="dark"] header .star-bright-2,
+    body[data-theme="dark"] header .star-bright-3 {
+        animation: none;
+        filter: brightness(1.5);
+    }
+    
+    body[data-theme="light"] header::after,
+    body[data-theme="light"] header::before {
+        animation: none;
+    }
+    
+    body[data-theme="light"] header {
+        animation: none;
+    }
+}

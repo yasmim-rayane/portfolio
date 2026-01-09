@@ -15,16 +15,20 @@ public/build/
 .tmp/
 .temp/
 
+# Documentação pessoal (não publicar)
+SETUP.md
+DEVELOPMENT.md
+
 # SASS cache
 .sass-cache/
 *.sassc
 *.scssc
 
-# Generated CSS (if you decide to exclude compiled artifacts)
+# CSS
 # assets/css/style.css
 # assets/css/print.css
 
-# Minified bundles (generated)
+# Minified bundles
 assets/script/*.min.js
 
 # Cache / coverage

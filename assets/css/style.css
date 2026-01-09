@@ -22,7 +22,7 @@
   content: "|";
   opacity: 1;
   animation: blink 1s infinite;
-  color: var(--text-teriary);
+  color: var(--text-tertiary);
   margin-left: -10px;
 }
 
@@ -41,7 +41,7 @@
   --text: #fff;
   --text-muted: #bbb;
   --text-secondary: #888;
-  --text-teriary: #ffd21d;
+  --text-tertiary: #ffd21d;
   --border: #222;
   --placeholder-color: rgba(255, 255, 255, 0.45);
   --code-bg: #0A0A0A;
@@ -60,16 +60,17 @@
   --skill-bg-hover: #181828;
   --input-bg: #181828;
   --input-bg-focus: #181828;
+  --header-border-color: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme=light] {
   --main-bg-color: #fefefe;
-  --header-bg-color: rgba(225, 225, 225, 0.85);
+  --header-bg-color: rgba(255, 255, 255, 0.55);
   --accent: #960dff;
   --text: #222;
   --text-muted: #666;
   --text-secondary: #888;
-  --text-teriary: #ffd21d;
+  --text-tertiary: #ffd21d;
   --border: #e1e1e1;
   --placeholder-color: #7a7a7a;
   --code-bg: #ffffff;
@@ -88,6 +89,7 @@
   --skill-bg-hover: #e2e2e2;
   --input-bg: #ffffff;
   --input-bg-focus: #ffffff;
+  --header-border-color: rgba(0, 0, 0, 0.1);
 }
 
 .translating {
@@ -227,6 +229,7 @@ header {
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--header-border-color, transparent);
 }
 header .header-button {
   background: none;
@@ -427,7 +430,7 @@ header .header-button:focus-visible {
 }
 .project-list .project-title:hover {
   transition: 300ms;
-  color: var(--text-teriary);
+  color: var(--text-tertiary);
   font-size: 1.2rem;
 }
 .project-list .project-description {
@@ -464,7 +467,7 @@ header .header-button:focus-visible {
 }
 .see-projects a:hover {
   filter: brightness(1);
-  color: var(--text-teriary);
+  color: var(--text-tertiary);
   text-decoration: underline 0.02rem;
 }
 

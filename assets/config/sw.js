@@ -50,11 +50,13 @@ const CACHE_NAME = 'portfolio-static-v1';
 const STATIC_ASSETS = [
     'index.html',
     'assets/css/style.css',
+    'assets/css/header-effects.css',
     'assets/css/translation.css',
     'assets/script/script.js',
     'assets/script/translation.js',
     'assets/script/theme.js',
     'assets/script/api-github.js',
+    'assets/script/shooting-stars.js',
     'assets/images/Rainbow Marble.ico',
     'assets/images/icons/usa-flag.svg',
     'assets/images/icons/brazil-flag.png',

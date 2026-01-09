@@ -333,8 +333,10 @@ async function getGitHubProjects() {
         
         // FALLBACK 2: Exibe mensagem de erro ao usuário
         // Só chega aqui se não houver cache disponível
+        // Reutiliza o elemento já buscado pela função displayProjects
         const projectList = document.querySelector('#projects .project-list');
         if (projectList) {
+            projectList.innerHTML = '';
             const errorItem = document.createElement('li');
             errorItem.classList.add('mb-4');
             errorItem.innerHTML = `
