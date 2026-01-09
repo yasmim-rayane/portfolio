@@ -237,7 +237,7 @@ header {
 
         &:hover {
             background: var(--skill-bg-hover);
-            color: var(--accent); // changed from var(--text-teriary)
+            color: var(--accent);
         }
     }
 }
@@ -303,7 +303,7 @@ header {
 
         &:hover {
             transition: 300ms;
-            color: var(--text-teriary); // was $text-tertiary (converte para var para consistência)
+            color: var(--text-tertiary);
             font-size: 1.2rem;
         }
     }
@@ -346,7 +346,7 @@ header {
 
         &:hover {
             filter: brightness(1);
-            color: var(--text-teriary); // already using – keep
+            color: var(--text-tertiary);
             text-decoration: underline 0.02rem;
         }
     }

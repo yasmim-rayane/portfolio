@@ -1,0 +1,190 @@
+# ============================================================================
+# CI para Branch Beta (Desenvolvimento)
+# ============================================================================
+# 
+# Este workflow executa automaticamente quando há push na branch beta.
+# Realiza validação de código mas não efetua deploy.
+# 
+# Verificações realizadas:
+# - Compilação do SASS
+# - Validação de sintaxe HTML
+# - Verificação de erros JavaScript
+# - Checagem de assets essenciais
+# ============================================================================
+
+name: Beta CI - Testes Automatizados
+
+# Executa quando houver push ou pull request na branch beta
+on:
+  push:
+    branches: [ beta ]
+  pull_request:
+    branches: [ beta ]
+
+jobs:
+  # =========================================================================
+  # Job 1: Compilação e Validação
+  # =========================================================================
+  build-and-test:
+    name: Build e Testes
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout do código
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+      
+      # Instala Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      # Instala Sass globalmente
+      - name: Instalar Sass
+        run: npm install -g sass
+      
+      # Compila SASS para CSS
+      - name: Compilar SASS
+        run: |
+          echo "Compilando arquivos SASS..."
+          sass --no-source-map assets/sass/style.scss assets/css/style.css
+          echo "SASS compilado com sucesso"
+      
+      # Verifica se o CSS foi gerado
+      - name: Verificar CSS gerado
+        run: |
+          if [ -f "assets/css/style.css" ]; then
+            echo "Arquivo style.css encontrado"
+            echo "Tamanho: $(wc -c < assets/css/style.css) bytes"
+          else
+            echo "ERRO: style.css não foi gerado"
+            exit 1
+          fi
+      
+      # Valida sintaxe HTML
+      - name: Validar HTML
+        run: |
+          echo "Validando estrutura HTML..."
+          # Verifica se index.html existe
+          if [ ! -f "index.html" ]; then
+            echo "index.html não encontrado"
+            exit 1
+          fi
+          # Verifica tags básicas obrigatórias
+          if ! grep -q "<!DOCTYPE html>" index.html; then
+            echo "DOCTYPE ausente"
+            exit 1
+          fi
+          if ! grep -q "<html" index.html; then
+            echo "Tag <html> ausente"
+            exit 1
+          fi
+          if ! grep -q "<head>" index.html; then
+            echo "Tag <head> ausente"
+            exit 1
+          fi
+          if ! grep -q "<body" index.html; then
+            echo "Tag <body> ausente"
+            exit 1
+          fi
+          echo "Estrutura HTML validada"
+      
+      # Verifica sintaxe JavaScript básica
+      - name: Verificar JavaScript
+        run: |
+          echo "Verificando arquivos JavaScript..."
+          
+          # Lista todos os arquivos JS
+          js_files=$(find assets/script -name "*.js" -type f)
+          
+          if [ -z "$js_files" ]; then
+            echo "Nenhum arquivo JavaScript encontrado"
+            exit 0
+          fi
+          
+          # Verifica sintaxe básica de cada arquivo
+          error_count=0
+          for file in $js_files; do
+            echo "Verificando: $file"
+            
+            # Verifica se o arquivo está vazio
+            if [ ! -s "$file" ]; then
+              echo "  Arquivo vazio"
+              continue
+            fi
+            
+            # Usa Node.js para verificar sintaxe
+            if node --check "$file" 2>/dev/null; then
+              echo "  Sintaxe válida"
+            else
+              echo "  Erro de sintaxe detectado"
+              error_count=$((error_count + 1))
+            fi
+          done
+          
+          if [ $error_count -gt 0 ]; then
+            echo "$error_count arquivo(s) com erro de sintaxe"
+            exit 1
+          fi
+          
+          echo "Todos os arquivos JavaScript estão válidos"
+      
+      # Verifica links de assets
+      - name: Verificar Assets
+        run: |
+          echo "Verificando existência de assets..."
+          
+          missing_files=0
+          
+          # Verifica CSS
+          if [ ! -f "assets/css/style.css" ]; then
+            echo "assets/css/style.css não encontrado"
+            missing_files=$((missing_files + 1))
+          fi
+          
+          # Verifica Service Worker
+          if [ ! -f "assets/config/sw.js" ]; then
+            echo "assets/config/sw.js não encontrado"
+          fi
+          
+          # Verifica scripts principais
+          required_scripts=(
+            "assets/script/script.js"
+            "assets/script/theme.js"
+            "assets/script/translation.js"
+            "assets/script/api-github.js"
+            "assets/script/shooting-stars.js"
+          )
+          
+          for script in "${required_scripts[@]}"; do
+            if [ -f "$script" ]; then
+              echo "$script encontrado"
+            else
+              echo "$script não encontrado"
+              missing_files=$((missing_files + 1))
+            fi
+          done
+          
+          if [ $missing_files -gt 0 ]; then
+            echo "$missing_files arquivo(s) obrigatório(s) ausente(s)"
+            exit 1
+          fi
+          
+          echo "Todos os assets principais estão presentes"
+      
+      # Relatório final
+      - name: Relatório de Validação
+        if: success()
+        run: |
+          echo "============================================================"
+          echo "                                                            "
+          echo "         TESTES CONCLUÍDOS COM SUCESSO                      "
+          echo "                                                            "
+          echo "  Branch: beta                                              "
+          echo "  Status: Aprovado para desenvolvimento                     "
+          echo "                                                            "
+          echo "  Nota: Este é um ambiente de testes.                       "
+          echo "  Merge para 'main' quando pronto para produção.            "
+          echo "                                                            "
+          echo "============================================================"

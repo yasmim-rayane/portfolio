@@ -10,6 +10,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/header-effects.css">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,6 +30,7 @@
     <meta name="theme-color" content="#0d0d0d" id="meta-theme-color">
     <script type="module" src="assets/script/script.js?v=3" defer></script>
     <script type="module" src="assets/script/api-github.js" defer></script>
+    <script src="assets/script/shooting-stars.js" defer></script>
 </head>
 
 <!-- data-theme controls dark/light mode. Toggle handled by script.js (not used yet) -->
@@ -50,6 +52,16 @@
 
     <!-- Header with language/theme toggles -->
     <header class="fixed-top shadow-sm py-2 px-4 d-flex justify-content-between align-items-center">
+        <!-- Estrelas com brilho especial (apenas no modo escuro) -->
+        <span class="star-bright-1"></span>
+        <span class="star-bright-2"></span>
+        <span class="star-bright-3"></span>
+        <!-- Estrelas cadentes (5 estrelas em alternância) -->
+        <span class="shooting-star-2"></span>
+        <span class="shooting-star-3"></span>
+        <span class="shooting-star-4"></span>
+        <span class="shooting-star-5"></span>
+        
         <h1 class="mb-0"
             style="font-family: 'Inconsolata', sans-serif; color: var(--accent); font-size: 1.7rem; font-weight: 900;">
             Yasmim
@@ -77,7 +89,7 @@
         <section id="about-me" class="row align-items-center rounded-5 mb-5">
             <div class="col-md-6 mb-4 mb-md-0">
                 <h2 class="fs-3" style="user-select: none;">
-                    <span style="color: var(--text-teriary); font-weight: 600;"
+                    <span style="color: var(--text-tertiary); font-weight: 600;"
                         data-i18n-html="hello">&lt;Hello/&gt;</span>, <span data-i18n="im">I'm</span><br>
                     <strong>
                         <span class="effect-yellow" style="font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;"
@@ -174,68 +186,9 @@
 
         <section id="projects" class="mb-5">
             <h2 class="effect-yellow section-title" data-i18n="projects">Recent projects</h2>
-            <!-- Projects: external links open in new tab -->
+            <!-- Projects: dynamically loaded from GitHub API via api-github.js -->
             <ol class="project-list list-unstyled">
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer"
-                        href="https://github.com/yasmim-rayane/agenda-telefonica" target="_blank"
-                        data-i18n="projPhonebookTitle">
-                        Phonebook
-                    </a>
-                    <div class="project-description" data-i18n="projPhonebookDesc">
-                        Focuses on managing contacts, creating accounts, and ensuring data security.
-                    </div>
-                    <div>
-                        <span class="under-project">
-                            C++
-                        </span>
-                        <span class="under-project">
-                            2025
-                        </span>
-                    </div>
-                </li>
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer" href="https://github.com/yasmim-rayane/todo-list"
-                        target="_blank" data-i18n="projTodoTitle">To-do
-                        list</a>
-                    <div class="project-description" data-i18n="projTodoDesc">
-                        A webpage of a to-do list.
-                    </div>
-                    <span class="under-project">
-                        HTML5, CSS3, JavaScript
-                    </span>
-                    <span class="under-project">
-                        2023
-                    </span>
-                </li>
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer"
-                        href="https://github.com/yasmim-rayane/calculator" target="_blank"
-                        data-i18n="projCalculatorTitle">Calculator</a>
-                    <div class="project-description" data-i18n="projCalculatorDesc">
-                        A calculator using TkInterCustom library.
-                    </div>
-                    <span class="under-project">
-                        Python, Tkinter
-                    </span>
-                    <span class="under-project">
-                        2023
-                    </span>
-                </li>
-                <li class="mb-4">
-                    <a class="project-title" rel="noopener noreferrer"
-                        href="https://github.com/yasmim-rayane/digital-clock" target="_blank"
-                        data-i18n="projClockTitle">Digital clock</a>
-                    <div class="project-description" data-i18n="projClockDesc">
-                        A webpage of a digital clock.
-                    </div>
-                    <span class="under-project">
-                        HTML5, CSS3, JavaScript
-                    </span>
-                    <span class="under-project">
-                        2023
-                    </span>
-                </li>
+                <!-- GitHub projects will be inserted here -->
             </ol>
             <span class="see-projects">
                 <a href="https://github.com/yasmim-rayane" target="_blank" data-i18n="viewAll">View all my works...</a>

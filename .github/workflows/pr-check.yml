@@ -1,0 +1,146 @@
+# ============================================================================
+# CI para Pull Requests (beta → main)
+# ============================================================================
+# 
+# Este workflow executa automaticamente em Pull Requests para main.
+# Realiza validação completa do código antes de permitir o merge.
+# 
+# Garante que:
+# - Código compila sem erros
+# - Todos os testes passam
+# - Não há problemas de sintaxe
+# - Assets essenciais estão presentes
+# ============================================================================
+
+name: PR Check - Validação Merge
+
+# Executa em Pull Requests para main
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # =========================================================================
+  # Validação completa antes do merge
+  # =========================================================================
+  validate-pr:
+    name: Validar PR (beta → main)
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+      
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Instalar Sass
+        run: npm install -g sass
+      
+      # Testes completos
+      - name: Compilar SASS
+        run: |
+          sass --no-source-map assets/sass/style.scss assets/css/style.css
+          echo "SASS compilado"
+      
+      - name: Validar Build
+        run: |
+          if [ ! -f "assets/css/style.css" ]; then
+            echo "CSS não gerado"
+            exit 1
+          fi
+          echo "Build validado"
+      
+      - name: Validar HTML
+        run: |
+          if ! grep -q "<!DOCTYPE html>" index.html; then
+            echo "HTML inválido"
+            exit 1
+          fi
+          echo "HTML validado"
+      
+      - name: Validar JavaScript
+        run: |
+          js_files=$(find assets/script -name "*.js" -type f)
+          error_count=0
+          for file in $js_files; do
+            if ! node --check "$file" 2>/dev/null; then
+              echo "Erro em: $file"
+              error_count=$((error_count + 1))
+            fi
+          done
+          if [ $error_count -gt 0 ]; then
+            echo "$error_count arquivo(s) com erro"
+            exit 1
+          fi
+          echo "JavaScript validado"
+      
+      - name: Validar Assets
+        run: |
+          required_files=(
+            "assets/css/style.css"
+            "assets/script/script.js"
+            "assets/script/theme.js"
+            "assets/script/translation.js"
+            "assets/script/api-github.js"
+            "assets/script/shooting-stars.js"
+            "index.html"
+          )
+          
+          missing=0
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Faltando: $file"
+              missing=$((missing + 1))
+            fi
+          done
+          
+          if [ $missing -gt 0 ]; then
+            echo "$missing arquivo(s) obrigatório(s) ausente(s)"
+            exit 1
+          fi
+          echo "Assets validados"
+      
+      # Relatório de aprovação
+      - name: PR Aprovado
+        if: success()
+        run: |
+          echo "============================================================"
+          echo "                                                            "
+          echo "             PULL REQUEST APROVADO                          "
+          echo "                                                            "
+          echo "  Todos os testes passaram com sucesso.                     "
+          echo "  Este PR está pronto para merge na main.                  "
+          echo "                                                            "
+          echo "  Após o merge:                                             "
+          echo "  - Versão será criada automaticamente                      "
+          echo "  - Deploy será feito no GitHub Pages                       "
+          echo "  - Release será publicada                                  "
+          echo "                                                            "
+          echo "============================================================"
+      
+      # Adiciona comentário no PR
+      - name: Comentar no PR
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '## Validação Completa Aprovada\n\n' +
+                    '### Testes Realizados:\n' +
+                    '- Compilação SASS\n' +
+                    '- Validação HTML\n' +
+                    '- Validação JavaScript\n' +
+                    '- Verificação de Assets\n\n' +
+                    '### Status: PRONTO PARA MERGE\n\n' +
+                    'Após o merge, os seguintes processos serão executados automaticamente:\n' +
+                    '1. Criação de nova versão (tag)\n' +
+                    '2. Deploy para GitHub Pages\n' +
+                    '3. Publicação de Release Notes\n\n' +
+                    '*Validação realizada pelo GitHub Actions*'
+            })

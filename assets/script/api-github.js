@@ -1,48 +1,371 @@
-/*
-    TO DO: Fetch GitHub repositories and display them on the portfolio page
+/**
+ * =============================================================================
+ * GitHub API Integration Module
+ * =============================================================================
+ * 
+ * Este módulo gerencia a integração com a API do GitHub para exibir 
+ * automaticamente os repositórios mais recentes no portfólio.
+ * 
+ * Funcionalidades principais:
+ * - Busca até 20 repositórios da API do GitHub
+ * - Filtra automaticamente o repositório README do perfil (username/username)
+ * - Exibe exatamente 5 projetos válidos após filtragem
+ * - Exibe nome, descrição, linguagem principal e ano de atualização
+ * - Utiliza as classes CSS existentes para manter consistência visual
+ * - Implementa sistema de cache com expiração de 1 hora para reduzir requisições
+ * - Fornece fallback com dados em cache expirado em caso de falha na API
+ * 
+ * Sistema de Cache:
+ * - Armazena apenas os 5 projetos filtrados no localStorage
+ * - Expira automaticamente após 1 hora
+ * - Reduz requisições à API de centenas para apenas 1 por hora
+ * - Melhora performance e experiência do usuário
+ * 
+ * Filtros Aplicados:
+ * - Exclui repositório com nome igual ao username (README do perfil)
+ * - Garante que sempre sejam exibidos exatamente 5 projetos reais
+ * =============================================================================
+ */
 
-    - Use GitHub API to get repository data
-        - Repository name
-        - Description
-        - URL
-        - Languages/technologies used
-        - Last updated date
+// ============================================================================
+// CONSTANTES DE CONFIGURAÇÃO
+// ============================================================================
 
-    - Change classes on HTML and CSS styles accordingly
-        - Card layout for each project
-        - Title layout
-        - Description layout
-        - Link to GitHub repository
-        - Languages/technologies used
-        - Last updated date
+/**
+ * Nome de usuário do GitHub
+ * Usado para construir a URL da API e filtrar o repositório README do perfil
+ * @constant {string}
+ */
+const GITHUB_USERNAME = 'yasmim-rayane';
 
-    Notice that the cache is being used for the entire page, which may affect the freshness of the data.
-    Consider implementing a strategy to refresh the GitHub data periodically if needed.
+/**
+ * Chave para armazenar os dados dos repositórios no localStorage
+ * @constant {string}
+ */
+const GITHUB_CACHE_KEY = 'github_repos_cache';
 
-    Probably, set an expiration time for the cached data and refetch from the API when the data is stale.
-*/
+/**
+ * Chave para armazenar o timestamp da última atualização do cache
+ * @constant {string}
+ */
+const GITHUB_CACHE_TIMESTAMP_KEY = 'github_repos_timestamp';
 
-async function getProjects() {
-    const url = 'https://api.github.com/users/yasmim-rayane/repos?sort=updated&direction=desc';
-    const projectContainer = document.querySelector('.projects-container');
+/**
+ * Tempo de expiração do cache em milissegundos (1 hora = 3.600.000 ms)
+ * Após este período, os dados serão buscados novamente da API
+ * @constant {number}
+ */
+const CACHE_EXPIRATION_MS = 60 * 60 * 1000; // 1 hora em milissegundos
 
+// ============================================================================
+// FUNÇÕES DE GERENCIAMENTO DE CACHE
+// ============================================================================
+
+/**
+ * Verifica se os dados em cache ainda são válidos
+ * 
+ * A validação é feita comparando o tempo atual com o timestamp armazenado.
+ * Se a diferença for menor que CACHE_EXPIRATION_MS, o cache é considerado válido.
+ * 
+ * @returns {boolean} true se o cache é válido, false caso contrário
+ */
+function isCacheValid() {
+    // Busca o timestamp da última atualização do cache
+    const timestamp = localStorage.getItem(GITHUB_CACHE_TIMESTAMP_KEY);
+    
+    // Se não houver timestamp, o cache não existe ou é inválido
+    if (!timestamp) return false;
+    
+    // Calcula a idade do cache (tempo desde a última atualização)
+    const now = Date.now();
+    const cacheAge = now - parseInt(timestamp, 10);
+    
+    // Retorna true se o cache ainda está dentro do período de validade
+    return cacheAge < CACHE_EXPIRATION_MS;
+}
+
+/**
+ * Obtém os dados em cache se estiverem disponíveis e válidos
+ * 
+ * Esta função verifica primeiro se o cache é válido. Se não for,
+ * remove os dados expirados e retorna null. Se for válido, tenta
+ * fazer o parse dos dados JSON armazenados.
+ * 
+ * @returns {Array|null} Array de repositórios ou null se cache inválido/inexistente
+ */
+function getCachedData() {
+    // Verifica se o cache ainda é válido
+    if (!isCacheValid()) {
+        // Cache expirado - remove os dados antigos para economizar espaço
+        localStorage.removeItem(GITHUB_CACHE_KEY);
+        localStorage.removeItem(GITHUB_CACHE_TIMESTAMP_KEY);
+        return null;
+    }
+    
+    // Busca os dados em cache
+    const cached = localStorage.getItem(GITHUB_CACHE_KEY);
+    if (!cached) return null;
+    
+    // Tenta fazer o parse do JSON
     try {
-        const response = await fetch(url);
-        const projects = await response.json();
-
-        projects.forEach(project => {
-            const projectCard = document.createElement('div');
-            projectCard.classList.add('project-card');
-            projectCard.innerHTML = `
-                <a href="${project.html_url}" target="_blank" class="project-title">${project.name}</a>
-                <p class="project-description">${project.description || 'No description available.'}</p>
-                <p class="project-updated">Last updated: ${new Date(project.updated_at).toLocaleDateString()}</p>
-            `;
-            projectContainer.appendChild(projectCard);
-        });
+        return JSON.parse(cached);
     } catch (error) {
-        console.error('Error fetching GitHub projects:', error);
+        // Se houver erro no parse, loga e retorna null
+        console.error('Error parsing cached data:', error);
+        return null;
     }
 }
 
-getProjects();
+/**
+ * Salva os dados dos repositórios no cache
+ * 
+ * Armazena tanto os dados quanto o timestamp atual no localStorage.
+ * Usa try-catch para lidar com possíveis erros (ex: limite de armazenamento).
+ * 
+ * @param {Array} data - Array de objetos de repositórios do GitHub
+ */
+function setCacheData(data) {
+    try {
+        // Converte os dados para JSON e armazena no localStorage
+        localStorage.setItem(GITHUB_CACHE_KEY, JSON.stringify(data));
+        
+        // Armazena o timestamp atual para controlar a expiração
+        localStorage.setItem(GITHUB_CACHE_TIMESTAMP_KEY, Date.now().toString());
+    } catch (error) {
+        // Loga erros (ex: quota excedida do localStorage)
+        console.error('Error saving to cache:', error);
+    }
+}
+
+// ============================================================================
+// FUNÇÕES DE REQUISIÇÃO À API
+// ============================================================================
+
+/**
+ * Busca repositórios do GitHub (via API ou cache)
+ * 
+ * Implementa a lógica de cache-first:
+ * 1. Tenta obter dados do cache válido
+ * 2. Se não houver cache válido, faz requisição à API
+ * 3. Filtra repositórios indesejados (README do perfil)
+ * 4. Limita aos 5 mais recentes após filtragem
+ * 5. Salva os dados filtrados no cache para uso futuro
+ * 
+ * URL da API: https://api.github.com/users/{username}/repos
+ * Parâmetros:
+ * - sort=updated: ordena por data de atualização
+ * - direction=desc: ordem decrescente (mais recentes primeiro)
+ * - per_page=20: busca 20 repositórios para garantir 5 válidos após filtragem
+ * 
+ * Filtros aplicados:
+ * - Remove repositório README do perfil (nome igual ao username)
+ * - Limita a 5 repositórios após filtragem
+ * 
+ * Nota: O cache armazena os dados já filtrados e limitados a 5, garantindo
+ * que sempre exibamos exatamente 5 projetos válidos.
+ * 
+ * @async
+ * @returns {Promise<Array>} Promise que resolve com array de 5 repositórios filtrados
+ * @throws {Error} Se a requisição à API falhar
+ */
+async function fetchGitHubRepos() {
+    // ETAPA 1: Tenta usar dados em cache
+    const cachedData = getCachedData();
+    if (cachedData) {
+        console.info('[GitHub API] Using cached data');
+        return cachedData;
+    }
+    
+    // ETAPA 2: Cache inválido/inexistente - busca dados da API
+    console.info('[GitHub API] Fetching fresh data from API');
+    
+    // Monta a URL com parâmetros para obter repositórios mais recentes
+    // Busca 20 repositórios para garantir que tenhamos 5 válidos após filtros
+    const url = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc&per_page=20`;
+    
+    // Faz a requisição à API do GitHub
+    const response = await fetch(url);
+    
+    // Verifica se a resposta foi bem-sucedida
+    if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+    }
+    
+    // Converte a resposta para JSON
+    const allProjects = await response.json();
+    
+    // ETAPA 3: Filtra o repositório README do perfil
+    // O repositório com nome igual ao username é usado para personalizar o perfil
+    // e não deve ser exibido como projeto
+    const filteredProjects = allProjects.filter(project => 
+        project.name.toLowerCase() !== GITHUB_USERNAME.toLowerCase()
+    );
+    
+    // ETAPA 4: Limita aos 5 repositórios mais recentes após filtragem
+    const top5Projects = filteredProjects.slice(0, 5);
+    
+    // ETAPA 5: Salva os dados filtrados e limitados no cache
+    // Isso garante que o cache já contenha exatamente os 5 projetos que queremos exibir
+    setCacheData(top5Projects);
+    
+    return top5Projects;
+}
+
+// ============================================================================
+// FUNÇÕES DE RENDERIZAÇÃO
+// ============================================================================
+
+/**
+ * Exibe os repositórios do GitHub na página
+ * 
+ * Esta função cria elementos HTML dinamicamente para cada repositório e
+ * os insere na lista de projetos existente. Mantém a mesma estrutura e
+ * classes CSS dos projetos manuais para consistência visual.
+ * 
+ * Nota: Os projetos recebidos já foram filtrados e limitados a 5 pela função
+ * fetchGitHubRepos(), então não é necessário aplicar filtros adicionais aqui.
+ * 
+ * Formatação aplicada:
+ * - Nome: converte de kebab-case para Title Case (ex: "todo-list" → "Todo List")
+ * - Descrição: usa a descrição do repositório ou mensagem padrão
+ * - Linguagem: exibe a linguagem principal do projeto
+ * - Data: exibe apenas o ano da última atualização
+ * 
+ * @param {Array} projects - Array de 5 repositórios já filtrados do GitHub
+ */
+function displayProjects(projects) {
+    // Busca o container da lista de projetos no DOM
+    const projectList = document.querySelector('#projects .project-list');
+
+    // Verifica se o container existe
+    if (!projectList) {
+        console.error('Project list container not found');
+        return;
+    }
+
+    // Limpa qualquer conteúdo existente (importante para recarregamentos)
+    projectList.innerHTML = '';
+
+    // Itera sobre cada repositório para criar os elementos HTML
+    // Nota: projects já contém exatamente 5 repositórios filtrados
+    projects.forEach(project => {
+        // Cria o elemento <li> para o projeto
+        const listItem = document.createElement('li');
+        listItem.classList.add('mb-4'); // Classe Bootstrap para margem inferior
+        
+        // Obtém a linguagem principal (ou 'N/A' se não disponível)
+        const language = project.language || 'N/A';
+        
+        // Extrai apenas o ano da data de atualização
+        const updateDate = new Date(project.updated_at).getFullYear();
+        
+        // Formata o nome do repositório de kebab-case para Title Case
+        // Ex: "todo-list" → ["todo", "list"] → ["Todo", "List"] → "Todo List"
+        const displayName = project.name
+            .split('-')                                    // Divide por hífens
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitaliza
+            .join(' ');                                    // Junta com espaços
+        
+        // Constrói o HTML do item usando template literals
+        // Mantém a mesma estrutura dos projetos manuais para consistência
+        listItem.innerHTML = `
+            <a class="project-title" rel="noopener noreferrer"
+                href="${project.html_url}" target="_blank">
+                ${displayName}
+            </a>
+            <div class="project-description">
+                ${project.description || 'No description available.'}
+            </div>
+            <div>
+                ${language !== 'N/A' ? `<span class="under-project">${language}</span>` : ''}
+                <span class="under-project">${updateDate}</span>
+            </div>
+        `;
+        
+        // Adiciona o item à lista de projetos no DOM
+        projectList.appendChild(listItem);
+    });
+}
+
+// ============================================================================
+// FUNÇÃO PRINCIPAL E INICIALIZAÇÃO
+// ============================================================================
+
+/**
+ * Função principal que coordena a busca e exibição dos projetos
+ * 
+ * Fluxo de execução:
+ * 1. Tenta buscar repositórios (cache ou API)
+ * 2. Exibe os repositórios na página
+ * 3. Em caso de erro:
+ *    a. Tenta usar cache expirado como fallback
+ *    b. Se não houver cache, exibe mensagem de erro ao usuário
+ * 
+ * Esta função implementa uma estratégia de fallback em camadas para
+ * garantir a melhor experiência possível ao usuário.
+ * 
+ * @async
+ */
+async function getGitHubProjects() {
+    try {
+        // Tenta buscar e exibir os projetos
+        const projects = await fetchGitHubRepos();
+        displayProjects(projects);
+        
+    } catch (error) {
+        // Loga o erro para debugging
+        console.error('Error fetching GitHub projects:', error);
+        
+        // FALLBACK 1: Tenta usar cache expirado
+        // Mesmo que o cache tenha expirado, é melhor mostrar dados antigos
+        // do que nenhum dado, especialmente em caso de falha na API
+        const cachedData = localStorage.getItem(GITHUB_CACHE_KEY);
+        if (cachedData) {
+            try {
+                const projects = JSON.parse(cachedData);
+                console.info('[GitHub API] Using expired cache as fallback');
+                displayProjects(projects);
+                return; // Sucesso com fallback - sai da função
+            } catch (e) {
+                // Se houver erro no parse, continua para o próximo fallback
+            }
+        }
+        
+        // FALLBACK 2: Exibe mensagem de erro ao usuário
+        // Só chega aqui se não houver cache disponível
+        // Reutiliza o elemento já buscado pela função displayProjects
+        const projectList = document.querySelector('#projects .project-list');
+        if (projectList) {
+            projectList.innerHTML = '';
+            const errorItem = document.createElement('li');
+            errorItem.classList.add('mb-4');
+            errorItem.innerHTML = `
+                <div class="project-description" style="color: var(--text-muted);">
+                    Unable to load GitHub projects. Please try again later.
+                </div>
+            `;
+            projectList.appendChild(errorItem);
+        }
+    }
+}
+
+// ============================================================================
+// INICIALIZAÇÃO DO MÓDULO
+// ============================================================================
+
+/**
+ * Garante que o código seja executado apenas após o DOM estar totalmente carregado
+ * 
+ * Este bloco verifica o estado de carregamento do documento:
+ * - Se ainda está carregando: aguarda o evento DOMContentLoaded
+ * - Se já carregou: executa imediatamente
+ * 
+ * Isso evita erros ao tentar manipular elementos que ainda não existem no DOM.
+ */
+if (document.readyState === 'loading') {
+    // DOM ainda não carregou - aguarda evento
+    document.addEventListener('DOMContentLoaded', getGitHubProjects);
+} else {
+    // DOM já carregado - executa imediatamente
+    getGitHubProjects();
+}
