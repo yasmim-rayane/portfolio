@@ -1,7 +1,7 @@
 <h1 align="center">Portfólio Pessoal - Front-End</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-purple?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.1.0-purple?style=flat-square" alt="Version">
   <img src="https://img.shields.io/github/actions/workflow/status/yasmim-rayane/portfolio/beta-ci.yml?branch=beta&style=flat-square&label=beta" alt="Beta CI">
   <img src="https://img.shields.io/github/actions/workflow/status/yasmim-rayane/portfolio/main-deploy.yml?branch=main&style=flat-square&label=deploy" alt="Deploy">
   <img src="https://img.shields.io/github/license/yasmim-rayane/portfolio?style=flat-square" alt="License">
