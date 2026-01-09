@@ -2,9 +2,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-purple?style=flat-square" alt="Version">
-  <img src="https://img.shields.io/github/actions/workflow/status/yasmim-rayane/portfolio-front-end-final/beta-ci.yml?branch=beta&style=flat-square&label=beta" alt="Beta CI">
-  <img src="https://img.shields.io/github/actions/workflow/status/yasmim-rayane/portfolio-front-end-final/main-deploy.yml?branch=main&style=flat-square&label=deploy" alt="Deploy">
-  <img src="https://img.shields.io/github/license/yasmim-rayane/portfolio-front-end-final?style=flat-square" alt="License">
+  <img src="https://img.shields.io/github/actions/workflow/status/yasmim-rayane/portfolio/beta-ci.yml?branch=beta&style=flat-square&label=beta" alt="Beta CI">
+  <img src="https://img.shields.io/github/actions/workflow/status/yasmim-rayane/portfolio/main-deploy.yml?branch=main&style=flat-square&label=deploy" alt="Deploy">
+  <img src="https://img.shields.io/github/license/yasmim-rayane/portfolio?style=flat-square" alt="License">
 </p>
 
 
@@ -14,7 +14,7 @@
 
 Este projeto foi desenvolvido como trabalho final da disciplina **Tecnologia Web** do curso de Engenharia da Computação da Universidade Santa Cecília. Consiste em um portfólio pessoal responsivo que apresenta informações profissionais, projetos desenvolvidos e canais de contato.
 
-**Acesso:** [https://yasmim-rayane.github.io/portfolio-front-end-final/](https://yasmim-rayane.github.io/portfolio-front-end-final/)
+**Acesso:** [https://yasmim-rayane.github.io/portfolio/](https://yasmim-rayane.github.io/portfolio/)
 
 ### Fases de Desenvolvimento
 
@@ -164,10 +164,10 @@ O design da interface foi previamente planejado utilizando Figma, garantindo con
 
 ```bash
 # Clone o repositório
-git clone https://github.com/yasmim-rayane/portfolio-front-end-final.git
+git clone https://github.com/yasmim-rayane/portfolio.git
 
 # Acesse o diretório do projeto
-cd portfolio-front-end-final
+cd portfolio
 
 # (Opcional) Se modificar os arquivos SASS, compile-os:
 sass assets/sass/style.scss assets/css/style.css
