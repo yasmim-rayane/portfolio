@@ -36,7 +36,7 @@
 }
 [data-theme=dark] {
   --main-bg-color: #0d0d0d;
-  --header-bg-color: rgba(26, 26, 26, 0.6862745098);
+  --header-bg-color: linear-gradient(rgba(2, 10, 46, 0.55), rgba(13, 13, 13, 0.55));
   --accent: #960dff;
   --text: #fff;
   --text-muted: #bbb;
@@ -229,7 +229,6 @@ header {
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--header-border-color, transparent);
 }
 header .header-button {
   background: none;
