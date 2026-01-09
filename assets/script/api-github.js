@@ -7,23 +7,36 @@
  * automaticamente os repositórios mais recentes no portfólio.
  * 
  * Funcionalidades principais:
- * - Busca os 5 repositórios mais recentes da API do GitHub
+ * - Busca até 20 repositórios da API do GitHub
+ * - Filtra automaticamente o repositório README do perfil (username/username)
+ * - Exibe exatamente 5 projetos válidos após filtragem
  * - Exibe nome, descrição, linguagem principal e ano de atualização
  * - Utiliza as classes CSS existentes para manter consistência visual
  * - Implementa sistema de cache com expiração de 1 hora para reduzir requisições
  * - Fornece fallback com dados em cache expirado em caso de falha na API
  * 
  * Sistema de Cache:
- * - Armazena dados no localStorage do navegador
+ * - Armazena apenas os 5 projetos filtrados no localStorage
  * - Expira automaticamente após 1 hora
  * - Reduz requisições à API de centenas para apenas 1 por hora
  * - Melhora performance e experiência do usuário
+ * 
+ * Filtros Aplicados:
+ * - Exclui repositório com nome igual ao username (README do perfil)
+ * - Garante que sempre sejam exibidos exatamente 5 projetos reais
  * =============================================================================
  */
 
 // ============================================================================
 // CONSTANTES DE CONFIGURAÇÃO
 // ============================================================================
+
+/**
+ * Nome de usuário do GitHub
+ * Usado para construir a URL da API e filtrar o repositório README do perfil
+ * @constant {string}
+ */
+const GITHUB_USERNAME = 'yasmim-rayane';
 
 /**
  * Chave para armazenar os dados dos repositórios no localStorage
@@ -134,16 +147,25 @@ function setCacheData(data) {
  * Implementa a lógica de cache-first:
  * 1. Tenta obter dados do cache válido
  * 2. Se não houver cache válido, faz requisição à API
- * 3. Salva os dados da API no cache para uso futuro
+ * 3. Filtra repositórios indesejados (README do perfil)
+ * 4. Limita aos 5 mais recentes após filtragem
+ * 5. Salva os dados filtrados no cache para uso futuro
  * 
- * URL da API: https://api.github.com/users/yasmim-rayane/repos
+ * URL da API: https://api.github.com/users/{username}/repos
  * Parâmetros:
  * - sort=updated: ordena por data de atualização
  * - direction=desc: ordem decrescente (mais recentes primeiro)
- * - per_page=5: limita a 5 repositórios
+ * - per_page=20: busca 20 repositórios para garantir 5 válidos após filtragem
+ * 
+ * Filtros aplicados:
+ * - Remove repositório README do perfil (nome igual ao username)
+ * - Limita a 5 repositórios após filtragem
+ * 
+ * Nota: O cache armazena os dados já filtrados e limitados a 5, garantindo
+ * que sempre exibamos exatamente 5 projetos válidos.
  * 
  * @async
- * @returns {Promise<Array>} Promise que resolve com array de repositórios
+ * @returns {Promise<Array>} Promise que resolve com array de 5 repositórios filtrados
  * @throws {Error} Se a requisição à API falhar
  */
 async function fetchGitHubRepos() {
@@ -157,8 +179,9 @@ async function fetchGitHubRepos() {
     // ETAPA 2: Cache inválido/inexistente - busca dados da API
     console.info('[GitHub API] Fetching fresh data from API');
     
-    // Monta a URL com parâmetros para obter os 5 repositórios mais recentes
-    const url = 'https://api.github.com/users/yasmim-rayane/repos?sort=updated&direction=desc&per_page=5';
+    // Monta a URL com parâmetros para obter repositórios mais recentes
+    // Busca 20 repositórios para garantir que tenhamos 5 válidos após filtros
+    const url = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc&per_page=20`;
     
     // Faz a requisição à API do GitHub
     const response = await fetch(url);
@@ -169,12 +192,23 @@ async function fetchGitHubRepos() {
     }
     
     // Converte a resposta para JSON
-    const projects = await response.json();
+    const allProjects = await response.json();
     
-    // ETAPA 3: Salva os dados no cache para uso futuro
-    setCacheData(projects);
+    // ETAPA 3: Filtra o repositório README do perfil
+    // O repositório com nome igual ao username é usado para personalizar o perfil
+    // e não deve ser exibido como projeto
+    const filteredProjects = allProjects.filter(project => 
+        project.name.toLowerCase() !== GITHUB_USERNAME.toLowerCase()
+    );
     
-    return projects;
+    // ETAPA 4: Limita aos 5 repositórios mais recentes após filtragem
+    const top5Projects = filteredProjects.slice(0, 5);
+    
+    // ETAPA 5: Salva os dados filtrados e limitados no cache
+    // Isso garante que o cache já contenha exatamente os 5 projetos que queremos exibir
+    setCacheData(top5Projects);
+    
+    return top5Projects;
 }
 
 // ============================================================================
@@ -188,13 +222,16 @@ async function fetchGitHubRepos() {
  * os insere na lista de projetos existente. Mantém a mesma estrutura e
  * classes CSS dos projetos manuais para consistência visual.
  * 
+ * Nota: Os projetos recebidos já foram filtrados e limitados a 5 pela função
+ * fetchGitHubRepos(), então não é necessário aplicar filtros adicionais aqui.
+ * 
  * Formatação aplicada:
  * - Nome: converte de kebab-case para Title Case (ex: "todo-list" → "Todo List")
  * - Descrição: usa a descrição do repositório ou mensagem padrão
  * - Linguagem: exibe a linguagem principal do projeto
  * - Data: exibe apenas o ano da última atualização
  * 
- * @param {Array} projects - Array de objetos de repositórios do GitHub
+ * @param {Array} projects - Array de 5 repositórios já filtrados do GitHub
  */
 function displayProjects(projects) {
     // Busca o container da lista de projetos no DOM
@@ -208,12 +245,10 @@ function displayProjects(projects) {
 
     // Limpa qualquer conteúdo existente (importante para recarregamentos)
     projectList.innerHTML = '';
-    
-    // Garante que apenas os 5 primeiros repositórios sejam exibidos
-    const recentProjects = projects.slice(0, 5);
 
     // Itera sobre cada repositório para criar os elementos HTML
-    recentProjects.forEach(project => {
+    // Nota: projects já contém exatamente 5 repositórios filtrados
+    projects.forEach(project => {
         // Cria o elemento <li> para o projeto
         const listItem = document.createElement('li');
         listItem.classList.add('mb-4'); // Classe Bootstrap para margem inferior
