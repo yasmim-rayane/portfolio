@@ -1,6 +1,6 @@
 // Design tokens (colors, spacing, radii, etc.)
 $main-bg-dark: #0d0d0d;
-$header-bg-dark: #1a1a1aaf;
+$header-bg-dark: linear-gradient(rgba(2, 10, 46, 0.55), rgba(13, 13, 13, 0.55));;
 $main-bg-light: #fefefe;
 $header-bg-light: #e1e1e1;
 $accent: #960dff;
@@ -12,7 +12,7 @@ $border: #222;
 $radius: 10px;
 
 // Cores do header translúcido
-$header-bg-dark-glass: #1a1a1aaf;
+$header-bg-dark-glass: linear-gradient(rgba(2, 10, 46, 0.55), rgba(13, 13, 13, 0.55));
 $header-bg-light-glass: rgba(255,255,255,0.55); // reduz opacidade para evidenciar transparência
 $header-border-light: rgba(0,0,0,0.10);
 $header-border-dark: rgba(255,255,255,0.08);
@@ -73,5 +73,4 @@ $header-border-dark: rgba(255,255,255,0.08);
   backdrop-filter: blur($blur) !important;
   -webkit-backdrop-filter: blur($blur) !important;
   box-shadow: $shadow;
-  border: 1px solid var(--header-border-color, transparent);
 }
