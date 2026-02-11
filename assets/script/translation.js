@@ -7,7 +7,7 @@ const translations = {
     about:
       "Web Developer focused on performance, security, and design.<br>" +
       "Bachelor’s Degree in Computer Engineering at Universidade Santa Cecília.<br>",
-    semester: "2nd of 10 semesters",
+    semester: "3rd of 10 semesters",
     download: "Download resume",
     projects: "Recent projects",
     // Project titles & descriptions
@@ -54,7 +54,7 @@ const translations = {
     about:
       "Desenvolvedora web focada em performance, segurança e design.<br>" +
       "Graduanda em Engenharia da Computação na Universidade Santa Cecília.<br>",
-    semester: "2º de 10 semestres",
+    semester: "3º de 10 semestres",
     download: "Baixar currículo",
     projects: "Projetos recentes",
     // Project titles & descriptions
