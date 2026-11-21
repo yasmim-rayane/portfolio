@@ -27,6 +27,8 @@
  * =============================================================================
  */
 
+import { getTranslation } from './translation.js';
+
 // ============================================================================
 // CONSTANTES DE CONFIGURAÇÃO
 // ============================================================================
@@ -215,6 +217,9 @@ async function fetchGitHubRepos() {
 // FUNÇÕES DE RENDERIZAÇÃO
 // ============================================================================
 
+let lastRenderedProjects = null;
+let lastLoadFailed = false;
+
 /**
  * Exibe os repositórios do GitHub na página
  * 
@@ -227,7 +232,7 @@ async function fetchGitHubRepos() {
  * 
  * Formatação aplicada:
  * - Nome: converte de kebab-case para Title Case (ex: "todo-list" → "Todo List")
- * - Descrição: usa a descrição do repositório ou mensagem padrão
+ * - Descrição: usa a descrição do repositório ou mensagem traduzida padrão
  * - Linguagem: exibe a linguagem principal do projeto
  * - Data: exibe apenas o ano da última atualização
  * 
@@ -243,48 +248,79 @@ function displayProjects(projects) {
         return;
     }
 
-    // Limpa qualquer conteúdo existente (importante para recarregamentos)
-    projectList.innerHTML = '';
+    lastRenderedProjects = projects;
+    lastLoadFailed = false;
 
-    // Itera sobre cada repositório para criar os elementos HTML
+    // Limpa qualquer conteúdo existente (importante para recarregamentos)
+    projectList.replaceChildren();
+
+    // Itera sobre cada repositório para criar os elementos HTML com segurança (textContent)
     // Nota: projects já contém exatamente 5 repositórios filtrados
     projects.forEach(project => {
-        // Cria o elemento <li> para o projeto
         const listItem = document.createElement('li');
         listItem.classList.add('mb-4'); // Classe Bootstrap para margem inferior
-        
-        // Obtém a linguagem principal (ou 'N/A' se não disponível)
+
         const language = project.language || 'N/A';
-        
-        // Extrai apenas o ano da data de atualização
         const updateDate = new Date(project.updated_at).getFullYear();
-        
+
         // Formata o nome do repositório de kebab-case para Title Case
         // Ex: "todo-list" → ["todo", "list"] → ["Todo", "List"] → "Todo List"
         const displayName = project.name
-            .split('-')                                    // Divide por hífens
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitaliza
-            .join(' ');                                    // Junta com espaços
-        
-        // Constrói o HTML do item usando template literals
-        // Mantém a mesma estrutura dos projetos manuais para consistência
-        listItem.innerHTML = `
-            <a class="project-title" rel="noopener noreferrer"
-                href="${project.html_url}" target="_blank">
-                ${displayName}
-            </a>
-            <div class="project-description">
-                ${project.description || 'No description available.'}
-            </div>
-            <div>
-                ${language !== 'N/A' ? `<span class="under-project">${language}</span>` : ''}
-                <span class="under-project">${updateDate}</span>
-            </div>
-        `;
-        
-        // Adiciona o item à lista de projetos no DOM
+            .split('-')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+
+        const titleLink = document.createElement('a');
+        titleLink.className = 'project-title';
+        titleLink.rel = 'noopener noreferrer';
+        titleLink.href = project.html_url;
+        titleLink.target = '_blank';
+        titleLink.textContent = displayName;
+
+        const descEl = document.createElement('div');
+        descEl.className = 'project-description';
+        descEl.textContent = project.description || getTranslation('noProjectDesc') || 'No description available.';
+
+        const metaEl = document.createElement('div');
+        if (language !== 'N/A') {
+            const langSpan = document.createElement('span');
+            langSpan.className = 'under-project';
+            langSpan.textContent = language;
+            metaEl.appendChild(langSpan);
+            metaEl.appendChild(document.createTextNode(' '));
+        }
+
+        const dateSpan = document.createElement('span');
+        dateSpan.className = 'under-project';
+        dateSpan.textContent = String(updateDate);
+        metaEl.appendChild(dateSpan);
+
+        listItem.append(titleLink, descEl, metaEl);
         projectList.appendChild(listItem);
     });
+}
+
+/**
+ * Exibe mensagem de erro traduzida quando não há dados disponíveis
+ */
+function displayError() {
+    lastRenderedProjects = null;
+    lastLoadFailed = true;
+
+    const projectList = document.querySelector('#projects .project-list');
+    if (!projectList) return;
+
+    projectList.replaceChildren();
+    const errorItem = document.createElement('li');
+    errorItem.classList.add('mb-4');
+
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'project-description';
+    errorDiv.style.color = 'var(--text-muted)';
+    errorDiv.textContent = getTranslation('githubError') || 'Unable to load GitHub projects. Please try again later.';
+
+    errorItem.appendChild(errorDiv);
+    projectList.appendChild(errorItem);
 }
 
 // ============================================================================
@@ -333,21 +369,18 @@ async function getGitHubProjects() {
         
         // FALLBACK 2: Exibe mensagem de erro ao usuário
         // Só chega aqui se não houver cache disponível
-        // Reutiliza o elemento já buscado pela função displayProjects
-        const projectList = document.querySelector('#projects .project-list');
-        if (projectList) {
-            projectList.innerHTML = '';
-            const errorItem = document.createElement('li');
-            errorItem.classList.add('mb-4');
-            errorItem.innerHTML = `
-                <div class="project-description" style="color: var(--text-muted);">
-                    Unable to load GitHub projects. Please try again later.
-                </div>
-            `;
-            projectList.appendChild(errorItem);
-        }
+        displayError();
     }
 }
+
+// Re-renderiza textos dinâmicos (fallback de descrição e erro) ao alternar idioma
+document.addEventListener('i18n:applied', () => {
+    if (lastRenderedProjects) {
+        displayProjects(lastRenderedProjects);
+    } else if (lastLoadFailed) {
+        displayError();
+    }
+});
 
 // ============================================================================
 // INICIALIZAÇÃO DO MÓDULO

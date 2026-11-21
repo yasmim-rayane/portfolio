@@ -166,9 +166,22 @@ function updateOfflineBanner() {
 function registerSW() {
     // Verifica se o navegador suporta Service Workers
     if ('serviceWorker' in navigator) {
-        // Registra o Service Worker
-        // Erros são silenciosamente ignorados para não quebrar a aplicação
-        navigator.serviceWorker.register('assets/config/sw.js').catch(() => {});
+        // Remove registros antigos do SW no subdiretório assets/config/ antes de registrar na raiz
+        navigator.serviceWorker.getRegistrations()
+            .then(regs => Promise.all(
+                regs
+                    .filter(reg =>
+                        reg.active?.scriptURL?.includes('/assets/config/sw.js') ||
+                        reg.installing?.scriptURL?.includes('/assets/config/sw.js') ||
+                        reg.waiting?.scriptURL?.includes('/assets/config/sw.js')
+                    )
+                    .map(reg => reg.unregister())
+            ))
+            .catch(() => {})
+            .finally(() => {
+                // Registra o Service Worker na raiz para cobrir todo o escopo do portfólio
+                navigator.serviceWorker.register('./sw.js').catch(() => {});
+            });
     }
 }
 

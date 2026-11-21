@@ -6,20 +6,6 @@
 
 Este site foi criado com foco em aplicar os conhecimentos de **HTML**, **CSS**, **JavaScript**, **Flexbox**, **responsividade** e **publicação com GitHub Pages**.
 
-O projeto foi dividido em duas fases:
-- **Parte 1 (Semana 5):** Estruturação HTML e protótipo no Figma  
-- **Parte 2 (Semana 11):** Finalização com responsividade, interatividade e publicação online
-
-<h2>Funcionalidades</h2>
-
-    - [x] Página Sobre Mim com imagem e descrição
-    - [x] Seção de Projetos com links e descrições
-    - [x] Formulário de Contato com validação básica
-    - [x] Layout responsivo (mobile e desktop)
-    - [x] Animações e efeitos visuais com CSS
-    - [x] Tema claro/escuro com JavaScript e CSS
-    - [x] Idiomas inglês/português com JavaScript e HTML
-
 ## Tecnologias Utilizadas
 
 <h3>Prototipagem e design</h3>
@@ -46,27 +32,9 @@ O projeto foi dividido em duas fases:
 ![Git & Github](https://img.shields.io/badge/Git%20&%20GitHub-000?logo=git&logoColor=white)
 ![GitHub Pages](https://img.shields.io/badge/Github%20Pages-000?logo=Github&logoColor=white)
 
-
-<h2>Protótipo</h2>
-Link para o protótipo criado no Figma:
-
-[🔗 Ver protótipo](https://www.figma.com/proto/r6YEu3B7Mkz5T44HFqD08c/Portfolio-for-Web-Development?page-id=0%3A1&node-id=78-11601&viewport=874%2C-1136%2C0.5&t=JnigT85uKSAhLjnN-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=78%3A11601)
-
 <h2>Acesso ao Projeto</h2>
 
 - **GitHub Pages:** [Clique aqui para acessar o site](https://yasmim-rayane.github.io/portfolio/)
-- **Repositório GitHub:** [Acesse o código-fonte aqui](https://github.com/yasmim-rayane/portfolio)
-
-<h2>Capturas de Tela</h2>
-
-<div align="center">
-    <img alt="Captura de tela do portfólio mobile com o tema escuro" src="assets/images/screenshots/darktheme-mobile.png" height="298"/>
-    <img alt="Captura de tela do portfólio desktop com o tema escuro" src="assets/images/screenshots/darktheme-web.png" height="298"/>
-    <br>
-    <img alt="Captura de tela do portfólio mobile com o tema claro" src="assets/images/screenshots/lighttheme-mobile.png" height="298"/>
-    <img alt="Captura de tela do portfólio desktop com o tema claro" src="assets/images/screenshots/lighttheme-web.png" height="298"/>
-</div>
-
 <h2>Licença</h2>
 
     Este projeto é de uso educacional, criado como parte da disciplina Tecnologia Web.
@@ -77,5 +45,5 @@ Yasmim Rayane.
 <p align="center">
     <a href="mailto:silva.yasmimray@gmail.com" target="_blank">E-mail</a> &nbsp;|&nbsp;
     <a href="https://github.com/yasmim-rayane" target="_blank">GitHub</a> &nbsp;|&nbsp;
-    <a href="https://www.linkedin.com/in/yasmimrayane" target="_blank">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/yasmim-rayane/" target="_blank">LinkedIn</a>
 </p>

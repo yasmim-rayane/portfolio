@@ -1,633 +1,990 @@
 /**
  * =============================================================================
- * Header Effects - Stars & Clouds Animation
+ * Header Effects - Deep Sky & Astrophysics Header (100% CSS Puro)
  * =============================================================================
- * 
- * Este arquivo contém animações decorativas para o header:
- * - Estrelas piscantes no modo escuro (simula noite)
- * - Nuvens flutuantes no modo claro (simula dia)
- * 
- * As animações são sutis e posicionadas no centro do header para não
- * interferir com os elementos interativos nas laterais (nome e botões).
+ *
+ * Cenário celeste desenhado integralmente em CSS puro (sem imagens/PNGs):
+ * - Modo escuro: nebulosa da Via Láctea, campo estelar multi-camadas com cores
+ *   espectrais, estrelas com pontas de difração, planeta com anéis, buraco negro
+ *   com disco de acreção/lente gravitacional, galáxia espiral e meteoros.
+ * - Modo claro: céu diurno translúcido com nuvens suaves em movimento.
  * =============================================================================
  */
 
 /* ============================================================================
-   CONTAINER DE EFEITOS DO HEADER
+   ESTRUTURA BASE DO HEADER
    ============================================================================ */
 
-/**
- * Container para os efeitos decorativos do header
- * Posicionado absolutamente, não interfere com cliques
- */
 header {
-    position: relative;
-    overflow: hidden; /* Garante que elementos não vazem do header */
+    min-height: 62px;
 }
 
-/* Desativa pseudo-elementos por padrão para evitar conflitos */
-header::before,
-header::after {
-    content: none;
+header > :not(.header-sky) {
+    position: relative;
+    z-index: 2;
+}
+
+.header-sky {
     position: absolute;
+    inset: 0;
+    overflow: hidden;
     pointer-events: none;
+    z-index: 0;
 }
 
-/* Garante que o conteúdo do header fique acima dos efeitos */
-header > * {
-    position: relative;
-    z-index: 1;
+.header-sky::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.11) 0%,
+        rgba(255, 255, 255, 0.025) 36%,
+        transparent 68%
+    );
+}
+
+body[data-theme="light"] .header-sky::after {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.34) 0%,
+        rgba(255, 255, 255, 0.08) 40%,
+        transparent 72%
+    );
+}
+
+body[data-theme="dark"] header {
+    background: linear-gradient(180deg, rgba(6, 8, 24, 0.52) 0%, rgba(12, 9, 30, 0.38) 100%) !important;
+    backdrop-filter: blur(16px) saturate(155%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(155%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 0 rgba(168, 120, 255, 0.25);
+}
+
+body[data-theme="light"] header {
+    background: linear-gradient(
+        95deg,
+        rgba(120, 192, 255, 0.48) 0%,
+        rgba(168, 220, 255, 0.42) 48%,
+        rgba(255, 232, 174, 0.46) 80%,
+        rgba(255, 214, 128, 0.52) 100%
+    ) !important;
+    backdrop-filter: blur(16px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.58);
+    box-shadow:
+        0 8px 28px rgba(45, 105, 185, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72),
+        inset 0 -1px 0 rgba(255, 206, 84, 0.30);
 }
 
 /* ============================================================================
-   ESTRELAS - MODO ESCURO
+   ASSINATURA ASTRONÔMICA (LATERAL ESQUERDA)
    ============================================================================ */
 
-/**
- * Estrelas animadas para o modo escuro
- * Usa múltiplas box-shadows para criar várias estrelas com uma única pseudo-elemento
- * Cores naturais de estrelas: branco, azulado e levemente amarelado
- * Campo expandido para 100% do header - alcance máximo
- */
-body[data-theme="dark"] header::after {
-    content: '';
+.header-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    user-select: none;
+    padding: 2px 4px;
+    border-radius: 10px;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.header-brand:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.brand-orbit {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(186, 140, 255, 0.55);
+    transform: rotate(-24deg);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand-orbit::after {
+    content: "";
+    position: absolute;
+    top: -2.5px;
+    left: 50%;
+    width: 4.5px;
+    height: 4.5px;
+    border-radius: 50%;
+    background: #ffd21d;
+    box-shadow: 0 0 6px rgba(255, 210, 29, 0.9);
+    transform: translateX(-50%);
+}
+
+.brand-star {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    pointer-events: none;
-    z-index: 0;
-    
-    /* Cria múltiplas estrelas usando box-shadow */
-    /* Campo máximo: horizontal de -400px a +400px (cobertura total) */
-    box-shadow:
-        /* Grupo 1 - Extrema esquerda (-400px a -300px) */
-        -400px 10px 0 0 rgba(255, 255, 255, 0.36),
-        -380px -14px 0 0 rgba(255, 255, 255, 0.38),
-        -360px 16px 0 0 rgba(255, 255, 255, 0.34),
-        -340px -8px 0 0 rgba(255, 255, 255, 0.4),
-        -320px 12px 0 0 rgba(255, 255, 255, 0.35),
-        -300px -16px 0 0 rgba(255, 255, 255, 0.37),
-        -390px 18px 1px 0 rgba(200, 220, 255, 0.32),
-        -370px -10px 1px 0 rgba(255, 250, 220, 0.34),
-        -350px 8px 0 0 rgba(255, 255, 255, 0.3),
-        -330px -20px 1px 0 rgba(210, 225, 255, 0.33),
-        -310px 14px 1px 0 rgba(255, 248, 210, 0.35),
-        
-        /* Grupo 2 - Esquerda (-300px a -150px) */
-        -280px 8px 0 0 rgba(255, 255, 255, 0.38),
-        -260px -12px 0 0 rgba(255, 255, 255, 0.35),
-        -240px 18px 0 0 rgba(255, 255, 255, 0.4),
-        -220px -6px 0 0 rgba(255, 255, 255, 0.36),
-        -180px 10px 0 0 rgba(255, 255, 255, 0.4),
-        -150px -8px 0 0 rgba(255, 255, 255, 0.38),
-        -270px 14px 1px 0 rgba(200, 220, 255, 0.33),
-        -250px -18px 1px 0 rgba(255, 250, 220, 0.35),
-        -230px 5px 0 0 rgba(255, 255, 255, 0.32),
-        -210px -15px 0 0 rgba(255, 255, 255, 0.34),
-        -165px -15px 1px 0 rgba(200, 220, 255, 0.35),
-        -195px 5px 0 0 rgba(255, 255, 255, 0.25),
-        -175px -20px 0 0 rgba(255, 255, 255, 0.22),
-        
-        /* Grupo 3 - Centro-esquerda (-150px a 0) */
-        -120px 15px 0 0 rgba(255, 255, 255, 0.35),
-        -90px -10px 0 0 rgba(255, 255, 255, 0.42),
-        -60px 12px 0 0 rgba(255, 255, 255, 0.37),
-        -30px -5px 0 0 rgba(255, 255, 255, 0.4),
-        -135px 18px 1px 0 rgba(210, 225, 255, 0.38),
-        -105px -8px 1px 0 rgba(195, 215, 255, 0.32),
-        -75px 20px 1px 0 rgba(205, 220, 255, 0.36),
-        -45px 20px 1px 0 rgba(255, 250, 220, 0.38),
-        -140px -18px 1px 0 rgba(255, 248, 210, 0.35),
-        -110px 8px 1px 0 rgba(255, 252, 225, 0.36),
-        -55px -18px 1px 0 rgba(255, 252, 225, 0.33),
-        -145px 25px 0 0 rgba(255, 255, 255, 0.24),
-        -115px -15px 0 0 rgba(255, 255, 255, 0.26),
-        -85px 20px 0 0 rgba(255, 255, 255, 0.23),
-        -188px -22px 0 0 rgba(255, 255, 255, 0.36),
-        -158px 16px 0 0 rgba(255, 255, 255, 0.34),
-        -128px -12px 0 0 rgba(255, 255, 255, 0.38),
-        -98px 18px 0 0 rgba(255, 255, 255, 0.35),
-        -68px -8px 0 0 rgba(255, 255, 255, 0.37),
-        -160px -5px 1px 0 rgba(180, 150, 255, 0.25),
-        -100px 12px 1px 0 rgba(175, 145, 255, 0.22),
-        -120px -15px 1px 0 rgba(175, 145, 255, 0.22),
-        
-        /* Grupo 4 - Centro (0 a +150px) */
-        20px 10px 0 0 rgba(255, 255, 255, 0.4),
-        50px -5px 0 0 rgba(255, 255, 255, 0.45),
-        80px 8px 0 0 rgba(255, 255, 255, 0.42),
-        110px -12px 0 0 rgba(255, 255, 255, 0.38),
-        140px 18px 0 0 rgba(255, 255, 255, 0.4),
-        40px -15px 1px 0 rgba(200, 220, 255, 0.35),
-        70px 18px 1px 0 rgba(210, 225, 255, 0.4),
-        125px -10px 1px 0 rgba(195, 215, 255, 0.34),
-        25px 22px 1px 0 rgba(255, 248, 210, 0.35),
-        130px 24px 1px 0 rgba(255, 250, 220, 0.37),
-        65px 25px 0 0 rgba(255, 255, 255, 0.36),
-        100px 5px 0 0 rgba(255, 255, 255, 0.25),
-        115px -8px 0 0 rgba(255, 255, 255, 0.3),
-        95px -20px 1px 0 rgba(180, 150, 255, 0.25),
-        
-        /* Grupo 5 - Centro-direita (+150px a +300px) */
-        170px -6px 0 0 rgba(255, 255, 255, 0.35),
-        200px 14px 0 0 rgba(255, 255, 255, 0.42),
-        220px -8px 0 0 rgba(255, 255, 255, 0.36),
-        240px 16px 0 0 rgba(255, 255, 255, 0.4),
-        260px -14px 0 0 rgba(255, 255, 255, 0.38),
-        280px 10px 0 0 rgba(255, 255, 255, 0.35),
-        155px 16px 1px 0 rgba(205, 220, 255, 0.37),
-        185px -14px 1px 0 rgba(200, 220, 255, 0.33),
-        210px 20px 1px 0 rgba(200, 220, 255, 0.35),
-        230px -16px 1px 0 rgba(210, 225, 255, 0.33),
-        250px 12px 1px 0 rgba(195, 215, 255, 0.36),
-        270px -10px 1px 0 rgba(205, 220, 255, 0.34),
-        160px -16px 1px 0 rgba(255, 248, 210, 0.34),
-        215px -20px 1px 0 rgba(255, 250, 220, 0.37),
-        235px 18px 1px 0 rgba(255, 248, 210, 0.35),
-        255px -12px 1px 0 rgba(255, 252, 225, 0.33),
-        160px 8px 0 0 rgba(255, 255, 255, 0.24),
-        190px -18px 0 0 rgba(255, 255, 255, 0.26),
-        205px 6px 0 0 rgba(255, 255, 255, 0.26),
-        225px -22px 0 0 rgba(255, 255, 255, 0.24),
-        245px 22px 0 0 rgba(255, 255, 255, 0.28),
-        265px -6px 0 0 rgba(255, 255, 255, 0.25),
-        145px 22px 0 0 rgba(255, 255, 255, 0.32),
-        175px -24px 0 0 rgba(255, 255, 255, 0.35),
-        150px 10px 1px 0 rgba(175, 145, 255, 0.23),
-        275px 16px 0 0 rgba(255, 255, 255, 0.3),
-        
-        /* Grupo 6 - Extrema direita (+300px a +400px) */
-        300px -12px 0 0 rgba(255, 255, 255, 0.37),
-        320px 14px 0 0 rgba(255, 255, 255, 0.35),
-        340px -16px 0 0 rgba(255, 255, 255, 0.4),
-        360px 10px 0 0 rgba(255, 255, 255, 0.34),
-        380px -8px 0 0 rgba(255, 255, 255, 0.38),
-        400px 12px 0 0 rgba(255, 255, 255, 0.36),
-        310px 18px 1px 0 rgba(200, 220, 255, 0.33),
-        330px -20px 1px 0 rgba(210, 225, 255, 0.32),
-        350px 16px 1px 0 rgba(195, 215, 255, 0.34),
-        370px -14px 1px 0 rgba(205, 220, 255, 0.35),
-        390px 8px 1px 0 rgba(200, 220, 255, 0.31),
-        305px -22px 1px 0 rgba(255, 250, 220, 0.34),
-        325px 20px 1px 0 rgba(255, 248, 210, 0.36),
-        345px -10px 1px 0 rgba(255, 252, 225, 0.33),
-        365px 14px 0 0 rgba(255, 255, 255, 0.32),
-        385px -18px 0 0 rgba(255, 255, 255, 0.3),
-        395px 6px 1px 0 rgba(180, 150, 255, 0.24);
-    
-    /* Animação de piscar suave e natural */
-    animation: starsTwinkle 5s ease-in-out infinite;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(215, 185, 255, 0.95);
+    transform: translate(-50%, -50%) rotate(24deg);
 }
 
-/**
- * Animação de brilho das estrelas
- * Cria um efeito de brilho alternado mais sutil
- */
-@keyframes starsTwinkle {
-    0%, 100% {
-        opacity: 1;
-        filter: brightness(1.2);
-        transform: translate(-50%, -50%);
-    }
-    50% {
-        opacity: 0.8;
-        filter: brightness(0.7);
-        transform: translate(-50%, -50%);
-    }
+.brand-star::before,
+.brand-star::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
 }
 
-/**
- * Animação de brilho intenso para estrelas especiais
- * Algumas estrelas brilham mais que outras
- */
-@keyframes starsBrightTwinkle {
-    0%, 100% {
-        opacity: 1;
-        filter: brightness(3) drop-shadow(0 0 3px rgba(255, 255, 255, 0.1));
-    }
-    50% {
-        opacity: 0.9;
-        filter: brightness(2.8) drop-shadow(0 0 5px rgba(255, 255, 255, 1));
-    }
+.brand-star::before {
+    width: 12px;
+    height: 1px;
 }
 
-/**
- * Animação de estrela cadente
- * Estrela que cria uma linha enquanto se move mais devagar
- */
-@keyframes shootingStar {
-    0% {
-        transform: translateX(0) translateY(0) rotate(-45deg) scaleX(1);
-        opacity: 1;
-    }
-    75% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(300px) translateY(300px) rotate(-45deg) scaleX(3);
-        opacity: 0;
-    }
+.brand-star::after {
+    width: 1px;
+    height: 12px;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+}
+
+.header-brand:hover .brand-orbit {
+    transform: rotate(156deg);
+    border-color: rgba(255, 210, 29, 0.75);
+    box-shadow: 0 0 12px rgba(150, 13, 255, 0.35);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.brand-title {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    background: linear-gradient(90deg, #f8f6ff 0%, #d8bcff 55%, #ffe082 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.brand-sub {
+    font-family: "Fira Mono", "Consolas", monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
+    color: rgba(210, 218, 245, 0.62);
+    margin-top: 2px;
+}
+
+body[data-theme="light"] .brand-orbit {
+    border-color: rgba(150, 13, 255, 0.45);
+}
+
+body[data-theme="light"] .brand-orbit::after {
+    background: #f5a600;
+    box-shadow: 0 0 6px rgba(255, 185, 0, 0.75);
+}
+
+body[data-theme="light"] .brand-star {
+    background: #4d148c;
+    box-shadow: 0 0 6px rgba(150, 13, 255, 0.45);
+}
+
+body[data-theme="light"] .brand-star::before {
+    background: linear-gradient(90deg, transparent, rgba(150, 13, 255, 0.8), transparent);
+}
+
+body[data-theme="light"] .brand-star::after {
+    background: linear-gradient(180deg, transparent, rgba(150, 13, 255, 0.8), transparent);
+}
+
+body[data-theme="light"] .brand-title {
+    background: none;
+    -webkit-text-fill-color: #1f1242;
+    color: #1f1242;
+    text-shadow: 0 1px 10px rgba(255, 255, 255, 0.65);
+}
+
+body[data-theme="light"] .brand-sub {
+    color: rgba(38, 26, 78, 0.78);
 }
 
 /* ============================================================================
-   NUVENS - MODO CLARO (Estilo Cartoon/Desenho)
+   NEBULOSA & CAMPO ESTELAR (MODO ESCURO)
    ============================================================================ */
 
-/**
- * Estrela cadente 1 - aparece ocasionalmente no modo escuro
- * Controlada por JavaScript para alternância adequada
- */
-body[data-theme="dark"] header::before {
+.sky-nebula {
+    position: absolute;
+    inset: -20% -5%;
+    background-image:
+        radial-gradient(ellipse 34% 110% at 18% 55%, rgba(52, 94, 198, 0.19) 0%, transparent 72%),
+        radial-gradient(ellipse 30% 95% at 54% 48%, rgba(150, 13, 255, 0.20) 0%, transparent 70%),
+        radial-gradient(ellipse 28% 105% at 82% 52%, rgba(92, 62, 184, 0.16) 0%, rgba(255, 198, 112, 0.06) 45%, transparent 75%),
+        radial-gradient(ellipse 20% 70% at 37% 30%, rgba(110, 168, 255, 0.10) 0%, transparent 70%);
+    animation: nebulaDrift 18s ease-in-out infinite alternate;
+}
+
+.sky-stars-far,
+.sky-stars-mid {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+}
+
+/* Camada distante: estrelas finas (0.8px - 1px) em bloco primo 293x64 */
+.sky-stars-far {
+    background-size: 293px 64px;
+    background-image:
+        radial-gradient(0.9px 0.9px at 14px 11px, rgba(255, 255, 255, 0.65) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 31px 43px, rgba(205, 224, 255, 0.55) 55%, transparent 100%),
+        radial-gradient(0.9px 0.9px at 47px 21px, rgba(255, 246, 220, 0.6) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 64px 52px, rgba(255, 255, 255, 0.48) 55%, transparent 100%),
+        radial-gradient(1px 1px at 81px 15px, rgba(196, 218, 255, 0.62) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 96px 36px, rgba(255, 255, 255, 0.5) 55%, transparent 100%),
+        radial-gradient(0.9px 0.9px at 112px 9px, rgba(255, 244, 214, 0.56) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 128px 49px, rgba(212, 228, 255, 0.52) 55%, transparent 100%),
+        radial-gradient(1px 1px at 146px 27px, rgba(255, 255, 255, 0.68) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 161px 58px, rgba(255, 255, 255, 0.45) 55%, transparent 100%),
+        radial-gradient(0.9px 0.9px at 177px 14px, rgba(220, 200, 255, 0.55) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 193px 40px, rgba(255, 255, 255, 0.54) 55%, transparent 100%),
+        radial-gradient(1px 1px at 209px 22px, rgba(202, 224, 255, 0.64) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 224px 53px, rgba(255, 245, 218, 0.5) 55%, transparent 100%),
+        radial-gradient(0.9px 0.9px at 239px 12px, rgba(255, 255, 255, 0.6) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 254px 33px, rgba(205, 224, 255, 0.48) 55%, transparent 100%),
+        radial-gradient(1px 1px at 268px 47px, rgba(255, 255, 255, 0.62) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 282px 19px, rgba(255, 248, 225, 0.52) 55%, transparent 100%),
+        radial-gradient(0.9px 0.9px at 73px 29px, rgba(255, 255, 255, 0.46) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 153px 7px, rgba(200, 220, 255, 0.54) 55%, transparent 100%),
+        radial-gradient(0.9px 0.9px at 217px 6px, rgba(255, 255, 255, 0.5) 55%, transparent 100%),
+        radial-gradient(0.8px 0.8px at 287px 56px, rgba(215, 200, 255, 0.48) 55%, transparent 100%);
+    animation: twinkleFar 6.8s ease-in-out infinite alternate;
+}
+
+/* Camada média: estrelas com classes espectrais (O/B, A, G, K) em bloco primo 419x64 */
+.sky-stars-mid {
+    background-size: 419px 64px;
+    background-image:
+        radial-gradient(1.4px 1.4px at 23px 18px, rgba(179, 213, 255, 0.88) 45%, transparent 100%),
+        radial-gradient(1.2px 1.2px at 58px 46px, rgba(255, 255, 255, 0.82) 45%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 94px 12px, rgba(255, 243, 209, 0.86) 45%, transparent 100%),
+        radial-gradient(1.1px 1.1px at 129px 35px, rgba(217, 184, 255, 0.78) 45%, transparent 100%),
+        radial-gradient(1.4px 1.4px at 164px 51px, rgba(255, 213, 158, 0.84) 45%, transparent 100%),
+        radial-gradient(1.3px 1.3px at 198px 20px, rgba(255, 255, 255, 0.9) 45%, transparent 100%),
+        radial-gradient(1.2px 1.2px at 232px 8px, rgba(179, 213, 255, 0.8) 45%, transparent 100%),
+        radial-gradient(1.6px 1.6px at 266px 42px, rgba(255, 243, 209, 0.88) 45%, transparent 100%),
+        radial-gradient(1.1px 1.1px at 298px 16px, rgba(255, 255, 255, 0.76) 45%, transparent 100%),
+        radial-gradient(1.4px 1.4px at 327px 53px, rgba(217, 184, 255, 0.82) 45%, transparent 100%),
+        radial-gradient(1.3px 1.3px at 356px 26px, rgba(179, 213, 255, 0.86) 45%, transparent 100%),
+        radial-gradient(1.2px 1.2px at 389px 11px, rgba(255, 213, 158, 0.82) 45%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 408px 47px, rgba(255, 255, 255, 0.88) 45%, transparent 100%),
+        radial-gradient(1.2px 1.2px at 76px 28px, rgba(255, 255, 255, 0.74) 45%, transparent 100%),
+        radial-gradient(1.3px 1.3px at 147px 9px, rgba(179, 213, 255, 0.8) 45%, transparent 100%),
+        radial-gradient(1.1px 1.1px at 215px 56px, rgba(255, 243, 209, 0.76) 45%, transparent 100%),
+        radial-gradient(1.4px 1.4px at 311px 34px, rgba(255, 255, 255, 0.84) 45%, transparent 100%),
+        radial-gradient(1.2px 1.2px at 372px 57px, rgba(217, 184, 255, 0.75) 45%, transparent 100%);
+    animation: twinkleMid 4.9s ease-in-out -2.2s infinite alternate;
+}
+
+/* ============================================================================
+   ESTRELAS BRILHANTES COM PONTAS DE DIFRAÇÃO (ESTILO HUBBLE / JWST)
+   ============================================================================ */
+
+.star-bright {
+    position: absolute;
+    width: 2.4px;
+    height: 2.4px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 6px 1px currentColor;
+}
+
+.star-bright::before,
+.star-bright::after {
     content: "";
     position: absolute;
-    top: 15%;
-    left: 20%;
-    width: 4px;
-    height: 4px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-    border-radius: 50%;
-    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0;
-    /* Sem animação por padrão - será adicionada via JavaScript */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-/**
- * Segunda estrela cadente - aparece em momento diferente
- * Controlada por JavaScript para alternância adequada
- */
-body[data-theme="dark"] header .shooting-star-2 {
-    display: block;
+.star-bright::before {
+    width: 13px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, currentColor 50%, transparent 100%);
+}
+
+.star-bright::after {
+    width: 1px;
+    height: 13px;
+    background: linear-gradient(180deg, transparent 0%, currentColor 50%, transparent 100%);
+}
+
+.star-bright-1 {
+    top: 26%;
+    left: 22%;
+    color: #b8dcff;
+    animation: diffractionTwinkle 4.4s ease-in-out infinite;
+}
+
+.star-bright-2 {
+    top: 72%;
+    left: 42%;
+    color: #ffe39c;
+    animation: diffractionTwinkle 5.6s ease-in-out -1.5s infinite;
+}
+
+.star-bright-3 {
+    top: 24%;
+    left: 65%;
+    color: #ffffff;
+    animation: diffractionTwinkle 3.9s ease-in-out -2.4s infinite;
+}
+
+.star-bright-4 {
+    top: 70%;
+    left: 82%;
+    color: #dfc2ff;
+    animation: diffractionTwinkle 6.3s ease-in-out -0.9s infinite;
+}
+
+.star-bright-5 {
+    top: 28%;
+    left: 91%;
+    color: #c2e4ff;
+    animation: diffractionTwinkle 5.1s ease-in-out -3.1s infinite;
+}
+
+/* ============================================================================
+   OBJETOS CELESTES (BURACO NEGRO, PLANETA COM ANÉIS E GALÁXIA ESPIRAL)
+   ============================================================================ */
+
+/* 1. Planeta com anéis (Saturno) */
+.cosmic-planet {
     position: absolute;
-    top: 25%;
-    left: 70%;
-    width: 4px;
-    height: 4px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-    border-radius: 50%;
-    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0;
-    /* Sem animação por padrão - será adicionada via JavaScript */
+    left: 33%;
+    top: 54%;
+    width: 36px;
+    height: 22px;
+    transform: translate(-50%, -50%);
+    opacity: 0.9;
 }
 
-/**
- * Terceira estrela cadente
- */
-body[data-theme="dark"] header .shooting-star-3 {
-    display: block;
+.planet-body {
     position: absolute;
-    top: 40%;
-    left: 35%;
-    width: 4px;
-    height: 4px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    top: 50%;
+    left: 50%;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
-    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
-    pointer-events: none;
+    transform: translate(-50%, -50%);
     z-index: 2;
-    opacity: 0;
+    background: radial-gradient(circle at 30% 28%, #f8ebd2 0%, #d4a977 38%, #73517a 72%, #140d24 100%);
+    box-shadow: 0 0 8px rgba(212, 169, 119, 0.25);
 }
 
-/**
- * Quarta estrela cadente
- */
-body[data-theme="dark"] header .shooting-star-4 {
-    display: block;
+.planet-ring {
     position: absolute;
-    top: 30%;
-    left: 55%;
-    width: 4px;
-    height: 4px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 9px;
     border-radius: 50%;
-    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    border: 1.5px solid rgba(236, 212, 175, 0.58);
+    box-shadow: inset 0 0 2px rgba(255, 240, 214, 0.35);
 }
 
-/**
- * Quinta estrela cadente
- */
-body[data-theme="dark"] header .shooting-star-5 {
-    display: block;
-    position: absolute;
-    top: 20%;
-    left: 80%;
-    width: 4px;
-    height: 4px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-    border-radius: 50%;
-    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9);
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0;
-}
-
-/* Esconde estrelas cadentes no modo claro */
-body[data-theme="light"] header .shooting-star-2,
-body[data-theme="light"] header .shooting-star-3,
-body[data-theme="light"] header .shooting-star-4,
-body[data-theme="light"] header .shooting-star-5 {
-    display: none;
-}
-
-/* Classes para ativar animação via JavaScript */
-body[data-theme="dark"] header.shooting-star-1-active::before {
-    animation: shootingStar 3.5s ease-out forwards;
-}
-
-body[data-theme="dark"] header .shooting-star-2.shooting-star-2-active {
-    animation: shootingStar 3.5s ease-out forwards;
-}
-
-body[data-theme="dark"] header .shooting-star-3.shooting-star-3-active {
-    animation: shootingStar 3.5s ease-out forwards;
-}
-
-body[data-theme="dark"] header .shooting-star-4.shooting-star-4-active {
-    animation: shootingStar 3.5s ease-out forwards;
-}
-
-body[data-theme="dark"] header .shooting-star-5.shooting-star-5-active {
-    animation: shootingStar 3.5s ease-out forwards;
-}
-
-/**
- * Estrelas com brilho especial - algumas estrelas brilham mais que outras
- */
-[data-theme="dark"] header .star-bright-1,
-[data-theme="dark"] header .star-bright-2,
-[data-theme="dark"] header .star-bright-3 {
-    display: block;
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: white;
-    border-radius: 50%;
-    pointer-events: none;
+.planet-ring-back {
     z-index: 1;
 }
 
-[data-theme="dark"] header .star-bright-1 {
-    top: 25%;
-    left: 30%;
-    animation: starsBrightTwinkle 4s ease-in-out infinite;
+.planet-ring-front {
+    z-index: 3;
+    clip-path: inset(48% 0 0 0);
 }
 
-[data-theme="dark"] header .star-bright-2 {
-    top: 65%;
-    left: 75%;
-    animation: starsBrightTwinkle 4s ease-in-out infinite 1.3s;
+/* 2. Buraco Negro com disco de acreção (Doppler beaming) e lente gravitacional */
+.cosmic-blackhole {
+    position: absolute;
+    left: 53%;
+    top: 52%;
+    width: 58px;
+    height: 34px;
+    transform: translate(-50%, -50%);
+    animation: bhPulse 6s ease-in-out infinite alternate;
 }
 
-[data-theme="dark"] header .star-bright-3 {
-    top: 45%;
-    left: 55%;
-    animation: starsBrightTwinkle 4s ease-in-out infinite 2.6s;
+.bh-halo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: radial-gradient(
+        circle,
+        transparent 44%,
+        rgba(255, 200, 110, 0.42) 56%,
+        rgba(150, 13, 255, 0.34) 72%,
+        transparent 100%
+    );
 }
 
-/* Esconde estrelas especiais no modo claro */
-body[data-theme="light"] header .star-bright-1,
-body[data-theme="light"] header .star-bright-2,
-body[data-theme="light"] header .star-bright-3 {
+.bh-disk {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 52px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-13deg);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 228, 158, 0.1) 0%,
+        rgba(255, 228, 158, 0.92) 22%,
+        rgba(255, 165, 65, 0.78) 46%,
+        rgba(150, 13, 255, 0.62) 74%,
+        rgba(150, 13, 255, 0.08) 100%
+    );
+    -webkit-mask-image: radial-gradient(ellipse at center, transparent 34%, #000 42%, #000 94%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, transparent 34%, #000 42%, #000 94%, transparent 100%);
+}
+
+.bh-disk-back {
+    z-index: 1;
+}
+
+.bh-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background: #020207;
+    box-shadow: 0 0 0 1px rgba(255, 232, 175, 0.8), 0 0 6px 1px rgba(255, 165, 65, 0.5);
+}
+
+.bh-disk-front {
+    z-index: 3;
+    clip-path: inset(48% 0 0 0);
+}
+
+/* 3. Galáxia espiral inclinada */
+.cosmic-galaxy {
+    position: absolute;
+    left: 74%;
+    top: 48%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%) rotate(-22deg) scaleY(0.42);
+    opacity: 0.86;
+}
+
+.galaxy-arms {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 20deg,
+        rgba(176, 198, 255, 0.48) 0deg 45deg,
+        rgba(150, 13, 255, 0.06) 80deg 165deg,
+        rgba(208, 176, 255, 0.52) 180deg 225deg,
+        rgba(150, 13, 255, 0.06) 260deg 345deg,
+        rgba(176, 198, 255, 0.48) 360deg
+    );
+    -webkit-mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.72) 45%, transparent 72%);
+    mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.72) 45%, transparent 72%);
+    animation: galaxySpin 48s linear infinite;
+}
+
+.galaxy-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, #fff5dc 0%, rgba(255, 224, 150, 0.65) 45%, transparent 100%);
+    box-shadow: 0 0 10px 2px rgba(255, 240, 200, 0.45);
+}
+
+/* ============================================================================
+   METEOROS / ESTRELAS CADENTES (ALINHADOS À TRAJETÓRIA)
+   ============================================================================ */
+
+.shooting-star {
+    position: absolute;
+    width: 92px;
+    height: 1.5px;
+    opacity: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(180, 220, 255, 0.45) 55%, #ffffff 100%);
+    border-radius: 999px;
+    transform-origin: right center;
+}
+
+.shooting-star::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    box-shadow: 0 0 6px 1px #ffffff, 0 0 12px 2px rgba(150, 13, 255, 0.65);
+}
+
+.shooting-star-1 { top: 14%; left: 16%; }
+.shooting-star-2 { top: 20%; left: 38%; }
+.shooting-star-3 { top: 10%; left: 58%; }
+.shooting-star-4 { top: 24%; left: 72%; }
+.shooting-star-5 { top: 16%; left: 26%; }
+
+body[data-theme="dark"] .shooting-star-1.shooting-star-1-active,
+body[data-theme="dark"] .shooting-star-2.shooting-star-2-active,
+body[data-theme="dark"] .shooting-star-3.shooting-star-3-active,
+body[data-theme="dark"] .shooting-star-4.shooting-star-4-active,
+body[data-theme="dark"] .shooting-star-5.shooting-star-5-active {
+    animation: meteorStreak 1.4s ease-out forwards;
+}
+
+/* ============================================================================
+   MODO CLARO: CÉU ENSOLARADO (SOL, COROA, LENS FLARE, LUA DIURNA & NUVENS)
+   ============================================================================ */
+
+body[data-theme="light"] .sky-nebula,
+body[data-theme="light"] .sky-stars-far,
+body[data-theme="light"] .sky-stars-mid,
+body[data-theme="light"] .star-bright,
+body[data-theme="light"] .cosmic-planet,
+body[data-theme="light"] .cosmic-blackhole,
+body[data-theme="light"] .cosmic-galaxy,
+body[data-theme="light"] .shooting-star {
     display: none;
 }
 
-/**
- * Container para as nuvens no modo claro
- * Usa pseudo-elementos para criar nuvens estilo desenho animado
- */
-body[data-theme="light"] header::after,
-body[data-theme="light"] header::before {
-    pointer-events: none;
-    z-index: 0;
+.sky-dayglow,
+.cosmic-daymoon,
+.cosmic-sun,
+.sun-flare,
+.sky-cloud {
+    display: none;
 }
 
-/**
- * Primeira nuvem - estilo cartoon grande com cores do portfólio
- * Branca com toques sutis de roxo e amarelo (cores do tema)
- */
-body[data-theme="light"] header::after {
-    content: '';
-    position: absolute;
-    top: 20%;
-    left: 15%;
-    width: 70px;
-    height: 70px;
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 50%;
-    filter: drop-shadow(0 2px 8px rgba(150, 13, 255, 0.15)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.08));
-    
-    /* Cria formato de nuvem cartoon com círculos sobrepostos */
-    box-shadow:
-        /* Círculo central maior - branco puro */
-        35px 0 0 0 rgba(255, 255, 255, 0.92),
-        /* Círculos nas laterais - toque roxo */
-        -28px 7px 0 -7px rgba(250, 245, 255, 0.88),
-        70px 7px 0 -7px rgba(250, 245, 255, 0.88),
-        /* Círculo superior (topo da nuvem) - toque amarelo */
-        17px -21px 0 -3px rgba(255, 252, 240, 0.90),
-        49px -17px 0 -7px rgba(255, 252, 240, 0.88),
-        /* Base da nuvem (mais larga) - roxo clarinho */
-        17px 28px 0 7px rgba(248, 245, 255, 0.85),
-        42px 28px 0 4px rgba(248, 245, 255, 0.82);
-    
-    /* Animação de flutuação */
-    animation: cloudFloat1 30s linear infinite;
+body[data-theme="light"] .sky-dayglow,
+body[data-theme="light"] .cosmic-daymoon,
+body[data-theme="light"] .cosmic-sun,
+body[data-theme="light"] .sun-flare,
+body[data-theme="light"] .sky-cloud {
+    display: block;
 }
 
-/**
- * Segunda nuvem - estilo cartoon menor com cores do tema
- * Branca com toques de amarelo e roxo nas extremidades
- */
-body[data-theme="light"] header::before {
-    content: '';
+/* Brilho atmosférico e raios crepusculares sutis */
+.sky-dayglow {
     position: absolute;
-    top: 40%;
+    inset: -15% -5%;
+    background-image:
+        radial-gradient(ellipse 38% 120% at 14% 35%, rgba(52, 148, 255, 0.24) 0%, transparent 72%),
+        radial-gradient(ellipse 36% 125% at 66% 42%, rgba(255, 214, 102, 0.36) 0%, rgba(255, 240, 178, 0.16) 45%, transparent 75%),
+        linear-gradient(118deg, transparent 36%, rgba(255, 248, 214, 0.20) 47%, rgba(255, 255, 255, 0.06) 56%, transparent 66%),
+        linear-gradient(126deg, transparent 54%, rgba(255, 244, 198, 0.16) 62%, transparent 72%);
+    animation: dayGlowPulse 14s ease-in-out infinite alternate;
+}
+
+/* Sol com coroa solar giratória, halo e fotosfera */
+.cosmic-sun {
+    position: absolute;
     left: 65%;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.88);
+    top: 44%;
+    width: 54px;
+    height: 54px;
+    transform: translate(-50%, -50%);
+}
+
+.sun-rays {
+    position: absolute;
+    inset: 0;
     border-radius: 50%;
-    filter: drop-shadow(0 2px 7px rgba(255, 210, 29, 0.14)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.07));
-    
-    /* Formato de nuvem menor */
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 224, 118, 0.42) 0deg 14deg,
+        transparent 22deg 45deg,
+        rgba(255, 242, 186, 0.36) 52deg 66deg,
+        transparent 74deg 90deg,
+        rgba(255, 224, 118, 0.42) 98deg 112deg,
+        transparent 120deg 135deg,
+        rgba(255, 242, 186, 0.36) 142deg 156deg,
+        transparent 164deg 180deg,
+        rgba(255, 224, 118, 0.42) 188deg 202deg,
+        transparent 210deg 225deg,
+        rgba(255, 242, 186, 0.36) 232deg 246deg,
+        transparent 254deg 270deg,
+        rgba(255, 224, 118, 0.42) 278deg 292deg,
+        transparent 300deg 315deg,
+        rgba(255, 242, 186, 0.36) 322deg 336deg,
+        transparent 344deg 360deg
+    );
+    -webkit-mask-image: radial-gradient(circle, transparent 22%, #000 34%, rgba(0, 0, 0, 0.55) 62%, transparent 92%);
+    mask-image: radial-gradient(circle, transparent 22%, #000 34%, rgba(0, 0, 0, 0.55) 62%, transparent 92%);
+    animation: sunRaysSpin 55s linear infinite;
+}
+
+.sun-halo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 244, 184, 0.8) 0%,
+        rgba(255, 210, 82, 0.44) 48%,
+        rgba(255, 178, 60, 0.14) 76%,
+        transparent 100%
+    );
+    animation: sunPulse 5.5s ease-in-out infinite alternate;
+}
+
+.sun-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 42% 40%, #ffffff 0%, #fff8d6 45%, #ffd21d 82%, #ffa928 100%);
     box-shadow:
-        /* Círculo central - branco */
-        26px 0 0 -3px rgba(255, 255, 255, 0.88),
-        /* Laterais - toque roxo */
-        -17px 4px 0 -7px rgba(252, 248, 255, 0.84),
-        50px 4px 0 -10px rgba(252, 248, 255, 0.84),
-        /* Topo - amarelo claro */
-        12px -14px 0 -4px rgba(255, 253, 240, 0.87),
-        31px -11px 0 -8px rgba(255, 253, 242, 0.84),
-        /* Base - roxo muito claro */
-        13px 20px 0 3px rgba(250, 248, 255, 0.80),
-        28px 20px 0 1px rgba(250, 248, 255, 0.78);
-    
-    /* Animação mais lenta */
-    animation: cloudFloat2 40s linear infinite;
+        0 0 12px 3px rgba(255, 228, 118, 0.85),
+        0 0 26px 8px rgba(255, 194, 58, 0.42);
 }
 
-/**
- * Animação de flutuação da primeira nuvem
- * Movimento suave da esquerda para direita com oscilação vertical
- * Scale para criar profundidade e sensação de flutuação
- */
-@keyframes cloudFloat1 {
+/* Reflexos ópticos sutis alinhados na diagonal do Sol */
+.sun-flare {
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sun-flare-1 {
+    left: 53%;
+    top: 66%;
+    width: 11px;
+    height: 11px;
+    background: radial-gradient(circle, rgba(205, 175, 255, 0.34) 0%, rgba(160, 215, 255, 0.16) 62%, transparent 100%);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.24);
+}
+
+.sun-flare-2 {
+    left: 45%;
+    top: 76%;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, rgba(255, 232, 165, 0.42) 0%, transparent 100%);
+}
+
+/* Lua crescente diurna com face iluminada voltada para o Sol */
+.cosmic-daymoon {
+    position: absolute;
+    left: 29%;
+    top: 42%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-12deg);
+    box-shadow: inset -4px 0 0 0 rgba(255, 255, 255, 0.78);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.45));
+    opacity: 0.78;
+}
+
+/* Nuvens iluminadas pelo sol em 3 camadas de profundidade */
+.sky-cloud {
+    position: absolute;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(235, 245, 255, 0.86) 100%);
+    box-shadow:
+        inset 0 -3px 6px rgba(96, 158, 232, 0.24),
+        0 4px 14px rgba(55, 125, 210, 0.14);
+}
+
+.sky-cloud::before,
+.sky-cloud::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(242, 248, 255, 0.90) 100%);
+}
+
+.sky-cloud-1 {
+    top: 26%;
+    left: -130px;
+    width: 78px;
+    height: 22px;
+    animation: cloudDrift 42s linear infinite;
+}
+
+.sky-cloud-1::before {
+    width: 34px;
+    height: 34px;
+    top: -15px;
+    left: 12px;
+}
+
+.sky-cloud-1::after {
+    width: 24px;
+    height: 24px;
+    top: -10px;
+    left: 38px;
+}
+
+.sky-cloud-2 {
+    top: 56%;
+    left: -160px;
+    width: 56px;
+    height: 16px;
+    background: linear-gradient(180deg, rgba(255, 252, 240, 0.94) 0%, rgba(246, 244, 238, 0.84) 100%);
+    opacity: 0.82;
+    animation: cloudDrift 58s linear -21s infinite;
+}
+
+.sky-cloud-2::before {
+    width: 24px;
+    height: 24px;
+    top: -10px;
+    left: 10px;
+    background: rgba(255, 252, 240, 0.92);
+}
+
+.sky-cloud-2::after {
+    width: 18px;
+    height: 18px;
+    top: -7px;
+    left: 28px;
+    background: rgba(255, 252, 240, 0.90);
+}
+
+.sky-cloud-3 {
+    top: 18%;
+    left: -200px;
+    width: 110px;
+    height: 7px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.72) 40%, rgba(255, 248, 224, 0.65) 75%, transparent 100%);
+    box-shadow: none;
+    filter: blur(1.2px);
+    opacity: 0.55;
+    animation: cloudDrift 74s linear -44s infinite;
+}
+
+.sky-cloud-3::before,
+.sky-cloud-3::after {
+    content: none;
+}
+
+/* ============================================================================
+   KEYFRAMES
+   ============================================================================ */
+
+@keyframes nebulaDrift {
     0% {
-        left: -10%;
-        transform: translateY(0) scale(1);
-        opacity: 0;
-    }
-    5% {
-        opacity: 1;
-    }
-    20% {
-        transform: translateY(-6px) scale(1.05);
-    }
-    40% {
-        transform: translateY(0) scale(1);
-    }
-    60% {
-        transform: translateY(-5px) scale(1.03);
-    }
-    80% {
-        transform: translateY(0) scale(1);
-    }
-    95% {
-        opacity: 1;
+        transform: translate3d(-1.5%, 0, 0) scale(1);
+        opacity: 0.85;
     }
     100% {
-        left: 120%;
-        transform: translateY(-3px) scale(0.95);
+        transform: translate3d(1.5%, 0, 0) scale(1.04);
+        opacity: 1;
+    }
+}
+
+@keyframes twinkleFar {
+    0% {
+        opacity: 0.65;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes twinkleMid {
+    0% {
+        opacity: 0.72;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes diffractionTwinkle {
+    0%, 100% {
+        opacity: 0.55;
+        transform: scale(0.88);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.12);
+    }
+}
+
+@keyframes bhPulse {
+    0% {
+        filter: drop-shadow(0 0 3px rgba(255, 195, 95, 0.25));
+    }
+    100% {
+        filter: drop-shadow(0 0 7px rgba(150, 13, 255, 0.42));
+    }
+}
+
+@keyframes galaxySpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes meteorStreak {
+    0% {
+        transform: rotate(22deg) translate3d(-40px, 0, 0) scaleX(0.45);
+        opacity: 0;
+    }
+    14% {
+        opacity: 1;
+    }
+    76% {
+        opacity: 0.95;
+    }
+    100% {
+        transform: rotate(22deg) translate3d(238px, 0, 0) scaleX(1);
         opacity: 0;
     }
 }
 
-/**
- * Animação de flutuação da segunda nuvem
- * Velocidade diferente e padrão de movimento variado
- */
-@keyframes cloudFloat2 {
+@keyframes cloudDrift {
     0% {
-        left: -16%;
-        transform: translateY(0) scale(1);
+        transform: translate3d(0, 0, 0);
         opacity: 0;
     }
-    5% {
-        opacity: 1;
+    8% {
+        opacity: 0.85;
     }
-    25% {
-        transform: translateY(-7px) scale(1.06);
-    }
-    45% {
-        transform: translateY(0) scale(1);
-    }
-    65% {
-        transform: translateY(-6px) scale(1.04);
-    }
-    85% {
-        transform: translateY(0) scale(1);
-    }
-    95% {
-        opacity: 1;
+    92% {
+        opacity: 0.85;
     }
     100% {
-        left: 118%;
-        transform: translateY(-4px) scale(0.96);
+        transform: translate3d(calc(100vw + 220px), 0, 0);
         opacity: 0;
+    }
+}
+
+@keyframes dayGlowPulse {
+    0% {
+        opacity: 0.85;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(1%, -1%, 0) scale(1.03);
+    }
+}
+
+@keyframes sunRaysSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes sunPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.86;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.08);
+        opacity: 1;
     }
 }
 
 /* ============================================================================
-   AJUSTES RESPONSIVOS
+   RESPONSIVIDADE & ACESSIBILIDADE
    ============================================================================ */
 
-/**
- * Em telas pequenas, reduz o tamanho dos efeitos
- */
 @media (max-width: 768px) {
-    /* Reduz área dos efeitos em mobile */
-    header::before {
-        width: 40%;
+    .cosmic-planet,
+    .cosmic-galaxy,
+    body[data-theme="light"] .cosmic-daymoon,
+    body[data-theme="light"] .sun-flare {
+        display: none;
     }
-    
-    /* Estrelas menores em mobile */
-    body[data-theme="dark"] header::after {
-        transform: translate(-50%, -50%) scale(0.7);
+
+    .cosmic-blackhole {
+        left: 56%;
+        transform: translate(-50%, -50%) scale(0.88);
     }
-    
-    /* Estrelas cadentes proporcionalmente mais rápidas em mobile */
-    body[data-theme="dark"] header::before,
-    body[data-theme="dark"] header .shooting-star-2,
-    body[data-theme="dark"] header .shooting-star-3,
-    body[data-theme="dark"] header .shooting-star-4,
-    body[data-theme="dark"] header .shooting-star-5 {
-        animation-duration: 2.8s;
-    }
-    
-    /* Estrelas especiais menores */
-    body[data-theme="dark"] header .star-bright-1,
-    body[data-theme="dark"] header .star-bright-2,
-    body[data-theme="dark"] header .star-bright-3 {
-        width: 2px;
-        height: 2px;
-    }
-    
-    /* Nuvens ajustadas para mobile - ainda visíveis mas não dominantes */
-    body[data-theme="light"] header::after {
-        width: 55px;
-        height: 55px;
-        top: 25%;
-    }
-    
-    body[data-theme="light"] header::before {
-        width: 40px;
-        height: 40px;
-        top: 45%;
+
+    .cosmic-sun {
+        left: 60%;
+        transform: translate(-50%, -50%) scale(0.88);
     }
 }
 
-/**
- * Para usuários que preferem movimento reduzido
- * Remove animações para acessibilidade
- */
+@media (max-width: 576px) {
+    .cosmic-blackhole,
+    .star-bright-4,
+    .star-bright-5,
+    body[data-theme="light"] .cosmic-sun,
+    body[data-theme="light"] .sky-cloud-3,
+    .brand-sub {
+        display: none;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    body[data-theme="dark"] header::after {
-        animation: none;
-        opacity: 0.8;
+    .sky-nebula,
+    .sky-stars-far,
+    .sky-stars-mid,
+    .star-bright,
+    .cosmic-blackhole,
+    .galaxy-arms,
+    .sky-dayglow,
+    .sun-rays,
+    .sun-halo,
+    .sky-cloud {
+        animation: none !important;
     }
-    
-    body[data-theme="dark"] header::before,
-    body[data-theme="dark"] header .shooting-star-2,
-    body[data-theme="dark"] header .shooting-star-3,
-    body[data-theme="dark"] header .shooting-star-4,
-    body[data-theme="dark"] header .shooting-star-5 {
-        animation: none;
-        opacity: 0;
+
+    .shooting-star {
+        animation: none !important;
+        opacity: 0 !important;
     }
-    
-    body[data-theme="dark"] header .star-bright-1,
-    body[data-theme="dark"] header .star-bright-2,
-    body[data-theme="dark"] header .star-bright-3 {
-        animation: none;
-        filter: brightness(1.5);
-    }
-    
-    body[data-theme="light"] header::after,
-    body[data-theme="light"] header::before {
-        animation: none;
-    }
-    
-    body[data-theme="light"] header {
-        animation: none;
+
+    .brand-orbit {
+        transition: none;
     }
 }

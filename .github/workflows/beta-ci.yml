@@ -144,8 +144,8 @@ jobs:
           fi
           
           # Verifica Service Worker
-          if [ ! -f "assets/config/sw.js" ]; then
-            echo "assets/config/sw.js não encontrado"
+          if [ ! -f "sw.js" ]; then
+            echo "sw.js não encontrado"
           fi
           
           # Verifica scripts principais

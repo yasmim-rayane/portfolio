@@ -6,6 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yasmim Rayane">
+    <meta name="description" content="Yasmim Rayane: Computer Engineering student focused on data engineering, process automation, AI, and autonomous robotics.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Yasmim Rayane | Data, Automation &amp; AI">
+    <meta property="og:description" content="Computer Engineering student focused on data engineering, process automation, AI, and autonomous robotics.">
+    <meta property="og:url" content="https://yasmim-rayane.github.io/portfolio/">
+    <meta property="og:image" content="https://yasmim-rayane.github.io/portfolio/assets/images/foto.jpeg">
+    <meta name="twitter:card" content="summary">
     <title>Yasmim Rayane</title>
 
     <!-- Custom CSS -->
@@ -22,18 +29,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/Rainbow Marble.ico">
     <link rel="manifest" href="assets/config/site.webmanifest">
     <meta name="theme-color" content="#0d0d0d" id="meta-theme-color">
-    <script type="module" src="assets/script/script.js?v=3" defer></script>
+    <script type="module" src="assets/script/script.js?v=6" defer></script>
     <script type="module" src="assets/script/api-github.js" defer></script>
     <script src="assets/script/shooting-stars.js" defer></script>
 </head>
 
-<!-- data-theme controls dark/light mode. Toggle handled by script.js (not used yet) -->
+<!-- data-theme controls dark/light mode. Toggle handled by script.js -->
 
 <body data-theme="dark">
     <!-- Offline banner -->
@@ -51,25 +58,78 @@
     </div>
 
     <!-- Header with language/theme toggles -->
-    <header class="fixed-top shadow-sm py-2 px-4 d-flex justify-content-between align-items-center">
-        <!-- Estrelas com brilho especial (apenas no modo escuro) -->
-        <span class="star-bright-1"></span>
-        <span class="star-bright-2"></span>
-        <span class="star-bright-3"></span>
-        <!-- Estrelas cadentes (5 estrelas em alternância) -->
-        <span class="shooting-star-2"></span>
-        <span class="shooting-star-3"></span>
-        <span class="shooting-star-4"></span>
-        <span class="shooting-star-5"></span>
-        
-        <h1 class="mb-0"
-            style="font-family: 'Inconsolata', sans-serif; color: var(--accent); font-size: 1.7rem; font-weight: 900;">
-            Yasmim
-        </h1>
-        <!-- Language and theme toggle buttons. Implement logic in script.js -->
+    <header class="fixed-top py-2 px-4 d-flex justify-content-between align-items-center">
+        <!-- Cenário celeste 100% CSS (estrelas, nebulosa, objetos cósmicos no modo escuro; nuvens no modo claro) -->
+        <div class="header-sky" aria-hidden="true">
+            <div class="sky-nebula"></div>
+            <div class="sky-stars-far"></div>
+            <div class="sky-stars-mid"></div>
+
+            <!-- Estrelas brilhantes com pontas de difração -->
+            <span class="star-bright star-bright-1"></span>
+            <span class="star-bright star-bright-2"></span>
+            <span class="star-bright star-bright-3"></span>
+            <span class="star-bright star-bright-4"></span>
+            <span class="star-bright star-bright-5"></span>
+
+            <!-- Planeta com anéis (Saturno) -->
+            <div class="cosmic-planet">
+                <span class="planet-ring planet-ring-back"></span>
+                <span class="planet-body"></span>
+                <span class="planet-ring planet-ring-front"></span>
+            </div>
+
+            <!-- Buraco negro com disco de acreção e lente gravitacional -->
+            <div class="cosmic-blackhole">
+                <span class="bh-halo"></span>
+                <span class="bh-disk bh-disk-back"></span>
+                <span class="bh-core"></span>
+                <span class="bh-disk bh-disk-front"></span>
+            </div>
+
+            <!-- Galáxia espiral inclinada -->
+            <div class="cosmic-galaxy">
+                <span class="galaxy-arms"></span>
+                <span class="galaxy-core"></span>
+            </div>
+
+            <!-- Meteoros / estrelas cadentes (5 trajetórias alternadas via shooting-stars.js) -->
+            <span class="shooting-star shooting-star-1"></span>
+            <span class="shooting-star shooting-star-2"></span>
+            <span class="shooting-star shooting-star-3"></span>
+            <span class="shooting-star shooting-star-4"></span>
+            <span class="shooting-star shooting-star-5"></span>
+
+            <!-- Céu diurno ensolarado (apenas no modo claro) -->
+            <div class="sky-dayglow"></div>
+            <span class="cosmic-daymoon"></span>
+            <div class="cosmic-sun">
+                <span class="sun-rays"></span>
+                <span class="sun-halo"></span>
+                <span class="sun-core"></span>
+            </div>
+            <span class="sun-flare sun-flare-1"></span>
+            <span class="sun-flare sun-flare-2"></span>
+            <span class="sky-cloud sky-cloud-1"></span>
+            <span class="sky-cloud sky-cloud-2"></span>
+            <span class="sky-cloud sky-cloud-3"></span>
+        </div>
+
+        <!-- Assinatura minimalista inspirada em astronomia -->
+        <a href="#" id="headerBrand" class="header-brand" aria-label="Yasmim Rayane: Back to top">
+            <span class="brand-orbit" aria-hidden="true">
+                <span class="brand-star"></span>
+            </span>
+            <span class="brand-text">
+                <span class="brand-title">ad astra</span>
+                <span class="brand-sub">yasmim · 23°57'S 46°20'W</span>
+            </span>
+        </a>
+
+        <!-- Language and theme toggle buttons (disposição preservada na lateral direita) -->
         <nav class="d-flex gap-2 align-items-center">
-            <button id="langToggle" class="header-button btn p-0 bg-transparent border-0" title="Change language"
-                aria-label="Change language">
+            <button id="langToggle" class="header-button btn p-0 bg-transparent border-0" title="Switch to Portuguese"
+                aria-label="Switch to Portuguese">
                 <img id="langFlag" src="assets/images/icons/usa-flag.svg" alt="Switch to Portuguese"
                     class="language-button" loading="lazy">
             </button>
@@ -88,45 +148,52 @@
 
         <section id="about-me" class="row align-items-center rounded-5 mb-5">
             <div class="col-md-6 mb-4 mb-md-0">
-                <h2 class="fs-3" style="user-select: none;">
+                <h1 class="fs-3" style="user-select: none;">
                     <span style="color: var(--text-tertiary); font-weight: 600;"
                         data-i18n-html="hello">&lt;Hello/&gt;</span>, <span data-i18n="im">I'm</span><br>
                     <strong>
                         <span class="effect-yellow" style="font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;"
                             data-i18n="name">Yasmim Rayane</span>
                     </strong><br>
-                    <span data-i18n="role">UI/UX Designer & Front-end Developer</span>
-                </h2>
+                    <span data-i18n="role">Data Intern @ DP World</span>
+                </h1>
                 <p>
                     <span data-i18n-html="about">
-                        Web Developer focused on performance, security, and design.<br>
+                        Focused on data engineering, process automation, AI, and autonomous robotics.<br>
                         Bachelor’s Degree in Computer Engineering at Universidade Santa Cecília.<br>
                     </span>
                     <span style="font-size: 0.95rem; color: var(--text-secondary);" data-i18n="semester">
-                        3rd of 10 semesters
+                        4th of 10 semesters
                     </span>
                 </p>
                 <div class="skills mb-3">
+                    <span class="skill">Python</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">Databricks</span>
+                    <span class="skill">SQL Server</span>
+                    <span class="skill">Power BI</span>
+                    <span class="skill">Power Platform</span>
+                    <span class="skill">Dynamics 365</span>
+
+                    <span class="skill">C++</span>
+                    <span class="skill">Docker</span>
+                    <span class="skill">ROS 2</span>
+                    <span class="skill">LLMs / RAG</span>
+                    <span class="skill">Computer Vision</span>
+                    <span class="skill">Git</span>
+
+                    <span class="skill">TypeScript</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Node.js</span>
+                    <span class="skill">React</span>
                     <span class="skill">HTML5</span>
                     <span class="skill">CSS3</span>
-                    <span class="skill">JavaScript</span>
                     <span class="skill">Sass</span>
                     <span class="skill">Bootstrap</span>
 
-                    <span class="skill">Python</span>
-                    <span class="skill">C++</span>
-                    <span class="skill">SQL</span>
-
+                    <span class="skill">Figma</span>
                     <span class="skill">Adobe Illustrator</span>
                     <span class="skill">Adobe Photoshop</span>
-                    <span class="skill">Figma</span>
-
-                    <span class="skill">Power BI</span>
-                    <span class="skill">Power Apps</span>
-                    <span class="skill">Power Automate</span>
-
-                    <span class="skill">DAX</span>
-                    <span class="skill">M</span>
                 </div>
                 <div class="d-flex align-items-center gap-3">
                     <a href="assets/docs/Curriculo_Yasmim_Rayane.pdf" download
@@ -159,37 +226,96 @@
                                 <span><i class="fa-solid fa-circle circle yellow"></i></span>
                                 <span><i class="fa-solid fa-circle circle green"></i></span>
                             </div>
-                            <span class="portfolio-title">portfolio.tsx</span>
+                            <span class="portfolio-title">profile.ts</span>
                         </div>
                         <span class="portfolio-title">VS Code</span>
                     </div>
                     <div class="mini-prompt">
-                        <span class="var">const</span> <span class="name" data-i18n="mpConst">developer</span> <span
+                        <span class="var">const</span> <span class="name" data-i18n="mpConst">profile</span> <span
                             class="eq">=</span>
                         {<br>
                         <div class="indent">
                             <span class="key" data-i18n="mpKeyName">name</span><span class="eq">:</span> <span
                                 class="string" data-i18n="mpNameVal">'Yasmim Rayane'</span>,<br>
-                            <span class="key" data-i18n="mpKeyRole">role</span><span class="eq">:</span> <span
-                                class="string" data-i18n="mpRoleVal">'UI/UX Designer &amp; Developer'</span>,<br>
-                            <span class="key" data-i18n="mpKeySkills">skills</span><span class="eq">:</span> [
-                            <span class="array" data-i18n="mpSkillBootstrap">'Bootstrap'</span>, <span class="array"
-                                data-i18n="mpSkillSass">'Sass'</span>,
-                            <span class="array" data-i18n="mpSkillFigma">'Figma'</span>, <span class="array"
-                                data-i18n="mpSkillDesignSystems">'Design'</span>
+                            <span class="key" data-i18n="mpKeyRole">focus</span><span class="eq">:</span> <span
+                                class="string" data-i18n="mpRoleVal">'Data, Automation &amp; AI'</span>,<br>
+                            <span class="key" data-i18n="mpKeySkills">stack</span><span class="eq">:</span> [
+                            <span class="array" data-i18n="mpSkill1">'Python'</span>, <span class="array"
+                                data-i18n="mpSkill2">'SQL'</span>,
+                            <span class="array" data-i18n="mpSkill3">'Databricks'</span>, <span class="array"
+                                data-i18n="mpSkill4">'AI &amp; Robotics'</span>
                             ],<br>
-                            <span class="key" data-i18n="mpKeyPassion">passion</span><span class="eq">:</span> <span
-                                class="string" data-i18n="mpPassionVal">'Creating beautiful UX'</span>,<br>
+                            <span class="key" data-i18n="mpKeyPassion">interests</span><span class="eq">:</span> <span
+                                class="string" data-i18n="mpPassionVal">'AI &amp; Autonomous Robotics'</span>,<br>
                             <span class="key" data-i18n="mpKeyStatus">status</span><span class="eq">:</span> <span
-                                class="string" data-i18n="mpStatusVal">'Intern @ APS'</span>
+                                class="string" data-i18n="mpStatusVal">'Data Intern @ DP World'</span>
                             <span class="typewriter"></span>
                         </div>
                         }<br><br>
                         <span class="export">export</span> <span class="var">default</span> <span
-                            class="name" data-i18n="mpConst">developer</span>;
+                            class="name" data-i18n="mpConst">profile</span>;
                     </div>
                     <div class="mini-prompt-footer d-flex justify-content-between align-items-center px-3 py-1">
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="mb-5">
+            <h2 class="effect-yellow section-title" data-i18n="experienceTitle">Experience</h2>
+            <div class="timeline">
+                <article class="timeline-item timeline-item--current">
+                    <h3 class="timeline-role" data-i18n="expDpWorldRole">Data Intern in Operational Excellence &amp; Innovation</h3>
+                    <p class="timeline-meta" data-i18n="expDpWorldPeriod">DP World · Jul 2026 – Present</p>
+                    <p class="timeline-desc" data-i18n="expDpWorldDesc">Data pipelines and process automation on Microsoft Power Platform (Power Automate, Dataverse) and Dynamics 365, complex SQL queries, data lake processing with Databricks, and interactive Power BI dashboards.</p>
+                </article>
+                <article class="timeline-item">
+                    <h3 class="timeline-role" data-i18n="expApsRole">Data Intern in IT Governance</h3>
+                    <p class="timeline-meta" data-i18n="expApsPeriod">Autoridade Portuária de Santos (APS) · Nov 2025 – Jun 2026 (8 mos)</p>
+                    <p class="timeline-desc" data-i18n="expApsDesc">Data modeling and analysis in Power BI (DAX &amp; M), operational workflow automation with Power Automate and Dataverse, Power Apps prototyping, IT environment governance, and technical documentation.</p>
+                </article>
+                <article class="timeline-item">
+                    <h3 class="timeline-role" data-i18n="expDeicmarRole">Customs Apprentice</h3>
+                    <p class="timeline-meta" data-i18n="expDeicmarPeriod">Bandeirantes Deicmar · Sep 2024 – Oct 2025 (1 yr 2 mos)</p>
+                    <p class="timeline-desc" data-i18n="expDeicmarDesc">Operational and administrative support in customs routines (Registration, Endorsement, GPDI, Deconsolidation, and API Recintos) and physical/digital document management.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="highlights" class="mb-5">
+            <h2 class="effect-yellow section-title" data-i18n="highlightsTitle">Research, Publications &amp; Awards</h2>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <article class="highlight-card h-100">
+                        <span class="highlight-badge" data-i18n="hlLiaBadge">Research</span>
+                        <h3 class="highlight-title" data-i18n="hlLiaTitle">Autonomous Robot Lia</h3>
+                        <p class="timeline-meta highlight-meta" data-i18n="hlLiaMeta">Mar 2026 – Present</p>
+                        <p class="highlight-desc" data-i18n="hlLiaDesc">Leading a 7-member multidisciplinary team in software architecture, backend, real-time communication, AI integration (Ollama LLMs, RAG, intent classification), computer vision, speech synthesis, ROS 2 (Python/C++), Docker, and Gazebo.</p>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="highlight-card h-100">
+                        <span class="highlight-badge" data-i18n="hlConicBadge">Publication</span>
+                        <h3 class="highlight-title" data-i18n="hlConicTitle">Digital Handgrip Dynamometer</h3>
+                        <p class="highlight-meta" data-i18n="hlConicMeta">26th National Congress of Scientific Initiation (CONIC) · 2026</p>
+                        <p class="highlight-desc" data-i18n="hlConicDesc">ESP32-based digital dynamometer with Bluetooth, mobile app, and cloud integration to track handgrip strength measurements for physical rehabilitation.</p>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="highlight-card h-100">
+                        <span class="highlight-badge" data-i18n="hlCobricBadge">Publication</span>
+                        <h3 class="highlight-title" data-i18n="hlCobricTitle">Computer Vision-Controlled Robotic Hand</h3>
+                        <p class="highlight-meta" data-i18n="hlCobricMeta">18th Brazilian Congress of Scientific Initiation (COBRIC) · 2026</p>
+                        <p class="highlight-desc" data-i18n="hlCobricDesc">Assistive and educational robotic hand using Python image processing integrated with Arduino to control five servomotors for finger movement.</p>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="highlight-card h-100">
+                        <span class="highlight-badge" data-i18n="hlHackathonBadge">Award</span>
+                        <h3 class="highlight-title" data-i18n="hlHackathonTitle">🥇 1st Place at ConstruInova Litoral Hackathon</h3>
+                        <p class="highlight-meta" data-i18n="hlHackathonMeta">Oct 2025</p>
+                        <p class="highlight-desc" data-i18n="hlHackathonDesc">First place award in the ConstruInova Litoral innovation hackathon.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -201,15 +327,13 @@
                 <!-- GitHub projects will be inserted here -->
             </ol>
             <span class="see-projects">
-                <a href="https://github.com/yasmim-rayane" target="_blank" data-i18n="viewAll">View all my works...</a>
+                <a href="https://github.com/yasmim-rayane" target="_blank" rel="noopener noreferrer" data-i18n="viewAll">View all my works...</a>
             </span>
         </section>
 
         <section id="contact" class="mb-5">
             <h2 class="effect-yellow section-title" data-i18n="contact">Get in Touch</h2>
-            <p data-i18n="contactText">I'm always open to discussing new opportunities, interesting projects, or just
-                having a chat about web
-                development and design. Feel free to reach out!</p>
+            <p data-i18n="contactText">Have an opportunity, an interesting project, or want to chat about data, automation, AI, or engineering? Send me a message below!</p>
             <div class="contact-form container-fluid">
                 <!-- Contact form uses Formspree. Validate inputs and check privacy policy. -->
                 <form action="https://formspree.io/f/xblaerpd" method="POST">
@@ -240,9 +364,9 @@
 
     <hr>
 
-    <!-- Footer: update year as needed. -->
+    <!-- Footer: year updated automatically by translation.js / script.js -->
     <footer class="text-center py-4">
-        <p class="mb-0" data-i18n-html="footer">&copy; 0123 Yasmim Rayane.</p>
+        <p class="mb-0" data-i18n-html="footer">&copy; 2026 Yasmim Rayane.</p>
     </footer>
 
     <noscript>

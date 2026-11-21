@@ -2,99 +2,85 @@
  * =============================================================================
  * Shooting Stars Controller
  * =============================================================================
- * 
- * Controla a animação das estrelas cadentes no header do portfólio.
- * Garante que apenas uma estrela caia por vez, em ordem alternada.
- * 
- * Sistema de 5 estrelas que caem em sequência alternada.
+ *
+ * Controla a animação dos meteoros / estrelas cadentes no header do portfólio.
+ * Garante que apenas um meteoro cruze o céu por vez, em ordem alternada,
+ * respeitando o tema escuro e a preferência de movimento reduzido.
  * =============================================================================
  */
 
-// Variáveis globais
 let currentStar = 1;
-const ANIMATION_DURATION = 3500; // 3.5 segundos
-const PAUSE_BETWEEN_STARS = 4000; // 4 segundos
-const INITIAL_DELAY = 3000; // 3 segundos
-const TOTAL_STARS = 5; // Total de estrelas cadentes
+const ANIMATION_DURATION = 1500; // 1.5s (sincronizado com @keyframes meteorStreak)
+const INITIAL_DELAY = 1800; // 1.8s após carregar
+const TOTAL_STARS = 5;
 
-// Cache dos elementos (evita múltiplas consultas ao DOM)
 let cachedElements = null;
 
-/**
- * Inicializa e armazena referências dos elementos
- */
 function cacheElements() {
     if (cachedElements) return cachedElements;
-    
+
     cachedElements = {
         header: document.querySelector('header'),
         stars: [
-            null, // Index 0 não usado (estrelas começam de 1)
-            document.querySelector('header'), // Estrela 1 usa ::before do header
+            null,
+            document.querySelector('.shooting-star-1'),
             document.querySelector('.shooting-star-2'),
             document.querySelector('.shooting-star-3'),
             document.querySelector('.shooting-star-4'),
             document.querySelector('.shooting-star-5')
         ]
     };
-    
+
     return cachedElements;
 }
 
-/**
- * Anima uma estrela cadente
- */
+function getNextPauseDelay() {
+    return 3200 + Math.floor(Math.random() * 2600);
+}
+
 function animateShootingStar(starNumber) {
     const elements = cacheElements();
-    
     if (!elements.header) return;
-    
-    // Verifica se está no modo escuro
+
     if (document.body.getAttribute('data-theme') !== 'dark') {
-        setTimeout(() => animateShootingStar(starNumber), 1000);
+        setTimeout(() => animateShootingStar(starNumber), 1200);
         return;
     }
-    
-    // Pega o elemento e classe correspondente
+
     const element = elements.stars[starNumber];
     const className = `shooting-star-${starNumber}-active`;
-    
+
     if (!element) return;
-    
-    // Adiciona classe para animar
+
     element.classList.add(className);
-    
-    // Remove após animação terminar e agenda a próxima estrela
+
     setTimeout(() => {
         element.classList.remove(className);
-        
+
         setTimeout(() => {
-            currentStar = (currentStar % TOTAL_STARS) + 1; // Cicla de 1 a 5
+            currentStar = (currentStar % TOTAL_STARS) + 1;
             animateShootingStar(currentStar);
-        }, PAUSE_BETWEEN_STARS);
+        }, getNextPauseDelay());
     }, ANIMATION_DURATION);
 }
 
-/**
- * Inicializa o sistema de estrelas cadentes
- */
 function initShootingStars() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
     const elements = cacheElements();
     if (!elements.header) return;
-    
-    // Aguarda delay inicial e inicia
+
     setTimeout(() => {
         animateShootingStar(1);
     }, INITIAL_DELAY);
 }
 
-// Aguarda DOM estar pronto antes de inicializar
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(initShootingStars, 500);
+        setTimeout(initShootingStars, 400);
     });
 } else {
-    setTimeout(initShootingStars, 500);
+    setTimeout(initShootingStars, 400);
 }
-
-
